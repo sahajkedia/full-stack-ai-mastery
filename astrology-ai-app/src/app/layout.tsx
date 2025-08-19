@@ -1,46 +1,34 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SessionProvider } from "@/components/SessionProvider";
-
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
-	title: "Astrology AI - Personalized Astrological Insights",
+	title: "Jyotish AI - Master of Astrology",
 	description:
-		"Discover your cosmic path with AI-powered astrological readings and personalized birth chart analysis.",
+		"Discover the ancient wisdom of Vedic astrology through advanced AI. Get personalized insights, birth chart analysis, and cosmic guidance.",
 	keywords:
-		"astrology, AI, birth chart, horoscope, cosmic insights, personalized readings",
-	authors: [{ name: "Astrology AI Team" }],
+		"vedic astrology, jyotish, birth chart, horoscope, AI astrology, planetary positions, cosmic guidance",
+	authors: [{ name: "Jyotish AI" }],
 	viewport: "width=device-width, initial-scale=1",
-	robots: "index, follow",
-	openGraph: {
-		title: "Astrology AI - Personalized Astrological Insights",
-		description:
-			"Discover your cosmic path with AI-powered astrological readings and personalized birth chart analysis.",
-		type: "website",
-		locale: "en_US",
-	},
+	themeColor: [
+		{ media: "(prefers-color-scheme: light)", color: "#ffffff" },
+		{ media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+	],
 };
 
 export default function RootLayout({
 	children,
-}: Readonly<{
+}: {
 	children: React.ReactNode;
-}>) {
+}) {
 	return (
-		<html lang="en">
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-				<SessionProvider>{children}</SessionProvider>
+		<html
+			lang="en"
+			className="dark"
+			suppressHydrationWarning>
+			<body className="min-h-screen bg-background text-foreground antialiased font-sans">
+				<div className="relative flex min-h-screen flex-col">
+					<div className="flex-1">{children}</div>
+				</div>
 			</body>
 		</html>
 	);
