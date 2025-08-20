@@ -16,6 +16,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import VedicChart from "../components/VedicChart";
 import BirthDetailsForm from "../components/BirthDetailsForm";
+import SupportButton from "../components/SupportButton";
 
 interface ChartData {
 	planets: Array<{
@@ -241,13 +242,21 @@ const ChatInterface = () => {
 								</div>
 							</div>
 							<div className="flex items-center space-x-3">
+								<SupportButton
+									kofiUsername="buildersahaj"
+									upiId="buildersahaj@paytm"
+									size="sm"
+									variant="cosmic"
+									showDropdown={true}
+									className="mr-2"
+								/>
 								<button
 									onClick={() => setShowForm(true)}
 									className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110"
 									title="Edit Birth Details">
 									<Settings className="w-5 h-5 text-white" />
 								</button>
-								<button className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110">
+								{/* <button className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110">
 									<Search className="w-5 h-5 text-white" />
 								</button>
 								<button className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110">
@@ -258,7 +267,7 @@ const ChatInterface = () => {
 								</button>
 								<button className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110">
 									<MoreVertical className="w-5 h-5 text-white" />
-								</button>
+								</button> */}
 							</div>
 						</div>
 
