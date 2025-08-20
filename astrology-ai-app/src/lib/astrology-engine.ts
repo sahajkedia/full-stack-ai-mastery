@@ -542,9 +542,13 @@ export async function generateAstrologyResponse(messages: UIMessage[]) {
 		// Convert messages to proper format
 		const formattedMessages = messages.map((msg) => {
 			const content = (msg as unknown as { content?: string })?.content;
+			const msgContent = (msg as unknown as { content?: unknown })?.content;
 			return {
 				role: msg.role,
-				content: typeof content === "string" ? content : JSON.stringify(msg?.content || ""),
+				content:
+					typeof content === "string"
+						? content
+						: JSON.stringify(msgContent || ""),
 			};
 		});
 
