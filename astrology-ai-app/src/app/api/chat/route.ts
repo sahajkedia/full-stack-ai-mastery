@@ -8,9 +8,17 @@ export async function POST(req: Request) {
 
 	try {
 		const response = await generateAstrologyResponse(messages);
-		return new Response(JSON.stringify({ response }), {
-			headers: { "Content-Type": "application/json" },
-		});
+		
+		// Handle both old string format and new object format
+		if (typeof response === "string") {
+			return new Response(JSON.stringify({ response }), {
+				headers: { "Content-Type": "application/json" },
+			});
+		} else {
+			return new Response(JSON.stringify(response), {
+				headers: { "Content-Type": "application/json" },
+			});
+		}
 	} catch (error) {
 		console.error("Astrology engine error:", error);
 		return new Response(

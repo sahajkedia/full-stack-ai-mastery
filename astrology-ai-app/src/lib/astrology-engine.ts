@@ -1,6 +1,7 @@
 import { generateText } from "ai";
 import { openai } from "@ai-sdk/openai";
 import { type UIMessage } from "ai";
+import { generateBirthChart, type BirthDetails } from "./chart-calculator";
 
 // Enhanced Vedic Astrology Knowledge Base
 const NAKSHATRAS = [
@@ -448,22 +449,58 @@ SPIRITUAL ANALYSIS FOCUS:
 
 // Helper functions for enhanced analysis
 function extractBirthDetails(userInput: string) {
+	console.log("Extracting birth details from:", userInput);
+
+	// More flexible patterns to handle various formats
 	const datePattern = /(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/;
 	const timePattern = /(\d{1,2}):(\d{2})/;
-	const placePattern = /([A-Za-z\s]+),\s*([A-Za-z\s]+),\s*([A-Za-z\s]+)/;
+	// More flexible place pattern to handle various formats
+	const placePattern = /([A-Za-z\s]+),\s*([A-Za-z\s]+)(?:,\s*([A-Za-z\s]+))?/;
 
 	const dateMatch = userInput.match(datePattern);
 	const timeMatch = userInput.match(timePattern);
 	const placeMatch = userInput.match(placePattern);
 
+	console.log("Date match:", dateMatch);
+	console.log("Time match:", timeMatch);
+	console.log("Place match:", placeMatch);
+
 	if (dateMatch && timeMatch && placeMatch) {
-		return {
+		const result = {
 			date: `${dateMatch[1]}/${dateMatch[2]}/${dateMatch[3]}`,
 			time: `${timeMatch[1]}:${timeMatch[2]}`,
 			place: placeMatch[0],
 		};
+		console.log("Birth details extracted successfully:", result);
+		return result;
 	}
 
+	// Fallback: Try to extract from comma-separated format
+	console.log("Trying fallback extraction...");
+	const parts = userInput.split(",").map((part) => part.trim());
+	console.log("Split parts:", parts);
+
+	if (parts.length >= 3) {
+		// Try to parse date from first part
+		const datePart = parts[0];
+		const dateMatch2 = datePart.match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
+
+		// Try to parse time from second part
+		const timePart = parts[1];
+		const timeMatch2 = timePart.match(/(\d{1,2}):(\d{2})/);
+
+		if (dateMatch2 && timeMatch2) {
+			const result = {
+				date: `${dateMatch2[1]}/${dateMatch2[2]}/${dateMatch2[3]}`,
+				time: `${timeMatch2[1]}:${timeMatch2[2]}`,
+				place: parts.slice(2).join(", "),
+			};
+			console.log("Birth details extracted with fallback:", result);
+			return result;
+		}
+	}
+
+	console.log("No birth details found in input");
 	return null;
 }
 
@@ -559,24 +596,52 @@ export async function generateAstrologyResponse(messages: UIMessage[]) {
 		let userInput = "";
 
 		if (latestMessage && latestMessage.role === "user") {
-			userInput = JSON.stringify(latestMessage);
+			// Extract the actual content from the message
+			userInput =
+				(latestMessage as unknown as { content: string }).content || "";
 		}
 
 		// Determine question type for specialized analysis
 		const questionType = determineQuestionType(userInput);
 
 		// Check if we have birth details
+		console.log("User input for birth details extraction:", userInput);
 		const birthDetails = extractBirthDetails(userInput);
 		const hasBirthDetails = birthDetails !== null;
+		console.log("Birth details extracted:", birthDetails);
+		console.log("Has birth details:", hasBirthDetails);
+		console.log("User input length:", userInput.length);
+		console.log("User input type:", typeof userInput);
+
+		// Generate chart data if birth details are available
+		let chartData = null;
+		if (hasBirthDetails && birthDetails) {
+			try {
+				console.log("Generating chart with birth details:", birthDetails);
+				chartData = generateBirthChart(birthDetails as BirthDetails);
+				console.log("Chart data generated:", chartData);
+				console.log("Chart data type:", typeof chartData);
+				console.log("Chart data planets:", chartData?.planets);
+			} catch (error) {
+				console.error("Error generating chart:", error);
+			}
+		} else {
+			console.log("No birth details available for chart generation");
+		}
 
 		// If no API key is available, use fallback responses
 		if (!process.env.OPENAI_API_KEY) {
-			return generateFallbackResponse(
+			const response = generateFallbackResponse(
 				userInput,
 				questionType,
 				hasBirthDetails,
 				birthDetails
 			);
+
+			return {
+				text: response,
+				chartData: chartData,
+			};
 		}
 
 		// Build contextual prompt
@@ -595,10 +660,17 @@ export async function generateAstrologyResponse(messages: UIMessage[]) {
 			temperature: 0.7, // Balanced creativity and accuracy
 		});
 
-		return text;
+		return {
+			text: text,
+			chartData: chartData,
+		};
 	} catch (error) {
 		console.error("Astrology engine error:", error);
-		return generateFallbackResponse("", "general", false, null);
+		const fallback = generateFallbackResponse("", "general", false, null);
+		return {
+			text: fallback,
+			chartData: null,
+		};
 	}
 }
 
@@ -608,150 +680,140 @@ function generateFallbackResponse(
 	hasBirthDetails: boolean,
 	birthDetails: { date: string; time: string; place: string } | null
 ) {
-	const input = userInput.toLowerCase();
-
 	// If no birth details provided, request them
 	if (!hasBirthDetails) {
 		return `Namaste! 🙏 I'm here to provide you with accurate Vedic astrology insights. 
 
-To give you the most precise analysis, I need your complete birth details:
-
-📅 **Date of Birth** (DD/MM/YYYY format)
-⏰ **Time of Birth** (24-hour format, e.g., 14:30 for 2:30 PM)
+Could you share:
+📅 **Date of Birth** (DD/MM/YYYY)
+⏰ **Time of Birth** (24-hour format in IST like 14:30)
 📍 **Place of Birth** (City, State, Country)
+
+**Note:** Time should be in Indian Standard Time (IST). If you don't know the exact time zone, we'll calculate based on IST.
 
 For example: "15/03/1990, 14:30, Mumbai, Maharashtra, India"
 
-Once you provide these details, I can:
-• Calculate your precise birth chart (Kundli)
-• Analyze planetary positions and their influences
-• Provide specific predictions for your life areas
-• Suggest personalized remedies and solutions
+Once you share these, I can give you personalized guidance! 🔮✨`;
+	}
 
-Please share your birth details so I can begin your cosmic analysis! 🔮✨`;
+	// Generate chart data if birth details are available
+	let chartData = null;
+	if (hasBirthDetails && birthDetails) {
+		try {
+			chartData = generateBirthChart(birthDetails as BirthDetails);
+		} catch (error) {
+			console.error("Error generating chart:", error);
+		}
 	}
 
 	// If birth details are provided, provide specialized responses
 	if (questionType === "health") {
-		return `🔮 **Health Analysis Based on Your Birth Chart**
+		let chartInfo = "";
+		if (chartData) {
+			chartInfo = `\n\n**Your Birth Chart Summary (calculated in IST):**
+• **Ascendant:** ${
+				chartData.ascendant.sign
+			} (${chartData.ascendant.degree.toFixed(1)}°)
+• **Moon Sign:** ${
+				chartData.planets.find(
+					(p: { name: string; sign: string }) => p.name === "Moon"
+				)?.sign || "Unknown"
+			}
+• **Birth Nakshatra:** ${chartData.birthNakshatra}`;
+		}
 
-Based on your birth details, I can see several planetary influences affecting your health:
+		return `🔮 **Health Insights**
 
-**Current Health Challenges:**
-• The 6th house (diseases) shows some challenging planetary positions
-• Saturn's transit may be affecting your nervous system
-• Mars-Mercury combination could indicate neurological issues
+I can see some interesting planetary influences affecting your health right now.${chartInfo}
 
-**Timeline for Improvement:**
-• **Next 3-6 months**: Gradual improvement in bladder function
-• **6-12 months**: Significant recovery in bowel control
-• **Jupiter's transit** (around 6 months from now) will bring healing energy
+**What I'm seeing:**
+• Your 6th house (health) has some challenging planetary positions
+• Saturn's current transit might be affecting your nervous system
+• There's a Mars-Mercury combination that could relate to neurological issues
 
-**Recommended Remedies:**
-1. **Mantra**: Chant "Om Namah Shivaya" 108 times daily
-2. **Gemstone**: Wear Yellow Sapphire (Pukhraj) in gold
-3. **Ritual**: Perform Rudrabhishek on Mondays
-4. **Lifestyle**: Practice yoga, especially pelvic floor exercises
-5. **Charity**: Donate yellow items on Thursdays
+**Good news:** Jupiter's transit is actually quite favorable for recovery! 
 
-**Medical Integration:**
-Continue your medical treatment alongside these spiritual remedies. The combination of modern medicine and Vedic wisdom will accelerate your recovery.
+**Timeline:** You should see gradual improvement over the next 3-6 months, with significant progress in 6-12 months.
 
-**Positive Outlook:**
-Your chart shows strong recovery potential. The current challenges are temporary and will improve significantly within the next year. Stay positive and maintain faith in both medical and spiritual healing! 🌟`;
+**Quick remedies that might help:**
+1. Chant "Om Namah Shivaya" daily (even just 11 times)
+2. Consider wearing a Yellow Sapphire (Pukhraj)
+3. Donate yellow items on Thursdays
+4. Keep up with your medical treatment - the combination of modern medicine and spiritual remedies works best!
+
+Stay positive! Your chart shows strong recovery potential. 🌟`;
 	}
 
 	if (questionType === "career") {
-		return `🔮 **Career Analysis Based on Your Birth Chart**
+		return `🚀 **Career Vibes**
 
-Your birth chart reveals excellent career potential:
+Your birth chart shows some really good career energy!
 
-**Career Strengths:**
-• Strong 10th house (Karma Bhava) indicates leadership qualities
-• Sun in favorable position suggests authority and recognition
-• Jupiter's influence brings wisdom and expansion
+**Strengths I'm seeing:**
+• Strong 10th house = natural leadership qualities
+• Sun in a good position = you'll get recognition
+• Jupiter's influence = wisdom and growth opportunities
 
-**Recommended Career Paths:**
-• Management and Administration
-• Teaching and Education
-• Healthcare and Healing
-• Technology and Innovation
-• Government or Public Service
+**Career paths that might suit you:**
+• Management/Administration
+• Teaching/Education  
+• Healthcare/Healing
+• Tech/Innovation
+• Government work
 
-**Timing for Career Growth:**
-• **Next 6 months**: New opportunities will emerge
-• **1-2 years**: Significant career advancement
-• **Jupiter's transit**: Major breakthrough in 8-10 months
+**Timing:** New opportunities should pop up in the next 6 months, with major breakthroughs in 8-10 months.
 
-**Career Remedies:**
-1. **Mantra**: "Om Gurave Namah" for career success
-2. **Gemstone**: Wear Ruby (Manik) for authority
-3. **Ritual**: Perform Surya Namaskar daily
-4. **Actions**: Take initiative and show leadership
+**Quick boost:** Try chanting "Om Gurave Namah" for career success, and maybe wear a Ruby if you're into gemstones.
 
-Your career path is blessed with success and recognition! 🚀`;
+You've got great career potential! 💫`;
 	}
 
 	if (questionType === "relationship") {
-		return `🔮 **Relationship Analysis Based on Your Birth Chart**
+		return `💕 **Love & Relationships**
 
-Your relationship sector shows interesting planetary combinations:
+Your relationship sector looks pretty interesting!
 
-**Current Relationship Status:**
-• Venus (love significator) is well-placed
-• 7th house (marriage) shows positive influences
-• Jupiter's aspect brings harmony and growth
+**Current vibes:**
+• Venus (love planet) is well-placed in your chart
+• 7th house (marriage) has positive influences
+• Jupiter's aspect brings harmony
 
-**Timing for Relationships:**
-• **Next 3-6 months**: New romantic opportunities
-• **Venus transit**: Enhanced love and harmony
-• **Jupiter's influence**: Deepening of existing relationships
+**Timing:** New romantic opportunities in the next 3-6 months, and existing relationships should deepen.
 
-**Relationship Remedies:**
-1. **Mantra**: "Om Shukraya Namah" for love
-2. **Gemstone**: Wear Diamond or White Sapphire
-3. **Ritual**: Perform Lakshmi Puja on Fridays
-4. **Actions**: Practice compassion and understanding
+**Quick love boost:**
+• Chant "Om Shukraya Namah" 
+• Wear Diamond or White Sapphire
+• Practice compassion and understanding
 
-**Compatibility:**
-Your chart shows compatibility with people born under:
-• Taurus, Libra, Capricorn, Aquarius
-• Nakshatras: Rohini, Uttara Phalguni, Uttara Ashadha
+**Compatibility:** You vibe well with Taurus, Libra, Capricorn, and Aquarius folks.
 
-Love and harmony are coming your way! 💕`;
+Love and harmony are coming your way! ✨`;
 	}
 
 	// Default response for other question types
-	return `🔮 **Vedic Astrology Guidance**
+	return `🔮 **Cosmic Guidance**
 
-Thank you for sharing your birth details! Your cosmic blueprint reveals:
+Thanks for sharing your birth details! Here's what I'm seeing:
 
-**Current Planetary Influences:**
-• Jupiter's transit brings wisdom and growth
-• Saturn's influence teaches patience and discipline
-• Mars provides energy and courage
+**Current energy:** Jupiter's transit brings wisdom and growth, Saturn teaches patience, and Mars gives you courage.
 
-**General Predictions:**
-• **Next 6 months**: Period of learning and growth
-• **1 year**: Major positive changes in life
-• **Long-term**: Success through patience and hard work
+**Next 6 months:** Learning and growth period
+**1 year:** Major positive changes coming
+**Long-term:** Success through patience and hard work
 
-**Universal Remedies:**
-1. **Daily Practice**: Chant "Om Namah Shivaya"
-2. **Gemstone**: Wear Yellow Sapphire for overall prosperity
-3. **Ritual**: Perform regular prayers and meditation
-4. **Actions**: Practice kindness and charity
+**Quick daily practice:** Chant "Om Namah Shivaya" and practice kindness.
 
-**Specific Guidance:**
-What aspect of your life would you like me to analyze in detail?
-• Career and Profession
-• Health and Wellness
-• Relationships and Love
-• Finance and Wealth
-• Education and Learning
-• Spiritual Growth
+**Note:** All calculations are based on Indian Standard Time (IST).
 
-I'm here to guide you through your cosmic journey! 🌟✨`;
+What would you like to explore more?
+• Career & work
+• Health & wellness  
+• Love & relationships
+• Money & wealth
+• Learning & education
+• Spiritual growth
+
+I'm here to guide you! 🌟✨`;
 }
 
 // Export constants for use in components
