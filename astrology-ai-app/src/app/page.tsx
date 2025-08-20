@@ -244,7 +244,7 @@ const ChatInterface = () => {
 							<div className="flex items-center space-x-3">
 								<SupportButton
 									kofiUsername="buildersahaj"
-									upiId="buildersahaj@paytm"
+									upiId="9108342605@ybl"
 									size="sm"
 									variant="cosmic"
 									showDropdown={true}

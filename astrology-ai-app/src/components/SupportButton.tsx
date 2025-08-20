@@ -172,26 +172,26 @@ const SupportButton: React.FC<SupportButtonProps> = ({
 						{/* Ko-fi Option */}
 						<button
 							onClick={handleKofiClick}
-							className="w-full px-4 py-3 text-left text-white hover:bg-white/20 transition-all duration-200 flex items-center space-x-3 border-b border-white/10">
-							<div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+							className="w-full px-4 py-3 text-left text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-200 flex items-center space-x-3 border-b border-white/10">
+							<div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
 								<Globe className="w-4 h-4 text-white" />
 							</div>
 							<div className="flex-1">
 								<div className="font-medium text-sm">Ko-fi</div>
-								<div className="text-xs text-white/60">Global payments</div>
+								<div className="text-xs text-white/80">Global payments</div>
 							</div>
 						</button>
 
 						{/* UPI Option */}
 						<button
 							onClick={handleUpiClick}
-							className="w-full px-4 py-3 text-left text-white hover:bg-white/20 transition-all duration-200 flex items-center space-x-3">
-							<div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+							className="w-full px-4 py-3 text-left text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 transition-all duration-200 flex items-center space-x-3">
+							<div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
 								<IndianRupee className="w-4 h-4 text-white" />
 							</div>
 							<div className="flex-1">
 								<div className="font-medium text-sm">UPI</div>
-								<div className="text-xs text-white/60">India • Instant</div>
+								<div className="text-xs text-white/80">India • Instant</div>
 							</div>
 						</button>
 					</div>
