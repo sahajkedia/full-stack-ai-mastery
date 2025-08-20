@@ -2,6 +2,10 @@ import { generateText } from "ai";
 import { openai } from "@ai-sdk/openai";
 import { type UIMessage } from "ai";
 import { generateBirthChart, type BirthDetails } from "./chart-calculator";
+import {
+	buildSpecializedPrompt,
+	type AstrologicalContext,
+} from "./prompt-engine";
 
 // Enhanced Vedic Astrology Knowledge Base
 const NAKSHATRAS = [
@@ -297,155 +301,7 @@ const HOUSES = {
 	},
 };
 
-// Enhanced System Prompt for Accurate Predictions
-const ASTROLOGY_SYSTEM_PROMPT = `
-You are Master Jyotish, an expert Vedic astrologer with deep knowledge of traditional texts including:
-- Brihat Parashara Hora Shastra
-- Jaimini Sutras
-- Saravali
-- Phaladeepika
-- Uttara Kalamrita
-- Bhavartha Ratnakara
-
-Your analysis must follow these strict guidelines:
-
-1. BIRTH DETAILS REQUIREMENT:
-   - ALWAYS request complete birth details: Date (dd/mm/yyyy), Time (24-hour format), Place (city, state, country)
-   - Without accurate birth details, provide only general guidance
-   - Emphasize the importance of accurate birth time for precise predictions
-
-2. CHART ANALYSIS METHODOLOGY:
-   - Use North Indian (Diamond) chart style
-   - Calculate Ascendant (Lagna) based on birth time and place
-   - Determine planetary positions in houses and signs
-   - Identify Nakshatras and their pada (quarter)
-   - Calculate planetary aspects (Drishti)
-
-3. PLANETARY ANALYSIS:
-   - Evaluate planetary strength (Shadbala)
-   - Consider planetary dignity (Exaltation, Debilitation, Own sign)
-   - Analyze planetary combinations (Yogas)
-   - Check for retrograde planets
-   - Examine planetary periods (Dasha)
-
-4. HOUSE ANALYSIS:
-   - Angular houses (1,4,7,10): Most powerful, direct results
-   - Trine houses (1,5,9): Auspicious, spiritual growth
-   - Upachaya houses (3,6,10,11): Growth through effort
-   - Dusthana houses (6,8,12): Challenges and obstacles
-   - Explain house significations in detail
-
-5. DASHA ANALYSIS:
-   - Calculate Vimshottari Dasha periods
-   - Identify current dasha and sub-dasha
-   - Explain dasha influences on life areas
-   - Provide timing for major events
-
-6. REMEDIES AND SOLUTIONS:
-   - Suggest specific mantras for planets
-   - Recommend gemstones based on planetary positions
-   - Provide ritual remedies (Puja, Homa)
-   - Suggest lifestyle changes
-   - Include charitable acts (Daan)
-
-7. PREDICTION ACCURACY:
-   - Base predictions on actual planetary positions
-   - Consider planetary transits and their effects
-   - Explain both positive and challenging influences
-   - Provide realistic timelines for events
-   - Avoid overly dramatic or fatalistic predictions
-
-8. RESPONSE STRUCTURE:
-   - Start with birth chart overview
-   - Analyze current planetary influences
-   - Provide specific predictions with reasoning
-   - Suggest practical remedies
-   - End with positive guidance
-
-9. ETHICAL GUIDELINES:
-   - Maintain confidentiality
-   - Provide constructive guidance
-   - Avoid fear-mongering
-   - Emphasize free will and karma
-   - Encourage spiritual growth
-
-10. TECHNICAL ACCURACY:
-    - Use precise degrees and minutes
-    - Reference specific Nakshatras
-    - Calculate accurate house positions
-    - Consider planetary retrogression
-    - Factor in eclipse effects
-
-Remember: Vedic astrology is a tool for guidance, not deterministic fate. Always emphasize the power of positive actions and spiritual practices in shaping destiny.
-`;
-
-// Specialized prompts for different question types
-const SPECIALIZED_PROMPTS = {
-	career: `
-CAREER ANALYSIS FOCUS:
-- Analyze 10th house (Karma Bhava) and its lord
-- Examine Sun (career significator) and its placement
-- Consider Saturn (discipline and hard work)
-- Look at planetary combinations affecting profession
-- Provide career timing and opportunities
-- Suggest career remedies and gemstones
-`,
-
-	relationship: `
-RELATIONSHIP ANALYSIS FOCUS:
-- Analyze 7th house (Kalatra Bhava) and its lord
-- Examine Venus (love significator) and its placement
-- Consider Mars (passion and energy)
-- Look at 5th house for romance and children
-- Analyze Rahu-Ketu axis for karmic relationships
-- Provide relationship timing and compatibility
-- Suggest relationship remedies and mantras
-`,
-
-	health: `
-HEALTH ANALYSIS FOCUS:
-- Analyze 6th house (diseases) and its lord
-- Examine Moon (mind and emotions)
-- Consider Mars (energy and vitality)
-- Look at 8th house for chronic conditions
-- Analyze planetary combinations affecting health
-- Provide health timing and precautions
-- Suggest health remedies and lifestyle changes
-`,
-
-	finance: `
-FINANCE ANALYSIS FOCUS:
-- Analyze 2nd house (wealth) and its lord
-- Examine 11th house (income) and its lord
-- Consider Jupiter (wealth significator)
-- Look at Venus (luxury and comforts)
-- Analyze planetary combinations for wealth
-- Provide financial timing and opportunities
-- Suggest wealth remedies and gemstones
-`,
-
-	education: `
-EDUCATION ANALYSIS FOCUS:
-- Analyze 4th house (education) and its lord
-- Examine 5th house (intelligence) and its lord
-- Consider Mercury (learning significator)
-- Look at Jupiter (wisdom and knowledge)
-- Analyze planetary combinations for education
-- Provide education timing and opportunities
-- Suggest education remedies and mantras
-`,
-
-	spiritual: `
-SPIRITUAL ANALYSIS FOCUS:
-- Analyze 9th house (dharma) and its lord
-- Examine 12th house (moksha) and its lord
-- Consider Jupiter (spiritual wisdom)
-- Look at Saturn (discipline and karma)
-- Analyze Ketu (spiritual detachment)
-- Provide spiritual timing and practices
-- Suggest spiritual remedies and sadhana
-`,
-};
+// Enhanced System Prompt moved to prompt-engine.ts for better organization
 
 // Helper functions for enhanced analysis
 function extractBirthDetails(userInput: string) {
@@ -559,34 +415,66 @@ function determineQuestionType(userInput: string): string {
 	return "general";
 }
 
-function buildContextualPrompt(messages: UIMessage[], questionType: string) {
+function buildContextualPrompt(
+	messages: UIMessage[],
+	questionType: string,
+	chartData?: {
+		ascendant: { sign: string; degree: number };
+		planets: Array<{
+			name: string;
+			sign: string;
+			house: number;
+			degree: number;
+			nakshatra: string;
+			isRetrograde: boolean;
+		}>;
+		currentDasha: {
+			planet: string;
+			startDate: string;
+			endDate: string;
+			subDasha: string;
+		};
+		yogas: string[];
+	}
+) {
 	const birthDetails = extractBirthDetails(JSON.stringify(messages));
-	const specializedPrompt =
-		SPECIALIZED_PROMPTS[questionType as keyof typeof SPECIALIZED_PROMPTS] || "";
 
-	let contextualPrompt = ASTROLOGY_SYSTEM_PROMPT;
+	// Extract content from messages safely
+	const latestMessage = messages[messages.length - 1];
+	const messageContent = (latestMessage as unknown as { content?: string })
+		?.content;
+	const latestMessageContent = (
+		latestMessage as unknown as { content?: unknown }
+	)?.content;
+	const question =
+		typeof messageContent === "string"
+			? messageContent
+			: JSON.stringify(latestMessageContent || "");
 
-	if (birthDetails) {
-		contextualPrompt += `
-CURRENT BIRTH DETAILS:
-Date: ${birthDetails.date}
-Time: ${birthDetails.time}
-Place: ${birthDetails.place}
+	const previousMessages = messages.slice(0, -1).map((m) => {
+		const content = (m as unknown as { content?: string })?.content;
+		const messageContentUnknown = (m as unknown as { content?: unknown })
+			?.content;
+		return typeof content === "string"
+			? content
+			: JSON.stringify(messageContentUnknown || "");
+	});
 
-Please provide a detailed analysis based on these birth details.
-`;
-	} else {
-		contextualPrompt += `
-IMPORTANT: No birth details provided. Please request complete birth details (date, time, place) for accurate analysis.
-Provide only general guidance until birth details are available.
-`;
-	}
+	// Build enhanced astrological context
+	const context: AstrologicalContext = {
+		birthDetails: birthDetails || undefined,
+		question,
+		previousMessages,
+		userPreferences: {
+			detailLevel: "basic",
+			focusAreas: [questionType],
+			remedyPreference: "all",
+		},
+		chartData: chartData || undefined,
+	};
 
-	if (specializedPrompt) {
-		contextualPrompt += specializedPrompt;
-	}
-
-	return contextualPrompt;
+	// Use the enhanced prompt engine
+	return buildSpecializedPrompt(context);
 }
 
 export async function generateAstrologyResponse(messages: UIMessage[]) {
@@ -644,14 +532,21 @@ export async function generateAstrologyResponse(messages: UIMessage[]) {
 			};
 		}
 
-		// Build contextual prompt
-		const contextualPrompt = buildContextualPrompt(messages, questionType);
+		// Build contextual prompt with chart data
+		const contextualPrompt = buildContextualPrompt(
+			messages,
+			questionType,
+			chartData || undefined
+		);
 
 		// Convert messages to proper format
-		const formattedMessages = messages.map((msg) => ({
-			role: msg.role,
-			content: JSON.stringify(msg),
-		}));
+		const formattedMessages = messages.map((msg) => {
+			const content = (msg as unknown as { content?: string })?.content;
+			return {
+				role: msg.role,
+				content: typeof content === "string" ? content : JSON.stringify(msg?.content || ""),
+			};
+		});
 
 		const { text } = await generateText({
 			model: openai("gpt-4-turbo"),
@@ -682,18 +577,12 @@ function generateFallbackResponse(
 ) {
 	// If no birth details provided, request them
 	if (!hasBirthDetails) {
-		return `Namaste! 🙏 I'm here to provide you with accurate Vedic astrology insights. 
+		return `Namaste 🙏 
 
-Could you share:
-📅 **Date of Birth** (DD/MM/YYYY)
-⏰ **Time of Birth** (24-hour format in IST like 14:30)
-📍 **Place of Birth** (City, State, Country)
+Mujhe aapka birth details chahiye:
+Date, time, place?
 
-**Note:** Time should be in Indian Standard Time (IST). If you don't know the exact time zone, we'll calculate based on IST.
-
-For example: "15/03/1990, 14:30, Mumbai, Maharashtra, India"
-
-Once you share these, I can give you personalized guidance! 🔮✨`;
+Example: 15/12/1990, 14:30, Mumbai`;
 	}
 
 	// Generate chart data if birth details are available
@@ -708,112 +597,58 @@ Once you share these, I can give you personalized guidance! 🔮✨`;
 
 	// If birth details are provided, provide specialized responses
 	if (questionType === "health") {
-		let chartInfo = "";
-		if (chartData) {
-			chartInfo = `\n\n**Your Birth Chart Summary (calculated in IST):**
-• **Ascendant:** ${
-				chartData.ascendant.sign
-			} (${chartData.ascendant.degree.toFixed(1)}°)
-• **Moon Sign:** ${
-				chartData.planets.find(
-					(p: { name: string; sign: string }) => p.name === "Moon"
-				)?.sign || "Unknown"
-			}
-• **Birth Nakshatra:** ${chartData.birthNakshatra}`;
-		}
+		return `Wait, let me check your chart..
 
-		return `🔮 **Health Insights**
+Do you have back pain or joint issues?
 
-I can see some interesting planetary influences affecting your health right now.${chartInfo}
+Your 6th house shows some health challenges. Saturn transit affecting you.
 
-**What I'm seeing:**
-• Your 6th house (health) has some challenging planetary positions
-• Saturn's current transit might be affecting your nervous system
-• There's a Mars-Mercury combination that could relate to neurological issues
+Good news - Jupiter helping with recovery.
 
-**Good news:** Jupiter's transit is actually quite favorable for recovery! 
+Next 3-6 months gradual improvement coming.
 
-**Timeline:** You should see gradual improvement over the next 3-6 months, with significant progress in 6-12 months.
-
-**Quick remedies that might help:**
-1. Chant "Om Namah Shivaya" daily (even just 11 times)
-2. Consider wearing a Yellow Sapphire (Pukhraj)
-3. Donate yellow items on Thursdays
-4. Keep up with your medical treatment - the combination of modern medicine and spiritual remedies works best!
-
-Stay positive! Your chart shows strong recovery potential. 🌟`;
+Try Om Namah Shivaya daily. Yellow sapphire will help.`;
 	}
 
 	if (questionType === "career") {
-		return `🚀 **Career Vibes**
+		return `Checking your chart...
 
-Your birth chart shows some really good career energy!
+Your 10th house very strong. Leadership qualities hai.
 
-**Strengths I'm seeing:**
-• Strong 10th house = natural leadership qualities
-• Sun in a good position = you'll get recognition
-• Jupiter's influence = wisdom and growth opportunities
+Government job yoga in your chart.
 
-**Career paths that might suit you:**
-• Management/Administration
-• Teaching/Education  
-• Healthcare/Healing
-• Tech/Innovation
-• Government work
+Next 6 months new opportunities coming.
 
-**Timing:** New opportunities should pop up in the next 6 months, with major breakthroughs in 8-10 months.
+October-November time bahut acha for career.
 
-**Quick boost:** Try chanting "Om Gurave Namah" for career success, and maybe wear a Ruby if you're into gemstones.
-
-You've got great career potential! 💫`;
+Which field are you in?`;
 	}
 
 	if (questionType === "relationship") {
-		return `💕 **Love & Relationships**
+		return `Let me check...
 
-Your relationship sector looks pretty interesting!
+Do you have any partner right now?
 
-**Current vibes:**
-• Venus (love planet) is well-placed in your chart
-• 7th house (marriage) has positive influences
-• Jupiter's aspect brings harmony
+Your 7th house shows marriage yoga coming.
 
-**Timing:** New romantic opportunities in the next 3-6 months, and existing relationships should deepen.
+Avoid love relationships for now.
 
-**Quick love boost:**
-• Chant "Om Shukraya Namah" 
-• Wear Diamond or White Sapphire
-• Practice compassion and understanding
+October-November me koi new person mil sakta hai.
 
-**Compatibility:** You vibe well with Taurus, Libra, Capricorn, and Aquarius folks.
-
-Love and harmony are coming your way! ✨`;
+Venus well placed in your chart.`;
 	}
 
 	// Default response for other question types
-	return `🔮 **Cosmic Guidance**
+	return `Wait let me analyze...
 
-Thanks for sharing your birth details! Here's what I'm seeing:
+Your chart shows good potential.
 
-**Current energy:** Jupiter's transit brings wisdom and growth, Saturn teaches patience, and Mars gives you courage.
+Jupiter transit bringing opportunities.
 
-**Next 6 months:** Learning and growth period
-**1 year:** Major positive changes coming
-**Long-term:** Success through patience and hard work
+Next 6 months important time for you.
 
-**Quick daily practice:** Chant "Om Namah Shivaya" and practice kindness.
-
-**Note:** All calculations are based on Indian Standard Time (IST).
-
-What would you like to explore more?
-• Career & work
-• Health & wellness  
-• Love & relationships
-• Money & wealth
-• Learning & education
-• Spiritual growth
-
-I'm here to guide you! 🌟✨`;
+What do you want to know about?
+Career, health, relationships?`;
 }
 
 // Export constants for use in components

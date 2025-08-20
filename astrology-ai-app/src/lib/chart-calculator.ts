@@ -18,7 +18,10 @@ export interface PlanetaryPosition {
 	nakshatra: string;
 	pada: number;
 	isRetrograde: boolean;
-	dignity: "exalted" | "own" | "neutral" | "debilited" | "enemy";
+	dignity: "exalted" | "own" | "neutral" | "debilitated" | "enemy";
+	strength: number; // Shadbala strength (0-100)
+	lordOf: number[]; // Houses this planet rules
+	aspectsTo: number[]; // Houses this planet aspects
 }
 
 export interface HousePosition {
@@ -391,7 +394,15 @@ export function calculatePlanetaryPositions(
 			nakshatra: nakshatra.name,
 			pada: nakshatra.pada,
 			isRetrograde: false, // Calculate from ephemeris
-			dignity: dignity as "exalted" | "own" | "neutral" | "debilited" | "enemy",
+			dignity: dignity as
+				| "exalted"
+				| "own"
+				| "neutral"
+				| "debilitated"
+				| "enemy",
+			strength: 50, // Will be calculated in enhancePlanetaryPositions
+			lordOf: [], // Will be calculated in enhancePlanetaryPositions
+			aspectsTo: [], // Will be calculated in enhancePlanetaryPositions
 		};
 	});
 }
@@ -497,30 +508,281 @@ export function calculateVimshottariDasha(
 	return dashas;
 }
 
-// Generate complete birth chart
+// Advanced Yoga Detection System
+export function detectYogas(planets: PlanetaryPosition[]): string[] {
+	const yogas: string[] = [];
+
+	// Find specific planets
+	const moon = planets.find((p) => p.name === "Moon");
+	const mars = planets.find((p) => p.name === "Mars");
+	const mercury = planets.find((p) => p.name === "Mercury");
+	const jupiter = planets.find((p) => p.name === "Jupiter");
+	const venus = planets.find((p) => p.name === "Venus");
+	const saturn = planets.find((p) => p.name === "Saturn");
+
+	// Gajakesari Yoga - Jupiter in Kendra from Moon
+	if (jupiter && moon) {
+		const houseDiff = Math.abs(jupiter.house - moon.house);
+		if (
+			[0, 3, 6, 9].includes(houseDiff) ||
+			([1, 4, 7, 10].includes(jupiter.house) &&
+				[1, 4, 7, 10].includes(moon.house))
+		) {
+			yogas.push("Gajakesari Yoga");
+		}
+	}
+
+	// Panch Mahapurush Yogas
+	if (
+		mercury &&
+		mercury.dignity === "own" &&
+		[1, 4, 7, 10].includes(mercury.house)
+	) {
+		yogas.push("Bhadra Yoga (Mercury Mahapurush)");
+	}
+	if (
+		jupiter &&
+		jupiter.dignity === "own" &&
+		[1, 4, 7, 10].includes(jupiter.house)
+	) {
+		yogas.push("Hamsa Yoga (Jupiter Mahapurush)");
+	}
+	if (venus && venus.dignity === "own" && [1, 4, 7, 10].includes(venus.house)) {
+		yogas.push("Malavya Yoga (Venus Mahapurush)");
+	}
+	if (mars && mars.dignity === "own" && [1, 4, 7, 10].includes(mars.house)) {
+		yogas.push("Ruchaka Yoga (Mars Mahapurush)");
+	}
+	if (
+		saturn &&
+		saturn.dignity === "own" &&
+		[1, 4, 7, 10].includes(saturn.house)
+	) {
+		yogas.push("Shasha Yoga (Saturn Mahapurush)");
+	}
+
+	// Chandra Mangal Yoga - Moon and Mars conjunction/aspect
+	if (moon && mars) {
+		if (
+			moon.house === mars.house ||
+			Math.abs(moon.house - mars.house) === 6 ||
+			((moon.house + 6) % 12) + 1 === mars.house ||
+			((mars.house + 6) % 12) + 1 === moon.house
+		) {
+			yogas.push("Chandra Mangal Yoga");
+		}
+	}
+
+	// Guru Mangal Yoga - Jupiter and Mars conjunction/aspect
+	if (jupiter && mars) {
+		if (
+			jupiter.house === mars.house ||
+			Math.abs(jupiter.house - mars.house) === 6 ||
+			((jupiter.house + 6) % 12) + 1 === mars.house ||
+			((mars.house + 6) % 12) + 1 === jupiter.house
+		) {
+			yogas.push("Guru Mangal Yoga");
+		}
+	}
+
+	// Raja Yoga - Kendra and Trikona lords in connection
+	const kendraLords = planets.filter((p) =>
+		p.lordOf.some((house) => [1, 4, 7, 10].includes(house))
+	);
+	const trikonaLords = planets.filter((p) =>
+		p.lordOf.some((house) => [1, 5, 9].includes(house))
+	);
+
+	for (const kendra of kendraLords) {
+		for (const trikona of trikonaLords) {
+			if (kendra.house === trikona.house && kendra.name !== trikona.name) {
+				yogas.push("Raja Yoga");
+				break;
+			}
+		}
+	}
+
+	// Neecha Bhanga Raja Yoga - Check for debilitation cancellation
+	const debilitatedPlanets = planets.filter((p) => p.dignity === "debilitated");
+	for (const debPlanet of debilitatedPlanets) {
+		const dispositor = planets.find((p) =>
+			p.lordOf.includes(getHouseNumberFromSign(debPlanet.sign))
+		);
+		if (
+			dispositor &&
+			([1, 4, 7, 10, 5, 9].includes(dispositor.house) ||
+				dispositor.dignity === "exalted")
+		) {
+			yogas.push("Neecha Bhanga Raja Yoga");
+		}
+	}
+
+	return yogas;
+}
+
+// Helper function to get house number from sign
+function getHouseNumberFromSign(sign: string): number {
+	const signToHouse: { [key: string]: number } = {
+		Aries: 1,
+		Taurus: 2,
+		Gemini: 3,
+		Cancer: 4,
+		Leo: 5,
+		Virgo: 6,
+		Libra: 7,
+		Scorpio: 8,
+		Sagittarius: 9,
+		Capricorn: 10,
+		Aquarius: 11,
+		Pisces: 12,
+	};
+	return signToHouse[sign] || 1;
+}
+
+// Calculate planetary strength (simplified Shadbala)
+export function calculatePlanetaryStrength(planet: PlanetaryPosition): number {
+	let strength = 50; // Base strength
+
+	// Dignity strength
+	switch (planet.dignity) {
+		case "exalted":
+			strength += 30;
+			break;
+		case "own":
+			strength += 20;
+			break;
+		case "neutral":
+			strength += 0;
+			break;
+		case "debilitated":
+			strength -= 30;
+			break;
+		case "enemy":
+			strength -= 10;
+			break;
+	}
+
+	// House strength (Kendra and Trikona are stronger)
+	if ([1, 4, 7, 10].includes(planet.house)) strength += 15; // Kendra
+	else if ([5, 9].includes(planet.house)) strength += 10; // Trikona
+	else if ([6, 8, 12].includes(planet.house)) strength -= 15; // Dusthana
+
+	// Retrograde strength (generally considered stronger)
+	if (planet.isRetrograde) strength += 10;
+
+	return Math.max(0, Math.min(100, strength));
+}
+
+// Enhanced planetary position calculation with strength and lordships
+function enhancePlanetaryPositions(
+	planets: PlanetaryPosition[]
+): PlanetaryPosition[] {
+	return planets.map((planet) => {
+		// Calculate strength
+		const strength = calculatePlanetaryStrength(planet);
+
+		// Calculate lordships
+		const lordOf: number[] = [];
+		Object.entries(getHouseLordships()).forEach(([house, lord]) => {
+			if (lord === planet.name) {
+				lordOf.push(parseInt(house));
+			}
+		});
+
+		// Calculate aspects (simplified)
+		const aspectsTo: number[] = [];
+		if (planet.name === "Mars") {
+			aspectsTo.push(
+				(planet.house + 3) % 12 || 12,
+				(planet.house + 7) % 12 || 12
+			);
+		} else if (planet.name === "Jupiter") {
+			aspectsTo.push(
+				(planet.house + 4) % 12 || 12,
+				(planet.house + 8) % 12 || 12
+			);
+		} else if (planet.name === "Saturn") {
+			aspectsTo.push(
+				(planet.house + 2) % 12 || 12,
+				(planet.house + 9) % 12 || 12
+			);
+		}
+		// All planets aspect 7th house
+		aspectsTo.push((planet.house + 6) % 12 || 12);
+
+		return {
+			...planet,
+			strength,
+			lordOf,
+			aspectsTo,
+		};
+	});
+}
+
+// Get house lordships based on ascendant
+function getHouseLordships(): { [house: number]: string } {
+	return {
+		1: "Mars",
+		2: "Venus",
+		3: "Mercury",
+		4: "Moon",
+		5: "Sun",
+		6: "Mercury",
+		7: "Venus",
+		8: "Mars",
+		9: "Jupiter",
+		10: "Saturn",
+		11: "Saturn",
+		12: "Jupiter",
+	};
+}
+
+// Generate complete birth chart with enhanced accuracy
 export function generateBirthChart(birthDetails: BirthDetails) {
 	// Note: Time is assumed to be in IST (Indian Standard Time, UTC+5:30)
 	// For accurate calculations, ensure birth time is provided in IST
 	const ascendant = calculateAscendant(birthDetails);
-	const planets = calculatePlanetaryPositions(birthDetails);
+	const ascendantSign = getSignFromDegree(ascendant);
+	let planets = calculatePlanetaryPositions(birthDetails);
 	const houses = calculateHousePositions(ascendant);
+
+	// Enhance planetary positions with strength and lordships
+	planets = enhancePlanetaryPositions(planets);
+
+	// Detect yogas
+	const yogas = detectYogas(planets);
 
 	// Get birth Nakshatra from Moon's position
 	const moon = planets.find((p) => p.name === "Moon");
 	const birthNakshatra = moon ? moon.nakshatra : "Ashwini";
 	const dashas = calculateVimshottariDasha(birthDetails, birthNakshatra);
 
+	// Get current dasha
+	const currentDate = new Date();
+	const currentDasha =
+		dashas.find(
+			(d) => currentDate >= d.startDate && currentDate <= d.endDate
+		) || dashas[0];
+
 	return {
 		ascendant: {
 			degree: ascendant,
-			sign: getSignFromDegree(ascendant),
+			sign: ascendantSign,
 			nakshatra: getNakshatraFromDegree(ascendant),
 		},
 		planets,
 		houses,
 		dashas,
+		currentDasha: {
+			planet: currentDasha?.planet || "Sun",
+			startDate: currentDasha?.startDate.toISOString().split("T")[0] || "",
+			endDate: currentDasha?.endDate.toISOString().split("T")[0] || "",
+			subDasha: currentDasha?.subDasha || "Current",
+		},
+		yogas,
 		birthNakshatra,
 		chartStyle: "North Indian",
+		calculationAccuracy: "Enhanced with Shadbala and Yoga detection",
 	};
 }
 

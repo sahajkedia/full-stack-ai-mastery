@@ -44,41 +44,199 @@ export interface AstrologicalContext {
 	};
 }
 
-// Advanced Yogas and Planetary Combinations
+// Advanced Yogas and Planetary Combinations - Enhanced for Precision
 const ADVANCED_YOGAS = {
 	"Gajakesari Yoga": {
 		condition: "Jupiter in Kendra (1,4,7,10) from Moon",
-		effects: ["Wisdom", "Leadership", "Spiritual growth", "Success in life"],
-		remedies: ["Jupiter mantras", "Yellow sapphire", "Thursday fasting"],
-	},
-	"Kesari Yoga": {
-		condition: "Jupiter in 1st house with strong Moon",
-		effects: ["Intelligence", "Good fortune", "Respect in society"],
-		remedies: ["Jupiter worship", "Yellow clothes", "Guru seva"],
-	},
-	"Panch Mahapurush Yoga": {
-		condition:
-			"Any of the 5 planets (Mercury, Venus, Mars, Jupiter, Saturn) in own/exaltation sign in Kendra",
+		strength: "Strong when both Jupiter and Moon are unafflicted",
 		effects: [
-			"Exceptional qualities",
+			"Wisdom",
 			"Leadership",
-			"Success in respective fields",
+			"Spiritual growth",
+			"Success in life",
+			"Political success",
 		],
-		remedies: ["Planet-specific remedies", "Gemstones", "Mantras"],
+		timing: "Results manifest during Jupiter or Moon periods",
+		remedies: [
+			"Jupiter mantras",
+			"Yellow sapphire",
+			"Thursday fasting",
+			"Guru seva",
+		],
+		validation: "Check Jupiter and Moon strength, aspects, and house positions",
 	},
-	"Raja Yoga": {
-		condition: "Strong planets in Kendra and Trikona houses",
-		effects: ["Royal qualities", "Leadership", "Authority", "Success"],
-		remedies: ["Sun worship", "Ruby gemstone", "Surya namaskar"],
-	},
-	"Dharma Karmadhipati Yoga": {
-		condition: "9th and 10th house lords in mutual aspect",
+	"Bhadra Yoga": {
+		condition: "Mercury in own sign (Gemini/Virgo) in Kendra from Ascendant",
+		strength: "Stronger when Mercury is in Virgo and unafflicted",
 		effects: [
-			"Dharma and karma alignment",
-			"Spiritual success",
-			"Career growth",
+			"Intelligence",
+			"Communication skills",
+			"Business acumen",
+			"Literary talents",
 		],
-		remedies: ["Jupiter remedies", "Saturn remedies", "Spiritual practices"],
+		timing: "Peak results in Mercury Mahadasha/Antardasha",
+		remedies: [
+			"Mercury mantras",
+			"Emerald",
+			"Wednesday worship",
+			"Vishnu sadhana",
+		],
+		validation: "Mercury must be in exact own sign and Kendra position",
+	},
+	"Hamsa Yoga": {
+		condition:
+			"Jupiter in own sign (Sagittarius/Pisces) in Kendra from Ascendant",
+		strength: "Most powerful when Jupiter is in Sagittarius in 1st house",
+		effects: [
+			"Spiritual wisdom",
+			"Teaching abilities",
+			"Religious leadership",
+			"Prosperity",
+		],
+		timing: "Life-changing results in Jupiter periods",
+		remedies: [
+			"Guru mantras",
+			"Yellow sapphire",
+			"Brihaspati worship",
+			"Charity",
+		],
+		validation: "Jupiter placement in exact own sign and angular house",
+	},
+	"Malavya Yoga": {
+		condition: "Venus in own sign (Taurus/Libra) in Kendra from Ascendant",
+		strength: "Stronger in Taurus, weaker if afflicted by malefics",
+		effects: [
+			"Artistic talents",
+			"Luxury",
+			"Beauty",
+			"Marital happiness",
+			"Wealth",
+		],
+		timing: "Prominent results in Venus Mahadasha",
+		remedies: ["Venus mantras", "Diamond", "Friday worship", "Lakshmi sadhana"],
+		validation: "Venus in exact own sign in angular position",
+	},
+	"Ruchaka Yoga": {
+		condition: "Mars in own sign (Aries/Scorpio) in Kendra from Ascendant",
+		strength: "Most powerful in Aries in 1st house",
+		effects: [
+			"Courage",
+			"Leadership",
+			"Military success",
+			"Athletic abilities",
+			"Land ownership",
+		],
+		timing: "Peak effects in Mars Mahadasha/Antardasha",
+		remedies: [
+			"Mars mantras",
+			"Red coral",
+			"Tuesday worship",
+			"Hanuman worship",
+		],
+		validation: "Mars in exact own sign in Kendra house",
+	},
+	"Shasha Yoga": {
+		condition:
+			"Saturn in own sign (Capricorn/Aquarius) in Kendra from Ascendant",
+		strength: "More effective in Capricorn, requires unafflicted Saturn",
+		effects: [
+			"Administrative skills",
+			"Longevity",
+			"Discipline",
+			"Success through hard work",
+		],
+		timing: "Major results in Saturn Mahadasha, especially after age 36",
+		remedies: [
+			"Saturn mantras",
+			"Blue sapphire",
+			"Saturday worship",
+			"Service to elderly",
+		],
+		validation: "Saturn in exact own sign in angular house",
+	},
+	"Neecha Bhanga Raja Yoga": {
+		condition: "Debilitated planet's dispositor in Kendra/Trikona or exalted",
+		strength: "Varies based on the specific cancellation conditions",
+		effects: [
+			"Rise from adversity",
+			"Unexpected success",
+			"Reversal of fortune",
+		],
+		timing: "Activates during the debilitated planet's period",
+		remedies: ["Planet-specific remedies", "Charity", "Spiritual practices"],
+		validation: "Multiple conditions must be checked for true cancellation",
+	},
+	"Viparita Raja Yoga": {
+		condition:
+			"Lords of 6th, 8th, 12th houses in mutual exchange or conjunction",
+		strength: "Stronger when all three dusthana lords are involved",
+		effects: [
+			"Success through obstacles",
+			"Unconventional achievements",
+			"Hidden talents",
+		],
+		timing: "Results during dusthana lord periods",
+		remedies: [
+			"Rudra mantras",
+			"Tantric practices",
+			"Obstacle removal rituals",
+		],
+		validation: "Exact exchange or conjunction of dusthana lords required",
+	},
+	"Chandra Mangal Yoga": {
+		condition: "Moon and Mars in conjunction or mutual aspect",
+		strength: "Stronger in benefic signs, weaker if afflicted",
+		effects: [
+			"Wealth accumulation",
+			"Property gains",
+			"Mother's blessings",
+			"Emotional strength",
+		],
+		timing: "Prominent in Moon or Mars periods",
+		remedies: ["Chandra-Mangal mantras", "Pearl and coral", "Mother's service"],
+		validation: "Check exact degrees and house positions",
+	},
+	"Guru Mangal Yoga": {
+		condition: "Jupiter and Mars in conjunction or mutual aspect",
+		strength: "Most powerful in fire signs or own signs",
+		effects: [
+			"Technical expertise",
+			"Engineering skills",
+			"Leadership",
+			"Spiritual warrior",
+		],
+		timing: "Peak results in Jupiter-Mars periods",
+		remedies: [
+			"Guru-Mangal mantras",
+			"Yellow sapphire and coral",
+			"Dharmic actions",
+		],
+		validation: "Conjunction within 10 degrees or exact mutual aspect",
+	},
+	"Dhana Yoga": {
+		condition: "2nd and 11th house lords in mutual connection",
+		strength: "Stronger when involving benefic planets",
+		effects: [
+			"Wealth accumulation",
+			"Financial stability",
+			"Multiple income sources",
+		],
+		timing: "Wealth periods during 2nd/11th lord dashas",
+		remedies: ["Lakshmi mantras", "Wealth-related gemstones", "Charity"],
+		validation: "Check connection through conjunction, aspect, or exchange",
+	},
+	"Raj Sambandha Yoga": {
+		condition: "1st, 5th, 9th house lords in mutual connection",
+		strength: "Most powerful when all three are strong",
+		effects: [
+			"Royal connections",
+			"Government favor",
+			"Leadership positions",
+			"Fame",
+		],
+		timing: "Major results in trikona lord periods",
+		remedies: ["Sun worship", "Ruby", "Authority-related mantras"],
+		validation: "Connection through conjunction, aspect, or house exchange",
 	},
 };
 
@@ -231,13 +389,14 @@ const DASHA_INTERPRETATIONS = {
 	},
 };
 
-// Build specialized prompts based on context
+// Build specialized prompts based on context with enhanced accuracy
 export function buildSpecializedPrompt(context: AstrologicalContext): string {
 	let prompt = "";
 
 	prompt += getConversationalStylePrompt();
+	prompt += getAccuracyValidationPrompt();
 
-	// Add birth details context
+	// Add birth details context with chart data
 	if (context.birthDetails) {
 		prompt += `
 BIRTH DETAILS ANALYSIS:
@@ -245,13 +404,27 @@ Date: ${context.birthDetails.date}
 Time: ${context.birthDetails.time}
 Place: ${context.birthDetails.place}
 
+CRITICAL ACCURACY REQUIREMENTS:
+1. Use EXACT birth time for precise calculations
+2. Consider time zone and daylight saving adjustments
+3. Calculate Ayanamsa for accurate planetary positions
+4. Verify all planetary degrees and Nakshatra positions
+5. Cross-check house cusps and planetary aspects
+
 Based on these birth details, provide a comprehensive analysis including:
-1. Ascendant calculation and its significance
-2. Planetary positions in houses and signs
-3. Nakshatra analysis for each planet
-4. Current dasha period and its effects
-5. Planetary combinations (Yogas) present in the chart
+1. Precise Ascendant calculation with degrees and minutes
+2. Exact planetary positions in houses, signs, and Nakshatras
+3. Detailed Nakshatra analysis with pada positions
+4. Current Vimshottari Dasha period with exact dates
+5. Comprehensive Yoga analysis with strength assessment
+6. Planetary strength analysis (Shadbala, Ashtakavarga)
+7. Transit analysis and their timing effects
 `;
+	}
+
+	// Add chart data analysis if available
+	if (context.chartData) {
+		prompt += buildChartAnalysisPrompt(context.chartData);
 	}
 
 	// Add question-specific analysis
@@ -269,22 +442,169 @@ Based on these birth details, provide a comprehensive analysis including:
 		prompt += getTransitAnalysisPrompt(context.currentTransits);
 	}
 
+	// Add timing precision requirements
+	prompt += getTimingPrecisionPrompt();
+
 	return prompt;
+}
+
+function getAccuracyValidationPrompt(): string {
+	return `
+ACCURACY VALIDATION REQUIREMENTS:
+- Always verify planetary positions against multiple sources
+- Check for calculation errors in house positions
+- Validate Nakshatra and pada positions
+- Confirm Dasha calculations with birth time precision
+- Cross-reference yoga conditions with actual chart positions
+- Ensure all predictions are based on verified chart data
+- Mention confidence levels for predictions
+- Acknowledge limitations when birth time is approximate
+
+PREDICTION QUALITY STANDARDS:
+- Provide specific timeframes with confidence intervals
+- Explain the astrological reasoning behind each prediction
+- Distinguish between strong, moderate, and weak indications
+- Avoid overly dramatic or fear-inducing language
+- Balance positive and challenging aspects
+- Offer constructive guidance for difficult periods
+`;
+}
+
+function buildChartAnalysisPrompt(chartData: {
+	ascendant: { sign: string; degree: number };
+	planets: Array<{
+		name: string;
+		sign: string;
+		house: number;
+		degree: number;
+		nakshatra: string;
+		isRetrograde: boolean;
+	}>;
+	currentDasha: {
+		planet: string;
+		startDate: string;
+		endDate: string;
+		subDasha: string;
+	};
+	yogas: string[];
+}): string {
+	return `
+CALCULATED CHART DATA ANALYSIS:
+Ascendant: ${chartData.ascendant.sign} at ${chartData.ascendant.degree.toFixed(
+		2
+	)}°
+
+PLANETARY POSITIONS:
+${chartData.planets
+	.map(
+		(planet) =>
+			`${planet.name}: ${planet.sign} (House ${
+				planet.house
+			}) at ${planet.degree.toFixed(2)}° in ${planet.nakshatra}${
+				planet.isRetrograde ? " (R)" : ""
+			}`
+	)
+	.join("\n")}
+
+CURRENT DASHA PERIOD:
+${chartData.currentDasha.planet} Mahadasha (${
+		chartData.currentDasha.startDate
+	} - ${chartData.currentDasha.endDate})
+Current Sub-period: ${chartData.currentDasha.subDasha}
+
+DETECTED YOGAS:
+${chartData.yogas.join(", ")}
+
+ANALYSIS REQUIREMENTS:
+1. Validate all planetary positions and aspects
+2. Analyze the strength and dignity of each planet
+3. Examine house lordships and their implications
+4. Assess the quality and strength of detected yogas
+5. Provide precise timing based on current dasha periods
+6. Consider planetary transits and their activation points
+`;
+}
+
+function getTimingPrecisionPrompt(): string {
+	return `
+TIMING PRECISION REQUIREMENTS:
+- Use Vimshottari Dasha system for major life events
+- Consider Antardasha and Pratyantardasha for specific timing
+- Factor in current planetary transits
+- Analyze activation of natal yogas by transits
+- Provide date ranges rather than exact dates when appropriate
+- Mention the astrological factors behind timing predictions
+- Consider the native's current age and life stage
+- Account for the maturation periods of different planets
+
+CONFIDENCE LEVELS:
+- High confidence: Strong planetary indications with multiple confirmations
+- Medium confidence: Clear indications with some supporting factors
+- Low confidence: Weak or conflicting indications
+- Always mention the basis for your confidence level
+`;
 }
 
 function getConversationalStylePrompt(): string {
 	return `
-  RESPONSE STYLE GUIDELINES:
-  - Use a warm, empathetic, and conversational tone like a wise astrologer
-  - Address the user by name if available, or use "dear one" or "seeker"
-  - Explain complex concepts in simple, relatable terms
-  - Use analogies and metaphors to illustrate astrological concepts
-  - Show genuine care and concern for the user's situation
-  - Use occasional emojis to convey emotion (🌙✨💫)
-  - Balance technical accuracy with spiritual wisdom
-  - End responses with an open-ended question to encourage dialogue
-  - Share personal insights when appropriate
-  - Use phrases like "I sense that..." or "The stars suggest..."
+RESPONSE STYLE - LIKE REAL ASTROLOGERS:
+
+CRITICAL: Your responses should be SHORT, DIRECT, and CONVERSATIONAL like the examples below:
+- "Do you have joints pain?"
+- "Career opportunity coming in next 3 months"  
+- "24th oct. -7th dec ...bahut bahut bahut acha job milta hua najar aa raha hai"
+- "You should avoid love relationship right now"
+- "Wait" / "Let me check" / "Okay"
+
+RESPONSE RULES:
+1. Keep responses SHORT (1-3 sentences max per message)
+2. Make DIRECT predictions without long explanations
+3. Use SPECIFIC dates/timeframes like "Oct-Nov", "next 3 months", "24th oct-7th dec"
+4. Ask simple questions: "IT field me job hai?", "Koi partner hai?", "Do you have health issues?"
+5. Use conversational fillers: "Wait", "Let me check", "Okay", "Checking your chart"
+6. Mix Hindi/English naturally: "bahut acha", "yoga hai", "time hai"
+7. Give immediate observations: "I see...", "Your chart shows...", "Got it"
+8. NO long explanations or educational content
+9. Focus on WHAT will happen, not WHY it happens
+10. Break complex predictions into multiple short messages
+11. Use direct statements: "You should avoid...", "Career opportunity coming..."
+12. Ask for clarification: "Which field are you in?", "Any partner right now?"
+13. Give timing predictions: "3 months", "October-November", specific date ranges
+14. Make health observations: "Do you have back pain?", "Joint pain?"
+15. Use reassuring language: "Don't worry", "Good news", "Future seems alright"
+
+EXAMPLES OF GOOD RESPONSES:
+✅ "Your chart shows government job yoga"
+✅ "October-November time very good for career"
+✅ "Do you have health issues right now?"
+✅ "Wait, let me check your dasha period"
+✅ "Avoid starting new relationships till December"
+✅ "24th oct-7th dec bahut bahut acha job milega"
+✅ "IT field me ho? New opportunity coming"
+✅ "Mercury mahadasha chal rahi hai"
+✅ "Got it. Future seems alright"
+✅ "High authoritative post will suit you"
+✅ "Travel chances are also there"
+✅ "Which field are you in?"
+✅ "Scorpio ascendant and Aquarius moon sign"
+✅ "Saturn's sadesati running"
+✅ "Marriage yoga started from June"
+
+CONVERSATION FLOW EXAMPLES:
+✅ Start: "Wait" / "Let me check" / "Checking your chart"
+✅ Observation: "Your chart shows..." / "I see..." / "Got it"
+✅ Question: "Do you have...?" / "Which field...?" / "Any partner?"
+✅ Prediction: "Next 3 months..." / "October-November..." / "Coming soon"
+✅ Advice: "You should..." / "Avoid..." / "Try..."
+
+AVOID:
+❌ Long explanations about planetary positions
+❌ Educational content about astrology
+❌ Multiple paragraphs
+❌ Technical jargon without context
+❌ Overly formal language
+❌ Bullet points and formatting
+❌ Multiple predictions in one message
   `;
 }
 
@@ -391,32 +711,32 @@ GENERAL LIFE ANALYSIS REQUIREMENTS:
 function getDetailLevelPrompt(level: string): string {
 	const levels = {
 		basic: `
-DETAIL LEVEL: BASIC
-- Provide essential information only
-- Focus on key planetary positions
-- Give basic remedies and suggestions
-- Keep explanations simple and clear
+DETAIL LEVEL: BASIC (CONVERSATIONAL STYLE)
+- Keep responses very short (1-2 sentences)
+- Make direct predictions only
+- Ask simple questions
+- Use timing like "next 3 months", "Oct-Nov"
+- No explanations, just predictions
 `,
 		comprehensive: `
-DETAIL LEVEL: COMPREHENSIVE
-- Provide detailed analysis of all relevant houses
-- Include planetary combinations and yogas
-- Give specific timing and predictions
-- Provide detailed remedies and gemstones
-- Include practical guidance and solutions
+DETAIL LEVEL: COMPREHENSIVE (CONVERSATIONAL STYLE)
+- Still keep responses short but can give 2-3 predictions
+- Include specific timing and key observations
+- Ask follow-up questions naturally
+- Mention key yogas/periods briefly
+- Focus on practical guidance in simple terms
 `,
 		expert: `
-DETAIL LEVEL: EXPERT
-- Provide expert-level analysis with technical details
-- Include advanced yogas and combinations
-- Give precise timing with degrees and minutes
-- Provide advanced remedies and spiritual practices
-- Include references to classical texts
-- Analyze subtle planetary influences
+DETAIL LEVEL: EXPERT (CONVERSATIONAL STYLE)  
+- Can mention technical terms but keep responses short
+- Give precise timing and multiple predictions
+- Reference specific planetary positions briefly
+- Still maintain conversational, direct style
+- Break complex analysis into multiple short messages
 `,
 	};
 
-	return levels[level as keyof typeof levels] || levels.comprehensive;
+	return levels[level as keyof typeof levels] || levels.basic;
 }
 
 function getRemedyPrompt(preference: string): string {

@@ -11,11 +11,12 @@ export async function POST(req: Request) {
 		
 		// Handle both old string format and new object format
 		if (typeof response === "string") {
-			return new Response(JSON.stringify({ response }), {
+			return new Response(JSON.stringify({ text: response }), {
 				headers: { "Content-Type": "application/json" },
 			});
 		} else {
-			return new Response(JSON.stringify(response), {
+			// Extract just the text from the response object
+			return new Response(JSON.stringify({ text: response.text, chartData: response.chartData }), {
 				headers: { "Content-Type": "application/json" },
 			});
 		}
