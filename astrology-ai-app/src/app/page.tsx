@@ -16,6 +16,13 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import VedicChart from "../components/VedicChart";
 import BirthDetailsForm from "../components/BirthDetailsForm";
+import ProgressiveBirthForm from "../components/ProgressiveBirthForm";
+import { ErrorBoundary } from "../components/ErrorBoundary";
+import {
+	StreamingStatus,
+	TypingIndicator,
+	LoadingSpinner,
+} from "../components/LoadingStates";
 
 interface ChartData {
 	planets: Array<{
@@ -50,6 +57,7 @@ interface BirthDetails {
 	minutes: string;
 	seconds: string;
 	placeOfBirth: string;
+	timeConfidence?: "exact" | "approximate" | "unknown";
 }
 
 const ChatInterface = () => {
@@ -59,6 +67,8 @@ const ChatInterface = () => {
 	const [messages, setMessages] = useState<Message[]>([]);
 	const [isTyping, setIsTyping] = useState(false);
 	const [showScrollButton, setShowScrollButton] = useState(false);
+	const [streamingStatus, setStreamingStatus] = useState<string | null>(null);
+	const [useProgressiveForm, setUseProgressiveForm] = useState(true);
 	const messagesEndRef = useRef<HTMLDivElement>(null);
 	const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -112,6 +122,7 @@ const ChatInterface = () => {
 								content: message,
 							},
 						],
+						stream: true,
 					}),
 				});
 
@@ -210,10 +221,19 @@ const ChatInterface = () => {
 						</p>
 					</div>
 
-					<BirthDetailsForm
-						onSubmit={handleFormSubmit}
-						initialData={birthDetails}
-					/>
+					{useProgressiveForm ? (
+						<ProgressiveBirthForm
+							onSubmit={handleFormSubmit}
+							initialData={birthDetails}
+							onCancel={() => setUseProgressiveForm(false)}
+						/>
+					) : (
+						<BirthDetailsForm
+							onSubmit={handleFormSubmit}
+							initialData={birthDetails}
+							onCancel={() => setUseProgressiveForm(true)}
+						/>
+					)}
 				</div>
 			) : (
 				<div className="w-full max-w-4xl h-full max-h-[900px] relative">
@@ -404,8 +424,13 @@ const ChatInterface = () => {
 								</div>
 							))}
 
-							{/* Typing indicator */}
-							{isTyping && (
+							{/* Streaming status and typing indicator */}
+							{streamingStatus && (
+								<div className="mb-4">
+									<StreamingStatus message={streamingStatus} />
+								</div>
+							)}
+							{isTyping && !streamingStatus && (
 								<div className="flex justify-start animate-fadeIn">
 									<div className="flex items-end space-x-3 max-w-xs lg:max-w-md">
 										<div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-sm">
@@ -471,4 +496,11 @@ const ChatInterface = () => {
 	);
 };
 
-export default ChatInterface;
+// Wrap the entire app with ErrorBoundary for production-ready error handling
+const WrappedChatInterface = () => (
+	<ErrorBoundary>
+		<ChatInterface />
+	</ErrorBoundary>
+);
+
+export default WrappedChatInterface;

@@ -6,6 +6,12 @@ import {
 	buildSpecializedPrompt,
 	type AstrologicalContext,
 } from "./prompt-engine";
+import {
+	cacheService,
+	generateChartCacheKey,
+	generatePredictionCacheKey,
+	withCache,
+} from "./cache-service";
 
 // Enhanced Vedic Astrology Knowledge Base
 const NAKSHATRAS = [
@@ -509,18 +515,28 @@ export async function generateAstrologyResponse(messages: UIMessage[]) {
 		const hasBirthDetails = birthDetails !== null;
 		console.log("Birth details extracted:", birthDetails);
 		console.log("Has birth details:", hasBirthDetails);
-		console.log("User input length:", userInput.length);
-		console.log("User input type:", typeof userInput);
 
-		// Generate chart data if birth details are available
+		// Try to get cached prediction first
+		const cacheKey = generatePredictionCacheKey(messages, birthDetails);
+		const cachedResponse = cacheService.get(cacheKey);
+		if (cachedResponse) {
+			console.log("Cache hit for prediction:", cacheKey);
+			return cachedResponse;
+		}
+
+		// Generate chart data if birth details are available (with caching)
 		let chartData = null;
 		if (hasBirthDetails && birthDetails) {
 			try {
 				console.log("Generating chart with birth details:", birthDetails);
-				chartData = generateBirthChart(birthDetails as BirthDetails);
+				const chartCacheKey = generateChartCacheKey(birthDetails);
+				chartData = await withCache(
+					chartCacheKey,
+					() =>
+						Promise.resolve(generateBirthChart(birthDetails as BirthDetails)),
+					1800 // 30 minutes cache for chart data
+				);
 				console.log("Chart data generated:", chartData);
-				console.log("Chart data type:", typeof chartData);
-				console.log("Chart data planets:", chartData?.planets);
 			} catch (error) {
 				console.error("Error generating chart:", error);
 			}
@@ -570,10 +586,15 @@ export async function generateAstrologyResponse(messages: UIMessage[]) {
 			temperature: 0.7, // Balanced creativity and accuracy
 		});
 
-		return {
+		const response = {
 			text: text,
 			chartData: chartData,
 		};
+
+		// Cache the response for 5 minutes (AI responses change but can be cached briefly)
+		cacheService.set(cacheKey, response, 300);
+
+		return response;
 	} catch (error) {
 		console.error("Astrology engine error:", error);
 		const fallback = generateFallbackResponse("", "general", false, null);
