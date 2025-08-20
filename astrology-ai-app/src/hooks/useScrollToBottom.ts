@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 interface UseScrollToBottomProps {
-	dependencies?: any[];
+	dependencies?: unknown[];
 	threshold?: number;
 	behavior?: ScrollBehavior;
 }
@@ -49,7 +49,7 @@ export function useScrollToBottom({
 			// Use requestAnimationFrame to ensure DOM has updated
 			requestAnimationFrame(scrollToBottom);
 		}
-	}, [...dependencies, isNearBottom, userHasScrolled]);
+	}, [behavior, isNearBottom, userHasScrolled, ...dependencies]);
 
 	// Set up intersection observer for scroll-to-bottom button visibility
 	useEffect(() => {

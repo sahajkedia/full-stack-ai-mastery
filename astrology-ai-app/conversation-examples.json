@@ -1,0 +1,1571 @@
+[
+	{
+		"consultation_details": {
+			"client_name": "Sahaj",
+			"astrologer_name": "Sanvika",
+			"platform": "Astrotalk",
+			"chat_start_time": "02:05 AM",
+			"chat_end_time": "02:15 AM"
+		},
+		"client_details": {
+			"name": "Sahaj",
+			"gender": "Male",
+			"date_of_birth": "05-December-2000",
+			"time_of_birth": "06:24 AM",
+			"place_of_birth": "Purnia, Bihar, India"
+		},
+		"conversation": [
+			{
+				"timestamp": "02:05 AM",
+				"sender": "system",
+				"message": "This is an automated message to confirm that chat has started."
+			},
+			{
+				"timestamp": "02:05 AM",
+				"sender": "system",
+				"message": "Welcome to Astrotalk. Consultant will take a minute to analyse your details. You may ask your question in the meanwhile."
+			},
+			{
+				"timestamp": "02:05 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "Radhe Radhe Ji🙏 How are you, How can I help you?"
+			},
+			{
+				"timestamp": "02:05 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "namaste"
+			},
+			{
+				"timestamp": "02:05 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "please do some predictions for me🙏🙏"
+			},
+			{
+				"timestamp": "02:05 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "Regarding what?"
+			},
+			{
+				"timestamp": "02:06 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "Health Career"
+			},
+			{
+				"timestamp": "02:06 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "Checking your chart"
+			},
+			{
+				"timestamp": "02:06 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "Wait"
+			},
+			{
+				"timestamp": "02:07 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "Do you have joints pain?"
+			},
+			{
+				"timestamp": "02:08 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "I have some backpain and neurological bladder and bowel conditions"
+			},
+			{
+				"timestamp": "02:08 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "neck joint has some pain"
+			},
+			{
+				"timestamp": "02:08 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "Got it"
+			},
+			{
+				"timestamp": "02:09 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "You should prepare for govt job"
+			},
+			{
+				"timestamp": "02:09 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "no interest in anyone"
+			},
+			{
+				"timestamp": "02:10 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "High authoritative post will suit you"
+			},
+			{
+				"timestamp": "02:10 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "Be it anywhere"
+			},
+			{
+				"timestamp": "02:10 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "very less money and not very nice lifestyle"
+			},
+			{
+				"timestamp": "02:10 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "Dont work under someone"
+			},
+			{
+				"timestamp": "02:10 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "currently I am an independent contractor"
+			},
+			{
+				"timestamp": "02:10 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "not working under anyone"
+			},
+			{
+				"timestamp": "02:11 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "Great"
+			},
+			{
+				"timestamp": "02:11 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "Future seems Alright"
+			},
+			{
+				"timestamp": "02:11 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "govt job me bhi kisi ke under hi toh kaam hota hai",
+				"translation": "In government jobs too, you have to work under someone"
+			},
+			{
+				"timestamp": "02:12 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "But government job mein high post pr work kroge that's going to be in your favour",
+				"translation": "But in government job you will work on high post, that's going to be in your favour"
+			},
+			{
+				"timestamp": "02:12 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "ohh"
+			},
+			{
+				"timestamp": "02:12 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "samajh hi nhi aa rha kaise aage badhu",
+				"translation": "I don't understand how to move forward"
+			},
+			{
+				"timestamp": "02:13 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "Dekho time to favourable hi chlra hai apka",
+				"translation": "Look, your time is running favourably"
+			},
+			{
+				"timestamp": "02:13 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "health bhi kafi kharab hai aur padhai bhi nhi ho rhi aage",
+				"translation": "Health is also quite bad and studies are not progressing"
+			},
+			{
+				"timestamp": "02:14 AM",
+				"sender": "astrologer",
+				"speaker": "Sanvika",
+				"message": "Chart k according to sab accha hai but you need to makeup your mind first what you want in your life",
+				"translation": "According to the chart everything is good but you need to makeup your mind first what you want in your life"
+			},
+			{
+				"timestamp": "02:15 AM",
+				"sender": "system",
+				"message": "Sahaj ended the chat"
+			}
+		],
+		"consultation_summary": {
+			"topics_discussed": ["Health", "Career"],
+			"health_issues_mentioned": [
+				"Back pain",
+				"Neurological bladder and bowel conditions",
+				"Neck joint pain"
+			],
+			"career_advice_given": [
+				"Prepare for government job",
+				"High authoritative post will suit",
+				"Don't work under someone",
+				"Work on high government post"
+			],
+			"astrologer_observations": [
+				"Time is running favourably",
+				"According to chart everything is good",
+				"Future seems alright"
+			],
+			"client_concerns": [
+				"No interest in government jobs",
+				"Low salary and lifestyle concerns",
+				"Health problems affecting studies",
+				"Confusion about future direction"
+			]
+		}
+	},
+
+	{
+		"consultation_details": {
+			"client_name": "Sahaj",
+			"astrologer_name": "Elisha",
+			"platform": "Astrotalk",
+			"chat_start_time": "07:19 PM",
+			"chat_end_time": "07:24 PM"
+		},
+		"client_details": {
+			"name": "Sahaj",
+			"gender": "Male",
+			"date_of_birth": "05-December-2000",
+			"time_of_birth": "06:24 AM",
+			"place_of_birth": "Purnia, Bihar, India"
+		},
+		"conversation": [
+			{
+				"timestamp": "07:19 PM",
+				"sender": "system",
+				"message": "This is an automated message to confirm that chat has started."
+			},
+			{
+				"timestamp": "07:19 PM",
+				"sender": "system",
+				"message": "Welcome to Astrotalk. Consultant will take a minute to analyse your details. You may ask your question in the meanwhile."
+			},
+			{
+				"timestamp": "07:19 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "Hello namaste !!!🙏🏻"
+			},
+			{
+				"timestamp": "07:19 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "How can I help you???"
+			},
+			{
+				"timestamp": "07:19 PM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "predict something about me 🙏"
+			},
+			{
+				"timestamp": "07:19 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "ohk wait"
+			},
+			{
+				"timestamp": "07:19 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "let me check"
+			},
+			{
+				"timestamp": "07:20 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "Sahaj you should avoid"
+			},
+			{
+				"timestamp": "07:20 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "love relationship"
+			},
+			{
+				"timestamp": "07:20 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "right now"
+			},
+			{
+				"timestamp": "07:20 PM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "yeah. not in any right now"
+			},
+			{
+				"timestamp": "07:20 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "and career opportunity"
+			},
+			{
+				"timestamp": "07:20 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "you will get"
+			},
+			{
+				"timestamp": "07:20 PM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "very far from any"
+			},
+			{
+				"timestamp": "07:20 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "in coming"
+			},
+			{
+				"timestamp": "07:20 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "3 months"
+			},
+			{
+				"timestamp": "07:21 PM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "November time?"
+			},
+			{
+				"timestamp": "07:21 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "and travel chances"
+			},
+			{
+				"timestamp": "07:21 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "are also there"
+			},
+			{
+				"timestamp": "07:21 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "yess"
+			},
+			{
+				"timestamp": "07:21 PM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "where?"
+			},
+			{
+				"timestamp": "07:21 PM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "when will I encounter this?",
+				"context": "Referring to love relationship"
+			},
+			{
+				"timestamp": "07:22 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "See work related travel"
+			},
+			{
+				"timestamp": "07:22 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "wait"
+			},
+			{
+				"timestamp": "07:22 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "October to November"
+			},
+			{
+				"timestamp": "07:22 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "time frame you can"
+			},
+			{
+				"timestamp": "07:22 PM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "something more about career"
+			},
+			{
+				"timestamp": "07:23 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "connect to new person"
+			},
+			{
+				"timestamp": "07:23 PM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "okay"
+			},
+			{
+				"timestamp": "07:23 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "in which field"
+			},
+			{
+				"timestamp": "07:23 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "you are"
+			},
+			{
+				"timestamp": "07:23 PM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "IT"
+			},
+			{
+				"timestamp": "07:23 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "because some new"
+			},
+			{
+				"timestamp": "07:23 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "opportunity"
+			},
+			{
+				"timestamp": "07:23 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "you should take"
+			},
+			{
+				"timestamp": "07:24 PM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "ok thanks"
+			},
+			{
+				"timestamp": "07:24 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "and yess foreign"
+			},
+			{
+				"timestamp": "07:24 PM",
+				"sender": "astrologer",
+				"speaker": "Elisha",
+				"message": "opportunity you should try for"
+			},
+			{
+				"timestamp": "07:24 PM",
+				"sender": "system",
+				"message": "Sahaj ended the chat"
+			}
+		],
+		"consultation_summary": {
+			"topics_discussed": ["Love relationships", "Career", "Travel"],
+			"relationship_advice": [
+				"Should avoid love relationships right now",
+				"Can connect to new person in October-November timeframe"
+			],
+			"career_predictions": [
+				"Career opportunity coming in next 3 months",
+				"November timing mentioned",
+				"New opportunities should be taken",
+				"Foreign opportunities recommended",
+				"Work-related travel predicted"
+			],
+			"travel_predictions": [
+				"Travel chances available",
+				"Work-related travel",
+				"October to November timeframe"
+			],
+			"timeframes_mentioned": [
+				"Next 3 months",
+				"November",
+				"October to November"
+			],
+			"client_background": {
+				"current_field": "IT",
+				"relationship_status": "Not in any relationship currently",
+				"career_status": "Very far from any opportunities (at time of chat)"
+			}
+		}
+	},
+
+	{
+		"consultation_details": {
+			"client_name": "User",
+			"astrologer_name": "Ankit4",
+			"platform": "Astrotalk",
+			"chat_start_time": "10:37 PM",
+			"chat_end_time": "10:44 PM"
+		},
+		"client_details": {
+			"name": "User",
+			"gender": "Female",
+			"date_of_birth": "09-September-1999",
+			"time_of_birth": "02:00 PM",
+			"place_of_birth": "Purnia, Bihar, India"
+		},
+		"conversation": [
+			{
+				"timestamp": "10:37 PM",
+				"sender": "system",
+				"message": "This is an automated message to confirm that chat has started."
+			},
+			{
+				"timestamp": "10:37 PM",
+				"sender": "system",
+				"message": "Welcome to Astrotalk. Consultant will take a minute to analyse your details. You may ask your question in the meanwhile."
+			},
+			{
+				"timestamp": "10:37 PM",
+				"sender": "client",
+				"speaker": "User",
+				"message": "hi"
+			},
+			{
+				"timestamp": "10:37 PM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "hii user ."
+			},
+			{
+				"timestamp": "10:37 PM",
+				"sender": "client",
+				"speaker": "User",
+				"message": "call?"
+			},
+			{
+				"timestamp": "10:37 PM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "yes kro..",
+				"translation": "yes do it"
+			},
+			{
+				"timestamp": "10:38 PM",
+				"sender": "client",
+				"speaker": "User",
+				"message": "hii"
+			},
+			{
+				"timestamp": "10:40 PM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "charge khatam",
+				"translation": "charge finished"
+			},
+			{
+				"timestamp": "10:40 PM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "fir se kro",
+				"translation": "do it again"
+			},
+			{
+				"timestamp": "10:41 PM",
+				"sender": "client",
+				"speaker": "User",
+				"message": "phone discharge ho gya hai, alptop pe h",
+				"translation": "phone got discharged, on laptop now"
+			},
+			{
+				"timestamp": "10:41 PM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "dec 2023- june 2025 ..ka time acha nai Raha hai.. presents health issues...financial issues bahut or brekup hua hoga ..",
+				"translation": "Dec 2023 - June 2025 time has not been good.. present health issues...a lot of financial issues and breakup must have happened"
+			},
+			{
+				"timestamp": "10:41 PM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "yaha par anxity bahut jada honi thi aapko ..",
+				"translation": "here you must have had a lot of anxiety"
+			},
+			{
+				"timestamp": "10:42 PM",
+				"sender": "client",
+				"speaker": "User",
+				"message": "okay understand"
+			},
+			{
+				"timestamp": "10:42 PM",
+				"sender": "client",
+				"speaker": "User",
+				"message": "haan anxiety toh hui thi",
+				"translation": "yes, there was anxiety"
+			},
+			{
+				"timestamp": "10:42 PM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "19th June se aapka shadi ka yog start ho gaya hai .or life me koi nai hai .to life me koi aayega",
+				"translation": "From 19th June your marriage yoga has started. And there's no one in life, so someone will come into life"
+			},
+			{
+				"timestamp": "10:42 PM",
+				"sender": "client",
+				"speaker": "User",
+				"message": "mujhe career related puchna hai",
+				"translation": "I want to ask about career related things"
+			},
+			{
+				"timestamp": "10:42 PM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "yaha par kisi ka surgery v hua tha ghar me??",
+				"translation": "Did someone have surgery at home here?"
+			},
+			{
+				"timestamp": "10:42 PM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "okay ..aap IT field se ho??",
+				"translation": "okay.. are you from IT field?"
+			},
+			{
+				"timestamp": "10:42 PM",
+				"sender": "client",
+				"speaker": "User",
+				"message": "haan bhai ka",
+				"translation": "yes, brother's"
+			},
+			{
+				"timestamp": "10:43 PM",
+				"sender": "client",
+				"speaker": "User",
+				"message": "haan",
+				"translation": "yes"
+			},
+			{
+				"timestamp": "10:43 PM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "waise aapke birth chart me govt. job ka v yog hai..or abroad settlement ka v yog hai...",
+				"translation": "By the way, in your birth chart there's also government job yoga.. and abroad settlement yoga too"
+			},
+			{
+				"timestamp": "10:43 PM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "acha ..ha... surgery ka yog tha ...",
+				"translation": "I see.. yes... there was surgery yoga"
+			},
+			{
+				"timestamp": "10:43 PM",
+				"sender": "client",
+				"speaker": "User",
+				"message": "acha",
+				"translation": "I see"
+			},
+			{
+				"timestamp": "10:44 PM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "2029- 2032 k bich abroad chali jaogi aap..",
+				"translation": "Between 2029-2032 you will go abroad"
+			},
+			{
+				"timestamp": "10:44 PM",
+				"sender": "client",
+				"speaker": "User",
+				"message": "main bohot time se job switch karne ka try kar rahi but ho nahi rahi",
+				"translation": "I've been trying to switch jobs for a long time but it's not happening"
+			}
+		],
+		"consultation_summary": {
+			"topics_discussed": [
+				"Career",
+				"Health",
+				"Relationships",
+				"Financial issues",
+				"Travel/Settlement"
+			],
+			"difficult_period_identified": {
+				"timeframe": "December 2023 - June 2025",
+				"issues": [
+					"Health problems",
+					"Financial difficulties",
+					"Breakup",
+					"High anxiety levels"
+				]
+			},
+			"family_predictions_confirmed": {
+				"brother_surgery": "Confirmed by client"
+			},
+			"relationship_predictions": [
+				"Marriage yoga started from 19th June",
+				"Someone will come into life"
+			],
+			"career_predictions": [
+				"Government job yoga in birth chart",
+				"IT field background confirmed",
+				"Abroad settlement yoga present",
+				"Will go abroad between 2029-2032"
+			],
+			"client_current_concerns": [
+				"Trying to switch jobs for a long time without success"
+			],
+			"technical_issues": [
+				"Call attempt made but charge finished",
+				"Phone discharged, consultation continued on laptop"
+			],
+			"astrologer_accuracy": [
+				"Correctly identified anxiety period",
+				"Accurately predicted brother's surgery",
+				"Client confirmed IT field background"
+			]
+		}
+	},
+
+	{
+		"consultation_details": {
+			"client_name": "Sahaj",
+			"astrologer_name": "Ankit4",
+			"platform": "Astrotalk",
+			"chat_start_time": "03:07 AM",
+			"chat_end_time": "03:14 AM"
+		},
+		"client_details": {
+			"name": "Sahaj",
+			"gender": "Male",
+			"date_of_birth": "05-December-2000",
+			"time_of_birth": "06:24 AM",
+			"place_of_birth": "Purnia, Bihar, India"
+		},
+		"conversation": [
+			{
+				"timestamp": "03:07 AM",
+				"sender": "system",
+				"message": "This is an automated message to confirm that chat has started."
+			},
+			{
+				"timestamp": "03:07 AM",
+				"sender": "system",
+				"message": "Welcome to Astrotalk. Consultant will take a minute to analyse your details. You may ask your question in the meanwhile."
+			},
+			{
+				"timestamp": "03:07 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "hey sahaj.."
+			},
+			{
+				"timestamp": "03:07 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "how r u??"
+			},
+			{
+				"timestamp": "03:07 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "ask ur question"
+			},
+			{
+				"timestamp": "03:07 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "Hi. I am completely confused about my career right now, in one month, my contract will be over what should I do? What do you see?"
+			},
+			{
+				"timestamp": "03:08 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "virchik lagan ki kundli hai or kumbh rashi hai aapki .",
+				"translation": "Your chart has Scorpio ascendant and Aquarius moon sign"
+			},
+			{
+				"timestamp": "03:08 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "haa",
+				"translation": "yes"
+			},
+			{
+				"timestamp": "03:08 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "okay ."
+			},
+			{
+				"timestamp": "03:08 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "IT field me job hai??",
+				"translation": "Is your job in IT field?"
+			},
+			{
+				"timestamp": "03:08 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "ha",
+				"translation": "yes"
+			},
+			{
+				"timestamp": "03:08 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "okay .pls wait ."
+			},
+			{
+				"timestamp": "03:08 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "22nd July -13th aug .health issues aayega..or anxity bani rahegi kisi na kisi chiz ko le kr .or job me ya collegue bk sath jagda v hone wala hai ..is time par thora gussa kam krna .",
+				"translation": "22nd July - 13th Aug health issues will come.. and anxiety will persist about something or the other. And there will be fights at job or with colleagues.. during this time reduce anger a bit"
+			},
+			{
+				"timestamp": "03:10 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "ab suno ..mid aug Tak to job hai .",
+				"translation": "now listen.. job is there till mid Aug"
+			},
+			{
+				"timestamp": "03:10 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "aapke birth chart...se 24th oct. -7th dec ...bahut bahut bahut acha job milta hua najar aa raha hai",
+				"translation": "from your birth chart... 24th Oct - 7th Dec... a very very very good job seems to be coming"
+			},
+			{
+				"timestamp": "03:11 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "jaisa job ya .ya jis project ya position ka wait kr rahi thi .wo aapke paas ..oct - nov me rahega .",
+				"translation": "the kind of job or project or position you were waiting for.. that will be with you in Oct-Nov"
+			},
+			{
+				"timestamp": "03:11 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "I have been trying to apply for jobs, not even one is selected. My health is not improving I have neurological bladder and bowel condition from 1.5 years. Trying to look for remote roles"
+			},
+			{
+				"timestamp": "03:11 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "mid aug - sept k bich me average time hai ..",
+				"translation": "mid Aug - Sept is average time"
+			},
+			{
+				"timestamp": "03:11 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "matlab 3 mahine mai kis chiz pe focus karu?",
+				"translation": "meaning what should I focus on in 3 months?"
+			},
+			{
+				"timestamp": "03:12 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "padhai par",
+				"translation": "on studies"
+			},
+			{
+				"timestamp": "03:12 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "june 2023- jan 2024 k bich me health issues aana tha ..",
+				"translation": "health issues were supposed to come between June 2023 - Jan 2024"
+			},
+			{
+				"timestamp": "03:12 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "ha",
+				"translation": "yes"
+			},
+			{
+				"timestamp": "03:13 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "waise to aapka kundli govt. job wala hai .",
+				"translation": "by the way your chart is for government job"
+			},
+			{
+				"timestamp": "03:13 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "Choose 1 - AI / Software Dev"
+			},
+			{
+				"timestamp": "03:13 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "lekin aapne It field choose kiya",
+				"translation": "but you chose IT field"
+			},
+			{
+				"timestamp": "03:13 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "usme paise nahi hai na",
+				"translation": "there's no money in that, right?"
+			},
+			{
+				"timestamp": "03:13 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "?"
+			},
+			{
+				"timestamp": "03:13 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "dekho ye chize kundli se nai dikhta hai. jiska market me future bhai wo choose kro",
+				"translation": "look, these things don't show in horoscope. choose whichever has future in the market, brother"
+			},
+			{
+				"timestamp": "03:13 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "😂"
+			},
+			{
+				"timestamp": "03:13 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "aapko Aisa lagta hai....ha bs white money nai hai ..",
+				"translation": "you feel that way.... yes just no white money"
+			},
+			{
+				"timestamp": "03:13 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "r u able to talk on call??"
+			},
+			{
+				"timestamp": "03:14 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "sahaj??"
+			},
+			{
+				"timestamp": "03:14 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "galat kaam nahi karna chahta life me",
+				"translation": "don't want to do wrong work in life"
+			},
+			{
+				"timestamp": "03:14 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "sure"
+			},
+			{
+				"timestamp": "03:14 AM",
+				"sender": "astrologer",
+				"speaker": "Ankit4",
+				"message": "aapka shani ki sadesati v chal rahi hai",
+				"translation": "your Saturn's Sadesati is also running"
+			}
+		],
+		"consultation_summary": {
+			"topics_discussed": [
+				"Career confusion",
+				"Health issues",
+				"Job search struggles",
+				"Government vs IT career choice"
+			],
+			"astrological_details": {
+				"ascendant": "Scorpio (Virchik)",
+				"moon_sign": "Aquarius (Kumbh)",
+				"current_period": "Saturn's Sadesati running"
+			},
+			"timeline_predictions": {
+				"july_22_aug_13": {
+					"description": "Difficult period",
+					"issues": ["Health problems", "Anxiety", "Workplace conflicts"],
+					"advice": "Control anger"
+				},
+				"mid_august": "Job available till this time",
+				"mid_aug_september": "Average period",
+				"oct_24_dec_7": {
+					"description": "Very good job opportunity period",
+					"details": "The job/project/position client has been waiting for"
+				}
+			},
+			"health_predictions": {
+				"past_period": "June 2023 - Jan 2024 health issues (confirmed by client)",
+				"current_condition": "Neurological bladder and bowel condition for 1.5 years",
+				"ongoing_struggles": "Health not improving"
+			},
+			"career_analysis": {
+				"current_field": "IT",
+				"chart_indication": "Government job suited according to horoscope",
+				"client_concern": "Government jobs don't pay well",
+				"astrologer_response": "Horoscope doesn't show specific technology choices",
+				"job_search_status": "Applying but no selections, looking for remote roles",
+				"contract_ending": "In one month from consultation"
+			},
+			"client_concerns": [
+				"Career confusion",
+				"Contract ending soon",
+				"No job selections despite applications",
+				"Health deterioration",
+				"Seeking remote work due to health",
+				"Ethical work concerns"
+			],
+			"advice_given": [
+				"Focus on studies for next 3 months",
+				"Wait for October-November period for good opportunities",
+				"Choose technology with market future",
+				"Consider call consultation for detailed discussion"
+			]
+		}
+	},
+
+	{
+		"consultation_details": {
+			"client_name": "Sahaj",
+			"astrologer_name": "Navyanshika",
+			"platform": "Astrotalk",
+			"chat_start_time": "02:04 AM",
+			"chat_end_time": "02:38 AM",
+			"consultation_type": ["Astrology", "Numerology", "Tarot"],
+			"end_reason": "Low balance - chat auto-ended"
+		},
+		"client_details": {
+			"name": "Sahaj",
+			"gender": "Male",
+			"date_of_birth": "05-December-2000",
+			"time_of_birth": "06:24 AM",
+			"place_of_birth": "Purnia, Bihar, India",
+			"current_age": 25,
+			"previous_consultation": "April (same astrologer)"
+		},
+		"conversation": [
+			{
+				"timestamp": "02:04 AM",
+				"sender": "system",
+				"message": "This is an automated message to confirm that chat has started."
+			},
+			{
+				"timestamp": "02:04 AM",
+				"sender": "system",
+				"message": "Welcome to Astrotalk. Consultant will take a minute to analyse your details. You may ask your question in the meanwhile."
+			},
+			{
+				"timestamp": "02:04 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "hi ma'am"
+			},
+			{
+				"timestamp": "02:04 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "hello"
+			},
+			{
+				"timestamp": "02:04 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "namaste 🙏 how are you aap apna question puchiye 🙂",
+				"translation": "namaste 🙏 how are you, please ask your question 🙂"
+			},
+			{
+				"timestamp": "02:04 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "please predict something about me"
+			},
+			{
+				"timestamp": "02:04 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "sure"
+			},
+			{
+				"timestamp": "02:05 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "i remember I talked to you in april"
+			},
+			{
+				"timestamp": "02:05 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "ok"
+			},
+			{
+				"timestamp": "02:05 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "I request you aap muje 2 se 3 second de dijiye main aapki kundli check Karti hun aur aapko neumerology se tarot card reading karke bhi aapko batati hu",
+				"translation": "I request you give me 2-3 seconds, I'll check your horoscope and also tell you through numerology and tarot card reading"
+			},
+			{
+				"timestamp": "02:05 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "ok"
+			},
+			{
+				"timestamp": "02:06 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "jaise ki main aapki kundli read bhi ki hai to aapko Mercury ke mhadsha hai jo 2024 mein aapko lagi Hai",
+				"translation": "As I've read your horoscope, you have Mercury's mahadasha which started for you in 2024"
+			},
+			{
+				"timestamp": "02:06 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "Mercury ke mahadashay Som Mercury ke mhadsha reflect Karti Hai smart mind ya kabhi kabhar aise bhi decision iski mhadsha ka Aisa bhi reflect hota hai kya flow flow mein wrong decision bhi le loge iske do effect hote hain life mein",
+				"translation": "Mercury's mahadasha reflects smart mind, sometimes this mahadasha also reflects that you might make wrong decisions in the flow - it has two effects in life"
+			},
+			{
+				"timestamp": "02:06 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "aapke present age 25 hai to aage jab November December ka jab aapke life mein turning point aa sakta hai",
+				"translation": "Your present age is 25, so ahead when November December comes, there can be a turning point in your life"
+			},
+			{
+				"timestamp": "02:07 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "to aage jab November December ka jab aapke life mein turning point aa sakta hai",
+				"translation": "So ahead when November December comes, there can be a turning point in your life"
+			},
+			{
+				"timestamp": "02:07 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "main aapko tero reading se bhi present situation aapko Bata dete Ho",
+				"translation": "I'll also tell you about your present situation through tarot reading"
+			},
+			{
+				"timestamp": "02:07 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "is card ka matlab hai authority and responsibility abhi aap Kisi bhi chij ki responsibility bahut easily responsible Ban ke nibhaoge iske iske meaning yah Bata diye authority the leadership",
+				"translation": "This card means authority and responsibility - right now you will fulfill any responsibility very easily by being responsible - its meaning shows authority and leadership"
+			},
+			{
+				"timestamp": "02:08 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "please predict something about me"
+			},
+			{
+				"timestamp": "02:08 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "family mein koi bade rahenge unki Rai hamesha lijiyega kuchh chij karne se pahle Life mein kuchh bhi aapko bada decision lena hai to unse ek bar salah aapko jarur lena hai",
+				"translation": "There will be some elders in the family, always take their advice before doing anything. If you have to make any big decision in life, you must consult with them once"
+			},
+			{
+				"timestamp": "02:09 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "Mercury ke mhadsha hai and number 5 ka bhi jo hai Mercury Hai to yah aapke liye favourable hoga",
+				"translation": "You have Mercury's mahadasha and number 5 is also Mercury, so this will be favorable for you"
+			},
+			{
+				"timestamp": "02:09 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "aapke birth date bhi 5 hai Mercury ka reflect batata Hai to Life mein kuchh aapko agar kahin per business karna hai ya छोटा-मोटा deal karna hai to aap kar sakte ho kyunki aapke liye favourable rahega number 5 ka reflect very smart mind",
+				"translation": "Your birth date is also 5, Mercury's reflection shows that if you want to do business anywhere in life or small deals, you can do it because number 5's reflection will be favorable for you - very smart mind"
+			},
+			{
+				"timestamp": "02:10 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "aapko kisi chij ke bare mein Pacific Janna hai sahaj ji",
+				"translation": "Do you want to know specifically about something, Sahaj ji?"
+			},
+			{
+				"timestamp": "02:10 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "abhi life meri bhayankar haywire h. personally job nhi h, koi relationship nhi, body kafi ugly dikh rhi h, health problems hai etc",
+				"translation": "Right now my life is terribly haywire. Personally no job, no relationship, body looks quite ugly, there are health problems etc"
+			},
+			{
+				"timestamp": "02:10 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "ye phase jan 2024 se chal rahi hai",
+				"translation": "This phase has been going on since Jan 2024"
+			},
+			{
+				"timestamp": "02:11 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "aapane mujhe abhi bataya but Maine pahle aapko bataya tha ki mercuri ke mhadsha hai Mercury kabhi negative effect bhi deti Hai kabhi positive effect bhi deti Hai",
+				"translation": "You told me now but I had told you earlier that you have Mercury's mahadasha - Mercury sometimes gives negative effects and sometimes positive effects"
+			},
+			{
+				"timestamp": "02:11 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "5 dec 2024 Mercury mhadsha start ho gayi hai",
+				"translation": "Mercury mahadasha started on 5 Dec 2024"
+			},
+			{
+				"timestamp": "02:12 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "don't worry time tak nahi chalega jyada tension nahi lena hai over thinking nahi Karna Hai chhote mote remedy follow karni hai apne aap positive time bhi a jaega",
+				"translation": "Don't worry, this time won't last long, don't take too much tension, don't overthink, follow small remedies and positive time will come by itself"
+			},
+			{
+				"timestamp": "02:12 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "today time ke liye negative effect hai",
+				"translation": "Today's time has negative effects"
+			},
+			{
+				"timestamp": "02:13 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "bahut jyada tension lete ho jyada tension nahin lena hai dear tension lekar kuchh nahin hone wala health kharab hogi Jo sacche dost rahenge vah aapke sath hamesha rahenge aur jo log nikal Ja Rahe Hain unko nikalne jaane do Koi fark nahin padta",
+				"translation": "You take too much tension, don't take too much tension dear, nothing will happen by taking tension, health will deteriorate. True friends will always stay with you and let those who are leaving go, it doesn't matter"
+			},
+			{
+				"timestamp": "02:13 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "life mein quality friend chahiye quantity friend nahi chahiye",
+				"translation": "In life you need quality friends, not quantity friends"
+			},
+			{
+				"timestamp": "02:13 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "itni jyada age thodi Na Hai kitne jyada negative ho gaye ho itna negative kyon sochana Hai Apne bare mein",
+				"translation": "You're not that old, how negative you've become, why think so negatively about yourself?"
+			},
+			{
+				"timestamp": "02:14 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "ok"
+			},
+			{
+				"timestamp": "02:14 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "Nazar dosh ka effect Hai to Main aapko ek powerful remedy bataungi vah aapko follow karna but Jo dost Ja Rahe Hain unko jaane do agar Jo ja rahe ho aap ke dost nahi hai",
+				"translation": "There's an effect of evil eye, so I'll tell you a powerful remedy that you need to follow, but let the friends who are leaving go - those who are leaving are not your friends"
+			},
+			{
+				"timestamp": "02:14 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "Tuesday/Saturday Hanuman temple red thread or black thread Lena aapko Ram raksha kavach stotra 3 time bolna hai or aap sunke bhi sakte ho YouTube se fir stotra repeat karna hai ( intention yahi rakhna hai ki negative energy aapse dur ja Rahi hai ) right hand mein aapko bracelet ki tarah aapko usse pahna hai",
+				"translation": "Tuesday/Saturday take red thread or black thread from Hanuman temple, you have to recite Ram raksha kavach stotra 3 times or you can listen from YouTube and repeat the stotra (keep the intention that negative energy is going away from you) wear it like a bracelet on your right hand"
+			},
+			{
+				"timestamp": "02:14 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "very powerful remedy is a follow karna hai",
+				"translation": "This very powerful remedy has to be followed"
+			},
+			{
+				"timestamp": "02:15 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "aur jitna ho sake utna budhwar ke din kyunki aapko mercuri ki mhadsha Hai so budhwar ke din aapko Green color ka kisi ko bhi kuchh ek ka Dan karna hai",
+				"translation": "And as much as possible on Wednesdays because you have Mercury's mahadasha, so on Wednesdays you have to donate something green colored to anyone"
+			},
+			{
+				"timestamp": "02:15 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "a depression mein itna ijili nahin Jana hai aur friendship mein agar koi aapke sath Aisa Kar Raha Hai to unko bhi aap jyada entertainment mat kariye kyunki group friendship mein aapke bure time mein aapke sath nahin rahenge to kya matlab hai",
+				"translation": "Don't get so deep into depression and if someone in friendship is behaving like this with you, don't entertain them much because if they won't stay with you in your bad times in group friendship, what's the point?"
+			},
+			{
+				"timestamp": "02:15 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "sensitive time mein lekin sensitive time aapko sab logon ke reality bata raha hai life ke asaliyat bata raha hai to thoda bahut taklif hoga lekin jo maine aapko remedy bataiye aapke health ke liye bhi bahut beneficial hoga",
+				"translation": "In sensitive time, but sensitive time is showing you everyone's reality, showing you life's reality, so there will be some pain but the remedy I told you will be very beneficial for your health too"
+			},
+			{
+				"timestamp": "02:16 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "sahaj ji"
+			},
+			{
+				"timestamp": "02:16 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "exactly 💯"
+			},
+			{
+				"timestamp": "02:16 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "main bahut personal ho rahi hun lekin Maine friendship mein bahut chijen aise dekhi hai aur aapko mercuri ke mhadsha hai to yah aapko life ke lesson aur achcha hai ki aapko reality bata rahi hai logon ki",
+				"translation": "I'm getting very personal but I've seen many such things in friendship and you have Mercury's mahadasha so this is good for you as a life lesson that it's showing you people's reality"
+			},
+			{
+				"timestamp": "02:17 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "matlab this is 100% true",
+				"translation": "meaning this is 100% true"
+			},
+			{
+				"timestamp": "02:17 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "main janti hun sab chijon ki vajah se ab kafi jyada depression mein chale Gaye Ho sensitive time ki vajah se aur koi Sath bhi nahin deta aisa hota hai lekin acche time mein to duniya dost Ban jaati Hai Lekin friendship mein ine future Koi aapko business bhi nahi karna itna Dhyan rakhna kyunki mercuri hai aapki 5 number hai aapka",
+				"translation": "I know because of all these things you've gone into a lot of depression due to sensitive time and no one supports you, this happens but in good times the whole world becomes friends. But in friendship, don't do business with anyone in future, be very careful because you have Mercury and your number is 5"
+			},
+			{
+				"timestamp": "02:17 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "abhi hi life me mujhe ek bande ki sacchai pata lagi hai",
+				"translation": "Just now in life I found out the truth about one person"
+			},
+			{
+				"timestamp": "02:18 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "aise hoga aur aapko reality maloom padegi Jo aapke sath hai vah aapke sath kitne honest hai kya usse acche dost Hain relative Ho Gaye kuchh Na kuchh aapke samne a jaega aur aapko bahut chijen hurt karegi but aapko strong Rehna Hai",
+				"translation": "This will happen and you'll come to know the reality of who is with you, how honest they are with you, whether they are good friends or relatives, something or the other will come in front of you and many things will hurt you but you have to stay strong"
+			},
+			{
+				"timestamp": "02:18 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "aise hi hoga Mercury sab ke bare mein aapko reality bataegi aapko hurt hoga lekin aapko strong Rehna Hai",
+				"translation": "This is how it will be, Mercury will tell you the reality about everyone, you will be hurt but you have to stay strong"
+			},
+			{
+				"timestamp": "02:19 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "mercuria aapko favourable Hai kyunki number 5 ka Mercury hota Hai aur kuchh time ke bare aapko positive result bhi denge itna bhi main aapko bata rahi hun",
+				"translation": "Mercury is favorable for you because number 5 belongs to Mercury and after some time it will also give you positive results, I'm telling you this too"
+			},
+			{
+				"timestamp": "02:19 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "love and relationships ke bare me koi predictions?",
+				"translation": "any predictions about love and relationships?"
+			},
+			{
+				"timestamp": "02:19 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "filhal aapke life mein koi partner hai",
+				"translation": "do you currently have any partner in your life?"
+			},
+			{
+				"timestamp": "02:20 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "nhi",
+				"translation": "no"
+			},
+			{
+				"timestamp": "02:20 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "jab aap love relation mein jaaoge ya love relationship mein rahoge tab aap kafi jyada possessive ho jaaoge aur jab possessiveness mein agar Kisi Ne aapke sath cheat Kiya ya jhooth bola tab right and wrong ka decision nahin loge apna decision Suna doge",
+				"translation": "When you get into a love relationship or are in a love relationship, you will become quite possessive and when in possessiveness if someone cheats with you or lies, you won't make right and wrong decisions, you'll make your own decision"
+			},
+			{
+				"timestamp": "02:20 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "ek friend hai, usse ghanto baat hoti hai lekin wo 2 saal bari hai",
+				"translation": "there's one friend, I talk to her for hours but she's 2 years older"
+			},
+			{
+				"timestamp": "02:20 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "spiritual experiences ki baate",
+				"translation": "talks about spiritual experiences"
+			},
+			{
+				"timestamp": "02:21 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "agar aapko batchit karna pasand hai to unse batchit karo koi problem nahin Hai go with the flow yani ki achcha time chal raha hai na use chalne do aapko achcha lag raha hai na to bus usi zone mein raho lekin mujhe unka name bataiye",
+				"translation": "If you like to chat then chat with her, no problem, go with the flow, meaning good time is going on so let it continue, you're feeling good so just stay in that zone but tell me her name"
+			},
+			{
+				"timestamp": "02:21 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "Lekha"
+			},
+			{
+				"timestamp": "02:21 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "aapke sath spiritual baten hoti hai mujhe unka name bataiye aur unke birth date",
+				"translation": "You have spiritual talks with her, tell me her name and birth date"
+			},
+			{
+				"timestamp": "02:22 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "birth date toh nahi pata exactly",
+				"translation": "don't know the birth date exactly"
+			},
+			{
+				"timestamp": "02:22 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "positive card aaya Hai unke liye negative person nahi hai positive cards strength ka card aaya Hai",
+				"translation": "Positive card has come for her, she's not a negative person, positive cards, strength card has come"
+			},
+			{
+				"timestamp": "02:22 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "it's okay dear taro reading se maine aapko bhej diya hai picture positive card aaya Hai strength ka card aaya hai",
+				"translation": "it's okay dear, from tarot reading I've sent you the picture, positive card has come, strength card has come"
+			},
+			{
+				"timestamp": "02:23 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "life ki decision bahut fast lete ho soch samajh ke decision lene ki jarurat hai",
+				"translation": "You make life decisions very fast, need to make decisions thoughtfully"
+			},
+			{
+				"timestamp": "02:23 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "aur career ke bare me details me please bataiye",
+				"translation": "and please tell about career in detail"
+			},
+			{
+				"timestamp": "02:24 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "jarur main aapke career ke bare mein bhi bataungi mujhe aap bataiye ki abhi aap filhal kya kar rahe ho I min Koi field mein aapko interest hai",
+				"translation": "Sure I'll also tell about your career, tell me what are you currently doing, I mean in which field you have interest"
+			},
+			{
+				"timestamp": "02:25 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "I am a independent contractor for VJT - software engineering but mere paas koi kaam nahi aa rhi h bohot samay se aur mai kuch nahi seekh rha hu aur mera contract 1 mahine me khatam ho jayega",
+				"translation": "I am an independent contractor for VJT - software engineering but I'm not getting any work for a long time and I'm not learning anything and my contract will end in 1 month"
+			},
+			{
+				"timestamp": "02:26 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "jaise ki maine aapke career ka dekha Hai aapke 9 house mein ketu hai an according to numerology your number 5;",
+				"translation": "As I've seen your career, you have Ketu in 9th house and according to numerology your number is 5"
+			},
+			{
+				"timestamp": "02:26 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "Koi tension lene ki jarurat nahin Hai kyunki isase field mein aapko main aapko bata rahi hun aapko bahut acchi growth milegi jaise ki maine aapko bataya sensitive time chal raha hai to downfall ka time samjhie Aisa time sensitive time hota hai na yah time abhi chal raha hai lekin jab kam aaega to achcha ek opportunity aaegi ek achcha kam aaega aur aap bahut achcha paisa banaoge",
+				"translation": "No need to take tension because in this field I'm telling you that you'll get very good growth. As I told you sensitive time is going on so understand it as downfall time. Such sensitive time happens, this time is going on now but when work comes, a good opportunity will come, good work will come and you'll make very good money"
+			},
+			{
+				"timestamp": "02:27 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "Mai 6 mahine se job khoj rha hu, bohot prayas kr rha hu, par koi fayeda nahi hai",
+				"translation": "I've been searching for a job for 6 months, trying a lot, but no benefit"
+			},
+			{
+				"timestamp": "02:27 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "lekin Main aur ek aapko advise kar rahi hun ki aapko kabhi kisi ko Paisa loan mein nahin dena hai paise ka vyavhar kisi ke sath nahin karna hai",
+				"translation": "But I'm giving you another advice that you should never give money as loan to anyone, don't do money dealings with anyone"
+			},
+			{
+				"timestamp": "02:28 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "5/dec 2024 Mercury ke mhadsha start ho gai hai is vajah se aapko bahut jyada problem ho raha hai",
+				"translation": "Mercury's mahadasha started on 5 Dec 2024, due to this you're having a lot of problems"
+			},
+			{
+				"timestamp": "02:28 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "meri birth date apne 5-12-2000 rakhi hai na?",
+				"translation": "you've kept my birth date as 5-12-2000, right?"
+			},
+			{
+				"timestamp": "02:28 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "maine aapko directly aapke kundli ke anusar chart bhej diya hai aapke kundli ka chart hai ye",
+				"translation": "I've sent you the chart directly according to your horoscope, this is your horoscope chart"
+			},
+			{
+				"timestamp": "02:29 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "yes"
+			},
+			{
+				"timestamp": "02:29 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "ok"
+			},
+			{
+				"timestamp": "02:29 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "complete detail Jo aapane mention Kiya Hai usi ko he read kar rahi dear",
+				"translation": "I'm reading the complete details that you mentioned, dear"
+			},
+			{
+				"timestamp": "02:29 AM",
+				"sender": "client",
+				"speaker": "Sahaj",
+				"message": "ok"
+			},
+			{
+				"timestamp": "02:29 AM",
+				"sender": "astrologer",
+				"speaker": "Navyanshika",
+				"message": "aapko kuchh chijen kundli mein nahin samajh mein I to vah bhi Main aapko explain kar sakti hun tab kya taki aapke mind mein koi doubt Na Rahe",
+				"translation": "If you don't understand some things in the horoscope, I can explain those too so that no doubt remains in your mind"
+			}
+		]
+	}
+]

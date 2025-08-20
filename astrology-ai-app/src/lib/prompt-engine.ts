@@ -1,4 +1,4 @@
-// Advanced Prompt Engineering for Vedic Astrology
+// Advanced Prompt Engineering for Vedic Astrology with Enhanced Accuracy
 
 export interface AstrologicalContext {
 	birthDetails?: {
@@ -23,6 +23,24 @@ export interface AstrologicalContext {
 			degree: number;
 			isRetrograde: boolean;
 		}>;
+	};
+	chartData?: {
+		ascendant: { sign: string; degree: number };
+		planets: Array<{
+			name: string;
+			sign: string;
+			house: number;
+			degree: number;
+			nakshatra: string;
+			isRetrograde: boolean;
+		}>;
+		currentDasha: {
+			planet: string;
+			startDate: string;
+			endDate: string;
+			subDasha: string;
+		};
+		yogas: string[];
 	};
 }
 
@@ -217,6 +235,8 @@ const DASHA_INTERPRETATIONS = {
 export function buildSpecializedPrompt(context: AstrologicalContext): string {
 	let prompt = "";
 
+	prompt += getConversationalStylePrompt();
+
 	// Add birth details context
 	if (context.birthDetails) {
 		prompt += `
@@ -252,6 +272,22 @@ Based on these birth details, provide a comprehensive analysis including:
 	return prompt;
 }
 
+function getConversationalStylePrompt(): string {
+	return `
+  RESPONSE STYLE GUIDELINES:
+  - Use a warm, empathetic, and conversational tone like a wise astrologer
+  - Address the user by name if available, or use "dear one" or "seeker"
+  - Explain complex concepts in simple, relatable terms
+  - Use analogies and metaphors to illustrate astrological concepts
+  - Show genuine care and concern for the user's situation
+  - Use occasional emojis to convey emotion (🌙✨💫)
+  - Balance technical accuracy with spiritual wisdom
+  - End responses with an open-ended question to encourage dialogue
+  - Share personal insights when appropriate
+  - Use phrases like "I sense that..." or "The stars suggest..."
+  `;
+}
+
 function determineQuestionType(question: string): string {
 	const q = question.toLowerCase();
 
@@ -280,24 +316,22 @@ function determineQuestionType(question: string): string {
 function getQuestionSpecificPrompt(questionType: string): string {
 	const prompts = {
 		career: `
-CAREER ANALYSIS REQUIREMENTS:
-- Analyze 10th house (Karma Bhava) and its lord in detail
-- Examine Sun (career significator) placement and strength
-- Consider Saturn (discipline) and its influence on career
-- Look for career-related yogas (Raja Yoga, Dharma Karmadhipati)
-- Provide specific career timing and opportunities
-- Suggest career-specific remedies and gemstones
-- Include current transit effects on career
+CAREER GUIDANCE APPROACH:
+- Begin with an encouraging note about their potential
+- Relate planetary positions to real-world career challenges
+- Share stories of similar career journeys when appropriate
+- Focus on practical, actionable advice
+- Emphasize their unique strengths and talents
+- Suggest timing for important career moves in relatable terms
 `,
 		relationship: `
-RELATIONSHIP ANALYSIS REQUIREMENTS:
-- Analyze 7th house (Kalatra Bhava) and its lord thoroughly
-- Examine Venus (love significator) placement and aspects
-- Consider Mars (passion) and its influence on relationships
-- Look at 5th house for romance and 8th house for intimacy
-- Analyze Rahu-Ketu axis for karmic relationships
-- Provide relationship timing and compatibility analysis
-- Suggest relationship-specific remedies and mantras
+RELATIONSHIP GUIDANCE APPROACH:
+- Show empathy for relationship challenges
+- Explain planetary influences on emotions and connections
+- Share wisdom about love and partnership
+- Suggest ways to nurture relationships
+- Discuss timing for important relationship decisions
+- Remind them that astrology shows tendencies, not destiny
 `,
 		health: `
 HEALTH ANALYSIS REQUIREMENTS:
@@ -422,7 +456,15 @@ REMEDY PREFERENCES: RITUALS
 	return remedies[preference as keyof typeof remedies] || remedies.all;
 }
 
-function getTransitAnalysisPrompt(transits: any): string {
+function getTransitAnalysisPrompt(transits: {
+	date: string;
+	planets?: Array<{
+		name: string;
+		sign: string;
+		degree: number;
+		isRetrograde: boolean;
+	}>;
+}): string {
 	return `
 CURRENT TRANSIT ANALYSIS:
 Date: ${transits.date}
