@@ -363,6 +363,15 @@ function extractBirthDetails(userInput: string) {
 function determineQuestionType(userInput: string): string {
 	const input = userInput.toLowerCase();
 
+	// Check for past-tense questions first
+	if (
+		input.match(
+			/\b(last|past|ago|was|were|did|happened|why|earlier|before|previous)\b/
+		)
+	) {
+		return "past_event";
+	}
+
 	if (
 		input.includes("career") ||
 		input.includes("job") ||
@@ -585,6 +594,16 @@ function getNextFewMonths(date: Date, count: number): string {
 	return months.join("-");
 }
 
+// Helper function to get past few months for historical analysis
+function getPastFewMonths(date: Date, count: number): string {
+	const months = [];
+	for (let i = 1; i <= count; i++) {
+		const pastMonth = new Date(date.getFullYear(), date.getMonth() - i, 1);
+		months.push(pastMonth.toLocaleString("default", { month: "long" }));
+	}
+	return months.reverse().join("-"); // Reverse to show chronological order
+}
+
 function generateFallbackResponse(
 	userInput: string,
 	questionType: string,
@@ -658,6 +677,21 @@ Avoid love relationships for now.
 ${nextMonths} me koi new person mil sakta hai.
 
 Venus well placed in your chart.`;
+	}
+
+	if (questionType === "past_event") {
+		const pastMonths = getPastFewMonths(currentDate, 3);
+		return `Let me check your past periods...
+
+${pastMonths} me kaun sa dasha chal raha tha?
+
+Past events match your planetary periods.
+
+Saturn transit was affecting you last year.
+
+Which specific time you asking about?
+
+What happened exactly?`;
 	}
 
 	// Default response for other question types

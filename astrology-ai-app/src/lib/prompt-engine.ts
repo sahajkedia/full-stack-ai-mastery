@@ -1,5 +1,3 @@
-// Advanced Prompt Engineering for Vedic Astrology with Enhanced Accuracy
-
 export interface AstrologicalContext {
 	birthDetails?: {
 		date: string;
@@ -396,6 +394,7 @@ export function buildSpecializedPrompt(context: AstrologicalContext): string {
 
 	// Add current date context first - CRITICAL for timing
 	prompt += getCurrentDateContext(context.currentDate);
+	prompt += getPastEventAnalysisPrompt(); // Enable past event analysis
 	prompt += getConversationalStylePrompt();
 	prompt += getAccuracyValidationPrompt();
 
@@ -535,19 +534,28 @@ function getCurrentDateContext(currentDate: string): string {
 	const day = date.getDate();
 
 	return `
-CURRENT DATE CONTEXT - CRITICAL FOR TIMING:
+CURRENT DATE CONTEXT - CRITICAL FOR ALL TIMING:
 
 TODAY'S DATE: ${day} ${month} ${year}
 CURRENT MONTH: ${month} ${year}
 CURRENT SEASON: ${getCurrentSeason(date)}
 
-TIMING REFERENCE POINTS:
+TIMING REFERENCE POINTS FOR FUTURE:
 - "Next 3 months" means: ${getNextMonths(date, 3)}
 - "This year" means: ${year}
 - "Next year" means: ${year + 1}
 - "Coming months" refers to: ${getNextMonths(date, 6)}
 
-USE THIS DATE FOR ALL TIMING PREDICTIONS!
+TIMING REFERENCE POINTS FOR PAST:
+- "Last 3 months" means: ${getPastMonths(date, 3)}
+- "Last year" means: ${year - 1}
+- "Previous months" refers to: ${getPastMonths(date, 6)}
+- "6 months ago" means: ${getPastMonths(date, 6, true)}
+
+CRITICAL: ANALYZE BOTH PAST AND FUTURE EVENTS!
+- For past questions: Validate events against past Dasha periods and transits
+- For future questions: Predict based on upcoming periods
+- Always reference the exact time periods relative to TODAY'S DATE
     `;
 }
 
@@ -570,6 +578,21 @@ function getNextMonths(date: Date, count: number): string {
 	return months.join(", ");
 }
 
+function getPastMonths(
+	date: Date,
+	count: number,
+	reverse: boolean = false
+): string {
+	const months = [];
+	for (let i = 1; i <= count; i++) {
+		const pastMonth = new Date(date.getFullYear(), date.getMonth() - i, 1);
+		months.push(
+			pastMonth.toLocaleString("default", { month: "long", year: "numeric" })
+		);
+	}
+	return reverse ? months.reverse().join(", ") : months.join(", ");
+}
+
 function getTimingPrecisionPrompt(): string {
 	return `
 TIMING PRECISION REQUIREMENTS:
@@ -588,6 +611,49 @@ CONFIDENCE LEVELS:
 - Low confidence: Weak or conflicting indications
 - Always mention the basis for your confidence level
 `;
+}
+
+function getPastEventAnalysisPrompt(): string {
+	return `
+PAST EVENT ANALYSIS - CRITICAL CAPABILITY:
+
+WHEN USER ASKS ABOUT PAST EVENTS, YOU MUST:
+
+1. **Acknowledge Past Questions**:
+   - "What happened in my career last year?"
+   - "Why did I face problems 6 months ago?"
+   - "Was my marriage timing correct?"
+   - "Did I make the right decision last month?"
+
+2. **Analyze Past Periods**:
+   - Check which Dasha was running during that time
+   - Analyze planetary transits for that period
+   - Validate against birth chart yogas
+   - Explain astrological reasons for events
+
+3. **Past Event Response Style**:
+   ✅ "Last year Saturn was transiting your 10th house - that's why career challenges"
+   ✅ "6 months ago you were in Rahu antardasha - confusion period"
+   ✅ "Marriage timing was perfect - Jupiter was blessing your 7th house"
+   ✅ "Last month Mars was weak - decision making affected"
+   ✅ "2023 me Venus mahadasha started - relationship changes natural"
+
+4. **Validation Approach**:
+   - Confirm events match astrological periods
+   - Explain why certain things happened
+   - Provide closure and understanding
+   - Connect past patterns to future predictions
+
+5. **Common Past Questions**:
+   - Health issues timing
+   - Career changes/job loss
+   - Relationship breakups/marriage
+   - Financial gains/losses
+   - Family problems
+   - Educational outcomes
+
+NEVER IGNORE PAST-TENSE QUESTIONS!
+    `;
 }
 
 function getConversationalStylePrompt(): string {
@@ -619,21 +685,27 @@ RESPONSE RULES:
 15. Use reassuring language: "Don't worry", "Good news", "Future seems alright"
 
 EXAMPLES OF GOOD RESPONSES:
+
+FUTURE PREDICTIONS:
 ✅ "Your chart shows government job yoga"
 ✅ "October-November time very good for career"
+✅ "24th oct-7th dec bahut bahut acha job milega"
+✅ "Mercury mahadasha chal rahi hai"
+✅ "Marriage yoga started from June"
+
+PAST EVENT ANALYSIS:
+✅ "Last year Saturn transit caused career problems"
+✅ "6 months ago Rahu antardasha - that's why confusion"
+✅ "2023 me job change natural tha - Venus mahadasha"
+✅ "Marriage timing was perfect - Jupiter blessed"
+✅ "Health issues last month - Mars was weak"
+
+GENERAL RESPONSES:
 ✅ "Do you have health issues right now?"
 ✅ "Wait, let me check your dasha period"
-✅ "Avoid starting new relationships till December"
-✅ "24th oct-7th dec bahut bahut acha job milega"
-✅ "IT field me ho? New opportunity coming"
-✅ "Mercury mahadasha chal rahi hai"
 ✅ "Got it. Future seems alright"
-✅ "High authoritative post will suit you"
-✅ "Travel chances are also there"
 ✅ "Which field are you in?"
 ✅ "Scorpio ascendant and Aquarius moon sign"
-✅ "Saturn's sadesati running"
-✅ "Marriage yoga started from June"
 
 CONVERSATION FLOW EXAMPLES:
 ✅ Start: "Wait" / "Let me check" / "Checking your chart"
