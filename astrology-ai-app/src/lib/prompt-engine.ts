@@ -10,6 +10,7 @@ export interface AstrologicalContext {
 	};
 	question: string;
 	previousMessages: string[];
+	currentDate: string; // Added current date for accurate timing predictions
 	userPreferences: {
 		detailLevel: "basic" | "comprehensive" | "expert";
 		focusAreas: string[];
@@ -393,6 +394,8 @@ const DASHA_INTERPRETATIONS = {
 export function buildSpecializedPrompt(context: AstrologicalContext): string {
 	let prompt = "";
 
+	// Add current date context first - CRITICAL for timing
+	prompt += getCurrentDateContext(context.currentDate);
 	prompt += getConversationalStylePrompt();
 	prompt += getAccuracyValidationPrompt();
 
@@ -523,6 +526,48 @@ ANALYSIS REQUIREMENTS:
 5. Provide precise timing based on current dasha periods
 6. Consider planetary transits and their activation points
 `;
+}
+
+function getCurrentDateContext(currentDate: string): string {
+	const date = new Date(currentDate);
+	const month = date.toLocaleString("default", { month: "long" });
+	const year = date.getFullYear();
+	const day = date.getDate();
+
+	return `
+CURRENT DATE CONTEXT - CRITICAL FOR TIMING:
+
+TODAY'S DATE: ${day} ${month} ${year}
+CURRENT MONTH: ${month} ${year}
+CURRENT SEASON: ${getCurrentSeason(date)}
+
+TIMING REFERENCE POINTS:
+- "Next 3 months" means: ${getNextMonths(date, 3)}
+- "This year" means: ${year}
+- "Next year" means: ${year + 1}
+- "Coming months" refers to: ${getNextMonths(date, 6)}
+
+USE THIS DATE FOR ALL TIMING PREDICTIONS!
+    `;
+}
+
+function getCurrentSeason(date: Date): string {
+	const month = date.getMonth() + 1; // JavaScript months are 0-indexed
+	if (month >= 3 && month <= 5) return "Spring";
+	if (month >= 6 && month <= 8) return "Summer/Monsoon";
+	if (month >= 9 && month <= 11) return "Post-Monsoon/Autumn";
+	return "Winter";
+}
+
+function getNextMonths(date: Date, count: number): string {
+	const months = [];
+	for (let i = 1; i <= count; i++) {
+		const nextMonth = new Date(date.getFullYear(), date.getMonth() + i, 1);
+		months.push(
+			nextMonth.toLocaleString("default", { month: "long", year: "numeric" })
+		);
+	}
+	return months.join(", ");
 }
 
 function getTimingPrecisionPrompt(): string {

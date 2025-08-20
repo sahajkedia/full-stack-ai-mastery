@@ -460,11 +460,13 @@ function buildContextualPrompt(
 			: JSON.stringify(messageContentUnknown || "");
 	});
 
-	// Build enhanced astrological context
+	// Build enhanced astrological context with current date
+	const currentDate = new Date().toISOString();
 	const context: AstrologicalContext = {
 		birthDetails: birthDetails || undefined,
 		question,
 		previousMessages,
+		currentDate, // Add current date for accurate timing predictions
 		userPreferences: {
 			detailLevel: "basic",
 			focusAreas: [questionType],
@@ -573,12 +575,26 @@ export async function generateAstrologyResponse(messages: UIMessage[]) {
 	}
 }
 
+// Helper function to get next few months for timing predictions
+function getNextFewMonths(date: Date, count: number): string {
+	const months = [];
+	for (let i = 1; i <= count; i++) {
+		const nextMonth = new Date(date.getFullYear(), date.getMonth() + i, 1);
+		months.push(nextMonth.toLocaleString("default", { month: "long" }));
+	}
+	return months.join("-");
+}
+
 function generateFallbackResponse(
 	userInput: string,
 	questionType: string,
 	hasBirthDetails: boolean,
 	birthDetails: { date: string; time: string; place: string } | null
 ) {
+	const currentDate = new Date();
+	const currentMonth = currentDate.toLocaleString("default", { month: "long" });
+	const currentYear = currentDate.getFullYear();
+
 	// If no birth details provided, request them
 	if (!hasBirthDetails) {
 		return `Namaste 🙏 
@@ -615,6 +631,7 @@ Try Om Namah Shivaya daily. Yellow sapphire will help.`;
 	}
 
 	if (questionType === "career") {
+		const nextMonths = getNextFewMonths(currentDate, 2);
 		return `Checking your chart...
 
 Your 10th house very strong. Leadership qualities hai.
@@ -623,12 +640,13 @@ Government job yoga in your chart.
 
 Next 6 months new opportunities coming.
 
-October-November time bahut acha for career.
+${nextMonths} time bahut acha for career.
 
 Which field are you in?`;
 	}
 
 	if (questionType === "relationship") {
+		const nextMonths = getNextFewMonths(currentDate, 2);
 		return `Let me check...
 
 Do you have any partner right now?
@@ -637,7 +655,7 @@ Your 7th house shows marriage yoga coming.
 
 Avoid love relationships for now.
 
-October-November me koi new person mil sakta hai.
+${nextMonths} me koi new person mil sakta hai.
 
 Venus well placed in your chart.`;
 	}
