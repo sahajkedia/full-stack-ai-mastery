@@ -262,6 +262,74 @@
 		animation: constellation-twinkle 2s ease-in-out infinite;
 	}
 
+	/* Cosmic Support Button Animations */
+	@keyframes cosmic-glow {
+		0%,
+		100% {
+			box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+		}
+		50% {
+			box-shadow: 0 0 30px rgba(168, 85, 247, 0.5),
+				0 0 40px rgba(168, 85, 247, 0.3);
+		}
+	}
+
+	@keyframes star-float {
+		0%,
+		100% {
+			transform: translateY(0px) rotate(0deg) scale(1);
+			opacity: 0.7;
+		}
+		33% {
+			transform: translateY(-8px) rotate(120deg) scale(1.1);
+			opacity: 1;
+		}
+		66% {
+			transform: translateY(-4px) rotate(240deg) scale(0.9);
+			opacity: 0.8;
+		}
+	}
+
+	@keyframes cosmic-pulse {
+		0%,
+		100% {
+			background-size: 100% 100%;
+			opacity: 0.8;
+		}
+		50% {
+			background-size: 110% 110%;
+			opacity: 1;
+		}
+	}
+
+	@keyframes support-sparkle {
+		0%,
+		100% {
+			transform: scale(1) rotate(0deg);
+			opacity: 0.6;
+		}
+		50% {
+			transform: scale(1.2) rotate(180deg);
+			opacity: 1;
+		}
+	}
+
+	.cosmic-glow {
+		animation: cosmic-glow 3s ease-in-out infinite;
+	}
+
+	.star-float {
+		animation: star-float 4s ease-in-out infinite;
+	}
+
+	.cosmic-pulse {
+		animation: cosmic-pulse 2s ease-in-out infinite;
+	}
+
+	.support-sparkle {
+		animation: support-sparkle 2.5s ease-in-out infinite;
+	}
+
 	/* Noise animation from animations.css */
 	@keyframes noise {
 		0%,

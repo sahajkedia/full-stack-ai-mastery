@@ -1,17 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import {
-	Send,
-	Paperclip,
-	Smile,
-	Phone,
-	Video,
-	MoreVertical,
-	Search,
-	ArrowDown,
-	Settings,
-} from "lucide-react";
+import { Send, Paperclip, Smile, ArrowDown, Settings } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import VedicChart from "../components/VedicChart";
@@ -190,12 +180,12 @@ const ChatInterface = () => {
 	};
 
 	return (
-		<div className="h-screen w-full bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
+		<div className="h-screen w-full bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-2 sm:p-4">
 			{/* Animated background elements */}
 			<div className="absolute inset-0 overflow-hidden">
-				<div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-				<div className="absolute top-1/3 right-1/4 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
-				<div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-2000"></div>
+				<div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+				<div className="absolute top-1/3 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
+				<div className="absolute bottom-1/4 left-1/3 w-64 h-64 sm:w-96 sm:h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-2000"></div>
 			</div>
 
 			{showForm ? (
@@ -219,42 +209,42 @@ const ChatInterface = () => {
 			) : (
 				<div className="w-full max-w-4xl h-full max-h-[900px] relative">
 					{/* Chat container with glassmorphism */}
-					<div className="h-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+					<div className="h-full bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden">
 						{/* Header */}
-						<div className="bg-white/5 backdrop-blur-sm border-b border-white/10 p-6 flex items-center justify-between">
-							<div className="flex items-center space-x-4">
-								<div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+						<div className="bg-white/5 backdrop-blur-sm border-b border-white/10 p-4 sm:p-6 flex items-center justify-between">
+							<div className="flex items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
+								<div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg shadow-lg flex-shrink-0">
 									🔮
 								</div>
-								<div>
-									<h1 className="text-white font-semibold text-xl">
+								<div className="min-w-0 flex-1">
+									<h1 className="text-white font-semibold text-lg sm:text-xl truncate">
 										Jyotish AI
 									</h1>
-									<p className="text-white/70 text-sm">
+									<p className="text-white/70 text-xs sm:text-sm truncate">
 										Your Cosmic Guide to Vedic Wisdom
 									</p>
 									{birthDetails && (
-										<p className="text-white/50 text-xs">
+										<p className="text-white/50 text-xs truncate">
 											{birthDetails.name} • {birthDetails.day}/
 											{birthDetails.month}/{birthDetails.year}
 										</p>
 									)}
 								</div>
 							</div>
-							<div className="flex items-center space-x-3">
+							<div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
 								<SupportButton
 									kofiUsername="buildersahaj"
 									upiId="9108342605@ybl"
 									size="sm"
 									variant="cosmic"
 									showDropdown={true}
-									className="mr-2"
+									className=""
 								/>
 								<button
 									onClick={() => setShowForm(true)}
-									className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110"
+									className="p-2.5 sm:p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110"
 									title="Edit Birth Details">
-									<Settings className="w-5 h-5 text-white" />
+									<Settings className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
 								</button>
 								{/* <button className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110">
 									<Search className="w-5 h-5 text-white" />
@@ -275,7 +265,7 @@ const ChatInterface = () => {
 						<div
 							ref={chatContainerRef}
 							onScroll={handleScroll}
-							className="flex-1 overflow-y-auto p-6 space-y-4 chat-scrollbar">
+							className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-3 sm:space-y-4 chat-scrollbar">
 							{messages.map((msg, index) => (
 								<div
 									key={msg.id}
@@ -286,18 +276,18 @@ const ChatInterface = () => {
 										animationDelay: `${index * 100}ms`,
 									}}>
 									<div
-										className={`flex items-end space-x-3 max-w-xs lg:max-w-md ${
+										className={`flex items-end space-x-2 sm:space-x-3 max-w-[85%] sm:max-w-xs lg:max-w-md ${
 											msg.sender === "me"
 												? "flex-row-reverse space-x-reverse"
 												: ""
 										}`}>
 										{msg.sender === "other" && (
-											<div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-sm flex-shrink-0">
+											<div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-xs sm:text-sm flex-shrink-0">
 												{msg.avatar}
 											</div>
 										)}
 										<div
-											className={`px-4 py-3 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 ${
+											className={`px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 ${
 												msg.sender === "me"
 													? "bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-br-md"
 													: "bg-white/20 backdrop-blur-sm text-white border border-white/30 rounded-bl-md"
@@ -444,10 +434,10 @@ const ChatInterface = () => {
 						)}
 
 						{/* Input area */}
-						<div className="bg-white/5 backdrop-blur-sm border-t border-white/10 p-6">
-							<div className="flex items-center space-x-4">
-								<button className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110 flex-shrink-0">
-									<Paperclip className="w-5 h-5 text-white" />
+						<div className="bg-white/5 backdrop-blur-sm border-t border-white/10 p-3 sm:p-6">
+							<div className="flex items-center space-x-2 sm:space-x-4">
+								<button className="hidden sm:block p-2.5 sm:p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110 flex-shrink-0">
+									<Paperclip className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
 								</button>
 
 								<div className="flex-1 relative">
@@ -456,20 +446,20 @@ const ChatInterface = () => {
 										onChange={(e) => setMessage(e.target.value)}
 										onKeyPress={handleKeyPress}
 										placeholder="Ask me about your birth chart, planetary positions, or any astrological insights..."
-										className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none transition-all duration-300 hover:bg-white/15"
+										className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none transition-all duration-300 hover:bg-white/15"
 										rows={1}
 									/>
 								</div>
 
-								<button className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110 flex-shrink-0">
-									<Smile className="w-5 h-5 text-white" />
+								<button className="hidden sm:block p-2.5 sm:p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110 flex-shrink-0">
+									<Smile className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
 								</button>
 
 								<button
 									onClick={sendMessage}
-									className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-full transition-all duration-300 hover:scale-110 shadow-lg flex-shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
+									className="p-2.5 sm:p-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-full transition-all duration-300 hover:scale-110 shadow-lg flex-shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
 									disabled={!message.trim()}>
-									<Send className="w-5 h-5 text-white" />
+									<Send className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
 								</button>
 							</div>
 						</div>
