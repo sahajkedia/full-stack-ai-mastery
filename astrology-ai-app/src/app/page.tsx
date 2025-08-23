@@ -51,8 +51,44 @@ const ChatInterface = () => {
 	const [isTyping, setIsTyping] = useState(false);
 	const [showScrollButton, setShowScrollButton] = useState(false);
 	const [showSupportModal, setShowSupportModal] = useState(false);
+	const [sessionId, setSessionId] = useState<string>("");
 	const messagesEndRef = useRef<HTMLDivElement>(null);
 	const chatContainerRef = useRef<HTMLDivElement>(null);
+
+	// Generate unique session ID on component mount
+	useEffect(() => {
+		const newSessionId = `session_${Date.now()}_${Math.random()
+			.toString(36)
+			.substr(2, 9)}`;
+		setSessionId(newSessionId);
+
+		// Cleanup function to remove old session storage entries
+		return () => {
+			// Clean up old session storage entries (older than 24 hours)
+			const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+			Object.keys(sessionStorage).forEach((key) => {
+				if (key.startsWith("supportModal_")) {
+					const sessionTimestamp = parseInt(key.split("_")[1]);
+					if (sessionTimestamp < oneDayAgo) {
+						sessionStorage.removeItem(key);
+					}
+				}
+			});
+		};
+	}, []);
+
+	// Check if support modal has been shown for this session
+	const isSupportModalShown = () => {
+		if (!sessionId) return false;
+		return sessionStorage.getItem(`supportModal_${sessionId}`) === "true";
+	};
+
+	// Mark support modal as shown for this session
+	const markSupportModalShown = () => {
+		if (sessionId) {
+			sessionStorage.setItem(`supportModal_${sessionId}`, "true");
+		}
+	};
 
 	const scrollToBottom = () => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -83,12 +119,13 @@ const ChatInterface = () => {
 			setMessages((prev) => [...prev, newMessage]);
 			setMessage("");
 
-			// Check if we should show support modal (after every 3 user messages)
+			// Check if we should show support modal (only once after 3 user messages)
 			const userMessages = messages.filter((msg) => msg.sender === "me");
-			if ((userMessages.length + 1) % 3 === 0) {
+			if ((userMessages.length + 1) % 3 === 0 && !isSupportModalShown()) {
 				// Show support modal after a short delay
 				setTimeout(() => {
 					setShowSupportModal(true);
+					markSupportModalShown();
 				}, 1000);
 			}
 
@@ -153,6 +190,11 @@ const ChatInterface = () => {
 	const handleFormSubmit = (details: BirthDetails) => {
 		setBirthDetails(details);
 		setShowForm(false);
+		// Generate new session ID for new chat session
+		const newSessionId = `session_${Date.now()}_${Math.random()
+			.toString(36)
+			.substr(2, 9)}`;
+		setSessionId(newSessionId);
 
 		// Initialize chat with welcome message
 		const welcomeMessage: Message = {
