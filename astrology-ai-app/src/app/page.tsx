@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import VedicChart from "../components/VedicChart";
 import BirthDetailsForm from "../components/BirthDetailsForm";
-import SupportButton from "../components/SupportButton";
+import SupportModal from "../components/SupportModal";
 
 interface ChartData {
 	planets: Array<{
@@ -50,6 +50,7 @@ const ChatInterface = () => {
 	const [messages, setMessages] = useState<Message[]>([]);
 	const [isTyping, setIsTyping] = useState(false);
 	const [showScrollButton, setShowScrollButton] = useState(false);
+	const [showSupportModal, setShowSupportModal] = useState(false);
 	const messagesEndRef = useRef<HTMLDivElement>(null);
 	const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -81,6 +82,15 @@ const ChatInterface = () => {
 			};
 			setMessages((prev) => [...prev, newMessage]);
 			setMessage("");
+
+			// Check if we should show support modal (after every 3 user messages)
+			const userMessages = messages.filter((msg) => msg.sender === "me");
+			if ((userMessages.length + 1) % 3 === 0) {
+				// Show support modal after a short delay
+				setTimeout(() => {
+					setShowSupportModal(true);
+				}, 1000);
+			}
 
 			// Simulate typing indicator
 			setIsTyping(true);
@@ -232,14 +242,6 @@ const ChatInterface = () => {
 								</div>
 							</div>
 							<div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
-								<SupportButton
-									kofiUsername="buildersahaj"
-									upiId="9108342605@ybl"
-									size="sm"
-									variant="cosmic"
-									showDropdown={true}
-									className=""
-								/>
 								<button
 									onClick={() => setShowForm(true)}
 									className="p-2.5 sm:p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110"
@@ -466,6 +468,14 @@ const ChatInterface = () => {
 					</div>
 				</div>
 			)}
+
+			{/* Support Modal */}
+			<SupportModal
+				isOpen={showSupportModal}
+				onClose={() => setShowSupportModal(false)}
+				kofiUsername="buildersahaj"
+				upiId="9108342605@ybl"
+			/>
 		</div>
 	);
 };
