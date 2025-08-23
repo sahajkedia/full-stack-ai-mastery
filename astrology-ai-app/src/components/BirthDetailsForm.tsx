@@ -248,15 +248,15 @@ const BirthDetailsForm: React.FC<BirthDetailsFormProps> = ({
 
 					{/* Action Buttons */}
 					<div className="flex flex-col sm:flex-row gap-3 pt-4">
-						<Button
+						{/* <Button
 							type="button"
 							variant="outline"
 							onClick={onCancel}
 							className="flex-1 bg-white/90 border-red-500 text-red-600 hover:bg-red-50 hover:border-red-600">
 							<Settings className="w-4 h-4 mr-2" />
 							SETTINGS
-						</Button>
-						<div className="flex gap-2 flex-1">
+						</Button> */}
+						{/* <div className="flex gap-2 flex-1">
 							<Button
 								type="button"
 								variant="outline"
@@ -273,7 +273,7 @@ const BirthDetailsForm: React.FC<BirthDetailsFormProps> = ({
 								<Clock className="w-4 h-4 mr-2" />
 								NOW
 							</Button>
-						</div>
+						</div> */}
 					</div>
 
 					{/* Submit Button */}
