@@ -6,6 +6,8 @@ import {
 	buildSpecializedPrompt,
 	type AstrologicalContext,
 } from "./prompt-engine";
+import { AstrologyAPI } from "./astrology-api";
+import { BirthChartInput } from "@/types/astrology";
 
 // Enhanced Vedic Astrology Knowledge Base
 const NAKSHATRAS = [
@@ -304,59 +306,76 @@ const HOUSES = {
 // Enhanced System Prompt moved to prompt-engine.ts for better organization
 
 // Helper functions for enhanced analysis
-function extractBirthDetails(userInput: string) {
-	console.log("Extracting birth details from:", userInput);
-
+function extractBirthDetailsFromText(text: string) {
 	// More flexible patterns to handle various formats
 	const datePattern = /(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/;
-	const timePattern = /(\d{1,2}):(\d{2})/;
-	// More flexible place pattern to handle various formats
-	const placePattern = /([A-Za-z\s]+),\s*([A-Za-z\s]+)(?:,\s*([A-Za-z\s]+))?/;
+	const timePattern = /(\d{1,2}):(\d{2})(?::(\d{2}))?/;
 
-	const dateMatch = userInput.match(datePattern);
-	const timeMatch = userInput.match(timePattern);
-	const placeMatch = userInput.match(placePattern);
+	// Look for specific birth detail patterns in text
+	const birthDatePattern =
+		/(?:Date of Birth|Birth Date|DOB).*?(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/i;
+	const birthTimePattern =
+		/(?:Time of Birth|Birth Time|TOB).*?(\d{1,2}):(\d{2})(?::(\d{2}))?/i;
+	const birthPlacePattern =
+		/(?:Place of Birth|Birth Place|POB).*?([A-Za-z\s,]+?)(?:\n|$)/i;
 
-	console.log("Date match:", dateMatch);
-	console.log("Time match:", timeMatch);
-	console.log("Place match:", placeMatch);
+	const dateMatch = text.match(birthDatePattern) || text.match(datePattern);
+	const timeMatch = text.match(birthTimePattern) || text.match(timePattern);
+	const placeMatch = text.match(birthPlacePattern);
 
-	if (dateMatch && timeMatch && placeMatch) {
+	if (dateMatch && timeMatch) {
+		let place = "Unknown";
+
+		if (placeMatch) {
+			// Clean up the place string
+			place = placeMatch[1]
+				.replace(/[*\n\r]/g, "")
+				.trim()
+				.replace(/\s+/g, " ");
+		}
+
 		const result = {
 			date: `${dateMatch[1]}/${dateMatch[2]}/${dateMatch[3]}`,
 			time: `${timeMatch[1]}:${timeMatch[2]}`,
-			place: placeMatch[0],
+			place: place,
 		};
-		console.log("Birth details extracted successfully:", result);
+
 		return result;
 	}
 
-	// Fallback: Try to extract from comma-separated format
-	console.log("Trying fallback extraction...");
-	const parts = userInput.split(",").map((part) => part.trim());
-	console.log("Split parts:", parts);
+	return null;
+}
 
-	if (parts.length >= 3) {
-		// Try to parse date from first part
-		const datePart = parts[0];
-		const dateMatch2 = datePart.match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
+function extractBirthDetailsFromMessages(messages: UIMessage[]) {
+	console.log("Extracting birth details from message history...");
 
-		// Try to parse time from second part
-		const timePart = parts[1];
-		const timeMatch2 = timePart.match(/(\d{1,2}):(\d{2})/);
-
-		if (dateMatch2 && timeMatch2) {
-			const result = {
-				date: `${dateMatch2[1]}/${dateMatch2[2]}/${dateMatch2[3]}`,
-				time: `${timeMatch2[1]}:${timeMatch2[2]}`,
-				place: parts.slice(2).join(", "),
-			};
-			console.log("Birth details extracted with fallback:", result);
-			return result;
+	// Look through all messages for birth details
+	for (let i = messages.length - 1; i >= 0; i--) {
+		const message = messages[i];
+		const content = (message as { content?: string }).content;
+		if (content && typeof content === "string") {
+			const birthDetails = extractBirthDetailsFromText(content);
+			if (birthDetails) {
+				console.log("Birth details found in message:", birthDetails);
+				return birthDetails;
+			}
 		}
 	}
 
-	console.log("No birth details found in input");
+	// Also try extracting from the stringified version of recent messages
+	const recentMessages = messages.slice(-5); // Check last 5 messages
+	const combinedText = recentMessages
+		.map((m) => (m as { content?: string }).content)
+		.filter(Boolean)
+		.join(" ");
+
+	const birthDetails = extractBirthDetailsFromText(combinedText);
+	if (birthDetails) {
+		console.log("Birth details found in combined text:", birthDetails);
+		return birthDetails;
+	}
+
+	console.log("No birth details found in message history");
 	return null;
 }
 
@@ -446,7 +465,7 @@ function buildContextualPrompt(
 		yogas: string[];
 	}
 ) {
-	const birthDetails = extractBirthDetails(JSON.stringify(messages));
+	const birthDetails = extractBirthDetailsFromText(JSON.stringify(messages));
 
 	// Extract content from messages safely
 	const latestMessage = messages[messages.length - 1];
@@ -488,6 +507,164 @@ function buildContextualPrompt(
 	return buildSpecializedPrompt(context);
 }
 
+// Generate real birth chart using the astrology API
+async function generateRealBirthChart(birthDetails: {
+	date: string;
+	time: string;
+	place: string;
+}) {
+	try {
+		// Parse birth details
+		const [day, month, year] = birthDetails.date.split("/").map(Number);
+		const [hours, minutes] = birthDetails.time.split(":").map(Number);
+
+		// Create BirthChartInput for the API
+		const birthChartInput: BirthChartInput = {
+			name: "User", // Default name since we don't have it
+			gender: "male", // Default gender
+			dateOfBirth: new Date(year, month - 1, day), // month is 0-indexed in JS Date
+			timeOfBirth: {
+				hours: hours,
+				minutes: minutes,
+				seconds: 0,
+			},
+			placeOfBirth: {
+				name: birthDetails.place,
+				latitude: 25.7771, // Default to Purnia coordinates for now
+				longitude: 87.4753,
+				timezone: 5.5, // IST
+			},
+		};
+
+		// Call the astrology API
+		const apiResponse = await AstrologyAPI.calculateBirthChart(birthChartInput);
+
+		if (!apiResponse) {
+			throw new Error("Failed to get chart data from API");
+		}
+
+		// Transform API response to match the expected format
+		const planets = Object.entries(apiResponse.output[1] || {}).map(
+			([name, planetData]) => ({
+				name: name,
+				symbol: getSymbolForPlanet(name),
+				sign: getSignName(planetData.current_sign),
+				degree: planetData.normDegree,
+				house: planetData.house_number || 1,
+				nakshatra: getNakshatraFromDegree(planetData.fullDegree),
+				pada: Math.floor((planetData.normDegree % 13.333) / 3.333) + 1,
+				isRetrograde: planetData.isRetro === "true",
+				dignity: "neutral" as const,
+				strength: 50,
+				lordOf: [],
+				aspectsTo: [],
+			})
+		);
+
+		// Get ascendant info
+		const ascendantData =
+			apiResponse.output[0]["0"] || apiResponse.output[1]["Ascendant"];
+		const ascendantSign = getSignName(ascendantData.current_sign);
+
+		return {
+			ascendant: {
+				degree: ascendantData.normDegree,
+				sign: ascendantSign,
+				nakshatra: getNakshatraFromDegree(ascendantData.fullDegree),
+			},
+			planets,
+			houses: [], // Will be calculated if needed
+			dashas: [],
+			currentDasha: {
+				planet: "Sun",
+				startDate: "",
+				endDate: "",
+				subDasha: "Current",
+			},
+			yogas: [],
+			birthNakshatra:
+				planets.find((p) => p.name === "Moon")?.nakshatra || "Ashwini",
+			chartStyle: "North Indian",
+			calculationAccuracy: "Real API Data",
+		};
+	} catch (error) {
+		console.error("Error generating real birth chart:", error);
+		throw error;
+	}
+}
+
+// Helper functions
+function getSymbolForPlanet(name: string): string {
+	const symbols: { [key: string]: string } = {
+		Sun: "☉",
+		Moon: "☽",
+		Mars: "♂",
+		Mercury: "☿",
+		Jupiter: "♃",
+		Venus: "♀",
+		Saturn: "♄",
+		Rahu: "☊",
+		Ketu: "☋",
+		Ascendant: "⇡",
+		Uranus: "♅",
+		Neptune: "♆",
+		Pluto: "♇",
+	};
+	return symbols[name] || "●";
+}
+
+function getSignName(signNumber: number): string {
+	const signs = [
+		"Aries",
+		"Taurus",
+		"Gemini",
+		"Cancer",
+		"Leo",
+		"Virgo",
+		"Libra",
+		"Scorpio",
+		"Sagittarius",
+		"Capricorn",
+		"Aquarius",
+		"Pisces",
+	];
+	return signs[(signNumber - 1) % 12] || "Aries";
+}
+
+function getNakshatraFromDegree(degree: number): string {
+	const nakshatras = [
+		"Ashwini",
+		"Bharani",
+		"Krittika",
+		"Rohini",
+		"Mrigashira",
+		"Ardra",
+		"Punarvasu",
+		"Pushya",
+		"Ashlesha",
+		"Magha",
+		"Purva Phalguni",
+		"Uttara Phalguni",
+		"Hasta",
+		"Chitra",
+		"Swati",
+		"Vishakha",
+		"Anuradha",
+		"Jyeshtha",
+		"Mula",
+		"Purva Ashadha",
+		"Uttara Ashadha",
+		"Shravana",
+		"Dhanishta",
+		"Shatabhisha",
+		"Purva Bhadrapada",
+		"Uttara Bhadrapada",
+		"Revati",
+	];
+	const nakshatraIndex = Math.floor(degree / 13.333);
+	return nakshatras[nakshatraIndex % 27] || "Ashwini";
+}
+
 export async function generateAstrologyResponse(messages: UIMessage[]) {
 	try {
 		// Extract the latest user message and convert to string
@@ -503,26 +680,26 @@ export async function generateAstrologyResponse(messages: UIMessage[]) {
 		// Determine question type for specialized analysis
 		const questionType = determineQuestionType(userInput);
 
-		// Check if we have birth details
+		// Check if we have birth details from conversation history
 		console.log("User input for birth details extraction:", userInput);
-		const birthDetails = extractBirthDetails(userInput);
+		const birthDetails = extractBirthDetailsFromMessages(messages);
 		const hasBirthDetails = birthDetails !== null;
 		console.log("Birth details extracted:", birthDetails);
 		console.log("Has birth details:", hasBirthDetails);
-		console.log("User input length:", userInput.length);
-		console.log("User input type:", typeof userInput);
 
 		// Generate chart data if birth details are available
 		let chartData = null;
 		if (hasBirthDetails && birthDetails) {
 			try {
 				console.log("Generating chart with birth details:", birthDetails);
-				chartData = generateBirthChart(birthDetails as BirthDetails);
+				chartData = await generateRealBirthChart(birthDetails);
 				console.log("Chart data generated:", chartData);
 				console.log("Chart data type:", typeof chartData);
 				console.log("Chart data planets:", chartData?.planets);
 			} catch (error) {
 				console.error("Error generating chart:", error);
+				// Fallback to mock data if API fails
+				chartData = generateBirthChart(birthDetails as BirthDetails);
 			}
 		} else {
 			console.log("No birth details available for chart generation");
@@ -530,7 +707,7 @@ export async function generateAstrologyResponse(messages: UIMessage[]) {
 
 		// If no API key is available, use fallback responses
 		if (!process.env.OPENAI_API_KEY) {
-			const response = generateFallbackResponse(
+			const response = await generateFallbackResponse(
 				userInput,
 				questionType,
 				hasBirthDetails,
@@ -539,7 +716,7 @@ export async function generateAstrologyResponse(messages: UIMessage[]) {
 
 			return {
 				text: response,
-				chartData: chartData,
+				chartData: null, // Don't show chart data in conversations
 			};
 		}
 
@@ -572,14 +749,14 @@ export async function generateAstrologyResponse(messages: UIMessage[]) {
 
 		return {
 			text: text,
-			chartData: chartData,
+			chartData: null, // Don't show chart data in conversations
 		};
 	} catch (error) {
 		console.error("Astrology engine error:", error);
 		const fallback = generateFallbackResponse("", "general", false, null);
 		return {
-			text: fallback,
-			chartData: null,
+			text: await fallback,
+			chartData: null, // Don't show chart data in conversations
 		};
 	}
 }
@@ -604,7 +781,7 @@ function getPastFewMonths(date: Date, count: number): string {
 	return months.reverse().join("-"); // Reverse to show chronological order
 }
 
-function generateFallbackResponse(
+async function generateFallbackResponse(
 	userInput: string,
 	questionType: string,
 	hasBirthDetails: boolean,
@@ -628,9 +805,11 @@ Example: 15/12/1990, 14:30, Mumbai`;
 	let chartData = null;
 	if (hasBirthDetails && birthDetails) {
 		try {
-			chartData = generateBirthChart(birthDetails as BirthDetails);
+			chartData = await generateRealBirthChart(birthDetails);
 		} catch (error) {
 			console.error("Error generating chart:", error);
+			// Fallback to mock data if API fails
+			chartData = generateBirthChart(birthDetails as BirthDetails);
 		}
 	}
 

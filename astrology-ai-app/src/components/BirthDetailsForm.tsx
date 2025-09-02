@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Settings, MapPin, Clock } from "lucide-react";
+import PlaceSelector from "./PlaceSelector";
+import { Place } from "@/types/location";
 
 interface BirthDetails {
 	name: string;
@@ -15,6 +17,8 @@ interface BirthDetails {
 	minutes: string;
 	seconds: string;
 	placeOfBirth: string;
+	latitude?: number;
+	longitude?: number;
 }
 
 interface BirthDetailsFormProps {
@@ -39,6 +43,8 @@ const BirthDetailsForm: React.FC<BirthDetailsFormProps> = ({
 			minutes: "",
 			seconds: "",
 			placeOfBirth: "",
+			latitude: undefined,
+			longitude: undefined,
 		}
 	);
 
@@ -55,6 +61,15 @@ const BirthDetailsForm: React.FC<BirthDetailsFormProps> = ({
 
 	const handleGenderChange = (gender: "male" | "female") => {
 		setFormData((prev) => ({ ...prev, gender }));
+	};
+
+	const handlePlaceSelect = (place: Place) => {
+		setFormData((prev) => ({
+			...prev,
+			placeOfBirth: place.display_name,
+			latitude: parseFloat(place.lat),
+			longitude: parseFloat(place.lon),
+		}));
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
@@ -235,15 +250,17 @@ const BirthDetailsForm: React.FC<BirthDetailsFormProps> = ({
 						<label className="block text-white font-bold text-sm mb-2">
 							Place of Birth
 						</label>
-						<Input
-							type="text"
-							placeholder="Place of Birth"
-							value={formData.placeOfBirth}
-							onChange={(e) =>
-								handleInputChange("placeOfBirth", e.target.value)
-							}
-							className="bg-white/90 border-white/30 text-gray-800 placeholder-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+						<PlaceSelector
+							onPlaceSelect={handlePlaceSelect}
+							placeholder="Search for place..."
+							className="w-full"
 						/>
+						{formData.latitude && formData.longitude && (
+							<div className="mt-2 text-xs text-white/70">
+								Coordinates: {formData.latitude.toFixed(4)},{" "}
+								{formData.longitude.toFixed(4)}
+							</div>
+						)}
 					</div>
 
 					{/* Action Buttons */}
