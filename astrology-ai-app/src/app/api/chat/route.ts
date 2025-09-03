@@ -4,10 +4,11 @@ import { type UIMessage } from "ai";
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
-	const { messages }: { messages: UIMessage[] } = await req.json();
+	const { messages, sessionId }: { messages: UIMessage[]; sessionId?: string } =
+		await req.json();
 
 	try {
-		const response = await generateAstrologyResponse(messages);
+		const response = await generateAstrologyResponse(messages, sessionId);
 
 		// Handle both old string format and new object format
 		if (typeof response === "string") {

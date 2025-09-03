@@ -245,7 +245,7 @@ const PlaceSelector: React.FC<PlaceSelectorProps> = ({
 			{isOpen && places.length === 0 && query.length >= 2 && !isLoading && (
 				<div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg p-4">
 					<div className="text-sm text-gray-500 text-center">
-						No places found for "{query}"
+						No places found for &quot;{query}&quot;
 					</div>
 				</div>
 			)}

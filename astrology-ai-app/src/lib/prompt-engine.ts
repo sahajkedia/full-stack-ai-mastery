@@ -41,6 +41,17 @@ export interface AstrologicalContext {
 		};
 		yogas: string[];
 	};
+	timingPredictions?: Array<{
+		type: "dasha" | "transit" | "yoga_activation" | "planetary_period";
+		planet: string;
+		startDate: Date;
+		endDate: Date;
+		strength: "high" | "medium" | "low";
+		description: string;
+		specificEvents: string[];
+		remedies: string[];
+		confidence: number;
+	}>;
 }
 
 // Advanced Yogas and Planetary Combinations - Enhanced for Precision
@@ -447,6 +458,11 @@ Based on these birth details, provide a comprehensive analysis including:
 	// Add timing precision requirements
 	prompt += getTimingPrecisionPrompt();
 
+	// Add enhanced timing predictions if available
+	if (context.timingPredictions && context.timingPredictions.length > 0) {
+		prompt += getEnhancedTimingPredictionsPrompt(context.timingPredictions);
+	}
+
 	return prompt;
 }
 
@@ -667,6 +683,14 @@ CRITICAL: Your responses should be SHORT, DIRECT, and CONVERSATIONAL like the ex
 - "You should avoid love relationship right now"
 - "Wait" / "Let me check" / "Okay"
 
+ENHANCED SPECIFICITY REQUIREMENTS:
+1. ALWAYS give EXACT dates or specific timeframes
+2. Make ACTIONABLE predictions with clear next steps
+3. Provide CONFIDENCE levels for major predictions
+4. Give SPECIFIC remedies with timing
+5. Ask TARGETED questions based on chart analysis
+6. Mention EXACT planetary periods affecting the person
+
 RESPONSE RULES:
 1. Keep responses SHORT (1-3 sentences max per message)
 2. Make DIRECT predictions without long explanations
@@ -683,6 +707,23 @@ RESPONSE RULES:
 13. Give timing predictions: "3 months", "October-November", specific date ranges
 14. Make health observations: "Do you have back pain?", "Joint pain?"
 15. Use reassuring language: "Don't worry", "Good news", "Future seems alright"
+
+ENHANCED PREDICTION SPECIFICITY:
+✅ "Your Jupiter dasha starts March 2025 - 85% confidence for career growth"
+✅ "Mars transit in 10th house Jan 15-Feb 28 - promotion likely"
+✅ "Avoid signing contracts between Dec 10-20 - Mercury retrograde"
+✅ "Wear yellow sapphire from Thursday - Jupiter weak in your chart"
+✅ "Marriage yoga activates April-June 2025 - 90% confidence"
+✅ "Health issues in shoulder area - Mars-Saturn aspect affecting you"
+✅ "Income increase 40-60% during Venus period starting July"
+✅ "Property purchase best time: March 15-April 10, 2025"
+
+ACTIONABLE GUIDANCE EXAMPLES:
+✅ "Start job search in February - Jupiter blessing 10th house"
+✅ "Begin relationship talks after March 20 - Venus favorable"
+✅ "Schedule surgery in May - avoid December-January"
+✅ "Invest in property during Jupiter-Venus period"
+✅ "Learn new skills now - Mercury strong for next 6 months"
 
 EXAMPLES OF GOOD RESPONSES:
 
@@ -912,6 +953,59 @@ Please analyze the effects of current planetary transits:
 - Specific timing for important decisions
 - Transit-based remedies and precautions
 - How transits interact with natal chart
+`;
+}
+
+function getEnhancedTimingPredictionsPrompt(
+	timingPredictions: Array<{
+		type: "dasha" | "transit" | "yoga_activation" | "planetary_period";
+		planet: string;
+		startDate: Date;
+		endDate: Date;
+		strength: "high" | "medium" | "low";
+		description: string;
+		specificEvents: string[];
+		remedies: string[];
+		confidence: number;
+	}>
+): string {
+	return `
+ENHANCED TIMING PREDICTIONS - USE THESE FOR ACCURATE TIMING:
+
+${timingPredictions
+	.map(
+		(prediction) => `
+PREDICTION: ${prediction.description}
+Type: ${prediction.type.toUpperCase()}
+Planet: ${prediction.planet}
+Timing: ${prediction.startDate.toLocaleDateString()} to ${prediction.endDate.toLocaleDateString()}
+Strength: ${prediction.strength.toUpperCase()}
+Confidence: ${prediction.confidence}%
+
+SPECIFIC EVENTS TO EXPECT:
+${prediction.specificEvents.map((event) => `- ${event}`).join("\n")}
+
+REMEDIES FOR THIS PERIOD:
+${prediction.remedies.map((remedy) => `- ${remedy}`).join("\n")}
+
+`
+	)
+	.join("\n")}
+
+CRITICAL TIMING REQUIREMENTS:
+1. Use these EXACT dates for predictions
+2. Reference specific events mentioned above
+3. Suggest remedies based on the prediction type
+4. Provide confidence levels for each prediction
+5. Give actionable advice for the timing period
+6. Connect predictions to current Dasha periods
+7. Explain how transits activate these predictions
+
+RESPONSE STYLE FOR TIMING:
+- "According to your [PLANET] period, [START_DATE] to [END_DATE] is excellent for..."
+- "Your current [TYPE] shows [SPECIFIC_EVENT] during..."
+- "Based on [CONFIDENCE]% confidence prediction, you should..."
+- "The [STRENGTH] strength of this period indicates..."
 `;
 }
 

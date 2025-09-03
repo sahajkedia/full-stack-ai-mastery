@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb";
 
 // Astrology API response types
 export interface PlanetData {
+	strength: number;
 	name: string;
 	fullDegree: number;
 	normDegree: number;
@@ -33,7 +34,7 @@ export interface AstrologyApiResponse {
 		};
 	};
 	output: [
-		{ [key: string]: PlanetData | AyanamsaData | any },
+		{ [key: string]: PlanetData | AyanamsaData | Record<string, unknown> },
 		{ [planetName: string]: PlanetData }
 	];
 }

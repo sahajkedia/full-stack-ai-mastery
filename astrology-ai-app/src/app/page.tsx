@@ -41,6 +41,8 @@ interface BirthDetails {
 	minutes: string;
 	seconds: string;
 	placeOfBirth: string;
+	latitude?: number;
+	longitude?: number;
 }
 
 const ChatInterface = () => {
@@ -150,6 +152,7 @@ const ChatInterface = () => {
 								content: message,
 							},
 						],
+						sessionId: sessionId,
 					}),
 				});
 
@@ -187,7 +190,7 @@ const ChatInterface = () => {
 		}
 	};
 
-	const handleFormSubmit = (details: BirthDetails) => {
+	const handleFormSubmit = async (details: BirthDetails) => {
 		setBirthDetails(details);
 		setShowForm(false);
 		// Generate new session ID for new chat session
@@ -195,6 +198,56 @@ const ChatInterface = () => {
 			.toString(36)
 			.substr(2, 9)}`;
 		setSessionId(newSessionId);
+
+		// Create session on the backend
+		try {
+			await fetch("/api/session", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					sessionId: newSessionId,
+					action: "create",
+				}),
+			});
+
+			// Update session with birth details
+			await fetch("/api/session", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					sessionId: newSessionId,
+					action: "updateBirthDetails",
+					data: {
+						birthDetails: {
+							name: details.name,
+							gender: details.gender,
+							dateOfBirth: new Date(
+								parseInt(details.year),
+								parseInt(details.month) - 1,
+								parseInt(details.day)
+							),
+							timeOfBirth: {
+								hours: parseInt(details.hours) || 0,
+								minutes: parseInt(details.minutes) || 0,
+								seconds: parseInt(details.seconds) || 0,
+							},
+							placeOfBirth: {
+								name: details.placeOfBirth,
+								latitude: details.latitude || 0,
+								longitude: details.longitude || 0,
+								timezone: 5.5, // Default to IST
+							},
+						},
+					},
+				}),
+			});
+		} catch (error) {
+			console.error("Error creating session:", error);
+		}
 
 		// Initialize chat with welcome message
 		const welcomeMessage: Message = {
