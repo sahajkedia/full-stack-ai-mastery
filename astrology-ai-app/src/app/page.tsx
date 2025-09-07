@@ -131,6 +131,29 @@ const ChatInterface = () => {
 				}, 1000);
 			}
 
+			// Save user message to MongoDB
+			try {
+				await fetch("/api/mongodb/message", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						action: "saveMessage",
+						data: {
+							sessionId: sessionId,
+							content: message,
+							role: "user",
+							metadata: {
+								messageType: "text",
+							},
+						},
+					}),
+				});
+			} catch (error) {
+				console.error("Error saving user message:", error);
+			}
+
 			// Simulate typing indicator
 			setIsTyping(true);
 
@@ -175,6 +198,30 @@ const ChatInterface = () => {
 				};
 				console.log("Bot Response:", botResponse); // Debug log
 				setMessages((prev) => [...prev, botResponse]);
+
+				// Save bot response to MongoDB
+				try {
+					await fetch("/api/mongodb/message", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							action: "saveMessage",
+							data: {
+								sessionId: sessionId,
+								content: botResponse.text,
+								role: "assistant",
+								metadata: {
+									messageType: "text",
+									chartData: botResponse.chartData,
+								},
+							},
+						}),
+					});
+				} catch (error) {
+					console.error("Error saving bot message:", error);
+				}
 			} catch (error) {
 				console.error("Error calling AI API:", error);
 				setIsTyping(false);
@@ -186,6 +233,30 @@ const ChatInterface = () => {
 					avatar: "🔮",
 				};
 				setMessages((prev) => [...prev, errorResponse]);
+
+				// Save error response to MongoDB
+				try {
+					await fetch("/api/mongodb/message", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							action: "saveMessage",
+							data: {
+								sessionId: sessionId,
+								content: errorResponse.text,
+								role: "assistant",
+								metadata: {
+									messageType: "text",
+									isError: true,
+								},
+							},
+						}),
+					});
+				} catch (error) {
+					console.error("Error saving error message:", error);
+				}
 			}
 		}
 	};
@@ -199,29 +270,34 @@ const ChatInterface = () => {
 			.substr(2, 9)}`;
 		setSessionId(newSessionId);
 
-		// Create session on the backend
+		// Create session on the backend using the new MongoDB API
 		try {
-			await fetch("/api/session", {
+			await fetch("/api/mongodb/session", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					sessionId: newSessionId,
 					action: "create",
+					data: {
+						sessionId: newSessionId,
+						metadata: {
+							sessionType: "new_user",
+						},
+					},
 				}),
 			});
 
 			// Update session with birth details
-			await fetch("/api/session", {
+			await fetch("/api/mongodb/session", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					sessionId: newSessionId,
 					action: "updateBirthDetails",
 					data: {
+						sessionId: newSessionId,
 						birthDetails: {
 							name: details.name,
 							gender: details.gender,
@@ -267,6 +343,40 @@ const ChatInterface = () => {
 		};
 
 		setMessages([welcomeMessage, detailsMessage]);
+
+		// Save welcome messages to MongoDB
+		try {
+			await fetch("/api/mongodb/message", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					action: "saveMessages",
+					data: {
+						sessionId: newSessionId,
+						messages: [
+							{
+								content: welcomeMessage.text,
+								role: "assistant",
+								metadata: {
+									messageType: "welcome",
+								},
+							},
+							{
+								content: detailsMessage.text,
+								role: "assistant",
+								metadata: {
+									messageType: "birth_details_summary",
+								},
+							},
+						],
+					},
+				}),
+			});
+		} catch (error) {
+			console.error("Error saving welcome messages:", error);
+		}
 	};
 
 	const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {

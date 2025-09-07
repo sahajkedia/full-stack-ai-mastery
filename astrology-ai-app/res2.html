@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Sahaj Kedia - Software Engineer Resume</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap");
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: "Inter", sans-serif;
+				line-height: 1.4;
+				color: #1a1a1a;
+				background: #ffffff;
+				font-size: 11px;
+			}
+
+			.resume-container {
+				max-width: 8.5in;
+				margin: 0 auto;
+				padding: 0.5in;
+				background: white;
+				min-height: 11in;
+			}
+
+			.header {
+				text-align: center;
+				margin-bottom: 20px;
+				border-bottom: 2px solid #0066cc;
+				padding-bottom: 15px;
+			}
+
+			.name {
+				font-size: 28px;
+				font-weight: 700;
+				color: #0066cc;
+				margin-bottom: 5px;
+			}
+
+			.title {
+				font-size: 16px;
+				color: #666;
+				font-weight: 500;
+				margin-bottom: 10px;
+			}
+
+			.ascii-box {
+				font-family: "JetBrains Mono", monospace;
+				font-size: 9px;
+				background: #f8f9fa;
+				padding: 8px;
+				border-radius: 4px;
+				margin: 10px 0;
+				border: 1px solid #e9ecef;
+			}
+
+			.contact-info {
+				display: flex;
+				justify-content: center;
+				gap: 15px;
+				flex-wrap: wrap;
+				font-size: 10px;
+				margin-top: 8px;
+			}
+
+			.contact-info span {
+				display: flex;
+				align-items: center;
+				gap: 3px;
+			}
+
+			.section {
+				margin-bottom: 18px;
+			}
+
+			.section-title {
+				font-size: 14px;
+				font-weight: 700;
+				color: #0066cc;
+				margin-bottom: 8px;
+				display: flex;
+				align-items: center;
+				gap: 5px;
+			}
+
+			.code-block {
+				font-family: "JetBrains Mono", monospace;
+				background: #f8f9fa;
+				border: 1px solid #e9ecef;
+				border-radius: 4px;
+				padding: 8px;
+				font-size: 9px;
+				margin: 6px 0;
+				overflow-x: auto;
+			}
+
+			.highlight {
+				background: #fff3cd;
+				padding: 1px 3px;
+				border-radius: 2px;
+				font-weight: 600;
+			}
+
+			.experience-item,
+			.project-item {
+				margin-bottom: 12px;
+				border-left: 3px solid #0066cc;
+				padding-left: 10px;
+			}
+
+			.job-title {
+				font-weight: 600;
+				font-size: 12px;
+				color: #1a1a1a;
+			}
+
+			.company {
+				font-weight: 500;
+				color: #0066cc;
+			}
+
+			.date {
+				font-size: 10px;
+				color: #666;
+				float: right;
+			}
+
+			.achievement {
+				margin: 4px 0;
+				padding-left: 8px;
+				font-size: 10px;
+			}
+
+			.tech-stack {
+				font-family: "JetBrains Mono", monospace;
+				background: #e3f2fd;
+				padding: 4px 6px;
+				border-radius: 3px;
+				font-size: 8px;
+				margin-top: 5px;
+			}
+
+			.two-column {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 15px;
+			}
+
+			.skill-category {
+				margin-bottom: 8px;
+			}
+
+			.skill-title {
+				font-weight: 600;
+				font-size: 11px;
+				margin-bottom: 3px;
+				color: #0066cc;
+			}
+
+			.skills-list {
+				font-size: 10px;
+				line-height: 1.3;
+			}
+
+			.star {
+				color: #ffc107;
+				font-weight: bold;
+			}
+
+			.education-item {
+				margin-bottom: 8px;
+			}
+
+			.degree {
+				font-weight: 600;
+				font-size: 11px;
+			}
+
+			.institution {
+				color: #666;
+				font-size: 10px;
+			}
+
+			.gpa {
+				float: right;
+				font-weight: 600;
+				color: #0066cc;
+			}
+
+			.download-btn {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				background: #0066cc;
+				color: white;
+				border: none;
+				padding: 10px 15px;
+				border-radius: 5px;
+				cursor: pointer;
+				font-size: 12px;
+				font-weight: 600;
+				z-index: 1000;
+			}
+
+			.download-btn:hover {
+				background: #0052a3;
+			}
+
+			@media print {
+				body {
+					font-size: 10px;
+				}
+				.resume-container {
+					padding: 0.3in;
+					box-shadow: none;
+				}
+				.download-btn {
+					display: none;
+				}
+				.code-block,
+				.ascii-box {
+					break-inside: avoid;
+					page-break-inside: avoid;
+				}
+				.experience-item,
+				.project-item {
+					break-inside: avoid;
+					page-break-inside: avoid;
+				}
+			}
+
+			@page {
+				margin: 0.5in;
+				size: letter;
+			}
+		</style>
+	</head>
+	<body>
+		<button
+			class="download-btn"
+			onclick="downloadResume()">
+			📄 Download PDF
+		</button>
+
+		<div class="resume-container">
+			<div class="header">
+				<div class="name">Sahaj Kedia</div>
+				<div class="title">
+					Full Stack Software Engineer & Backend Systems Architect
+				</div>
+
+				<div class="ascii-box">
+					Remote-First Developer • Distributed Systems Enthusiast │ │ 📧
+					sahajkedia20152498@gmail.com • 📱 +91 910-834-2605 │ │ 🔗
+					linkedin.com/in/sahaj-kedia • 💻 github.com/sahajkedia │
+				</div>
+			</div>
+
+			<div class="section">
+				<div class="section-title">🚀 Remote Engineering Excellence</div>
+				<div class="code-block">
+					experience: remote_teams: 5+ years time_zones: multi-zone coordination
+					async_communication: expert level documentation: comprehensive
+					technical writing git_workflows: advanced branching strategies ci_cd:
+					automated deployment pipelines cloud_deployment: production-grade
+					systems
+				</div>
+			</div>
+
+			<div class="section">
+				<div class="section-title">🛠️ Technical Arsenal</div>
+
+				<div class="two-column">
+					<div>
+						<div class="skill-category">
+							<div class="skill-title">Core Languages & Systems</div>
+							<div class="code-block">
+								// Primary Languages languages := map[string]string{
+								"JavaScript": "ES6+, Node.js runtime", "TypeScript": "Advanced
+								types, generics", <span class="star">⭐</span> "Go": "Concurrent
+								programming", <span class="star">⭐</span> "Python": "Data
+								processing, ML", "Java": "Enterprise applications", }
+							</div>
+						</div>
+
+						<div class="skill-category">
+							<div class="skill-title">Backend & Data Layer</div>
+							<div class="code-block">
+								-- Database Systems PostgreSQL <span class="star">⭐</span> ACID
+								transactions, optimization MongoDB Document stores, aggregations
+								Redis <span class="star">⭐</span> Caching, session mgmt,
+								pub/sub Vector DBs Semantic search, AI embeddings
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<div class="skill-category">
+							<div class="skill-title">API & Communication</div>
+							<div class="code-block">
+								# GraphQL Schema Design <span class="star">⭐</span> type Query
+								{ optimizedQueries: [Performance!]! realtimeSubscriptions:
+								[WebSocket!]! } RESTful APIs, RPC Protocols
+							</div>
+						</div>
+
+						<div class="skill-category">
+							<div class="skill-title">Cloud & Infrastructure</div>
+							<div class="code-block">
+								# Container Orchestration Docker
+								<span class="star">⭐</span> Containerization Kubernetes
+								<span class="star">⭐</span> Orchestration Google Cloud
+								<span class="star">⭐</span> GCP Services AWS EC2, S3, Lambda
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="section">
+				<div class="section-title">🎓 Academic Foundation</div>
+				<div class="education-item">
+					<div class="degree">
+						Bachelor of Engineering - Information Science & Engineering
+						<span class="gpa">CGPA: 8.45/10.0</span>
+					</div>
+					<div class="institution">
+						Visvesvaraya Technological University, Bangalore • Aug 2019 – Jun
+						2023
+					</div>
+					<div class="skills-list">
+						<span class="highlight">Computer Science equivalent</span>
+						<span class="star">⭐</span> • Data Structures, Algorithms, System
+						Design
+					</div>
+				</div>
+				<div class="education-item">
+					<div class="degree">
+						Higher Secondary Education (PCM) <span class="gpa">93% BIEAP</span>
+					</div>
+					<div class="institution">
+						FIITJEE Junior College, Visakhapatnam • Apr 2017 – Apr 2019
+					</div>
+				</div>
+			</div>
+
+			<div class="section">
+				<div class="section-title">💼 Professional Experience</div>
+
+				<div class="experience-item">
+					<div class="job-title">
+						Full-Stack Software Engineer (AI + Backend Systems)
+						<span class="date">Sept 2024 – Present</span>
+					</div>
+					<div class="company">VJ Imaging Technologies • Remote</div>
+
+					<div class="code-block">
+						// Enterprise X-ray Analysis Platform func main() { // Architected
+						multi-model image analysis system imageProcessor :=
+						NewImageProcessor() // Optimized inference pipelines - 40% precision
+						improvement llmPipeline := OptimizeLLMPipeline() // Automated CI/CD
+						with monitoring cicd := DeployWithGitHubActions() }
+					</div>
+
+					<div class="achievement">
+						• Built enterprise-grade X-ray analysis with TypeScript/React.js
+						frontend
+					</div>
+					<div class="achievement">
+						• Implemented real-time defect detection with
+						<strong>40% diagnostic precision improvement</strong>
+					</div>
+					<div class="achievement">
+						• Automated deployment workflows using GitHub Actions + AWS EC2
+					</div>
+					<div class="achievement">
+						• Developed RESTful APIs with Node.js/Express.js for bulk image
+						processing
+					</div>
+
+					<div class="tech-stack">
+						Tech: React.js, TypeScript, Node.js, Express.js, MongoDB, AWS,
+						GitHub Actions, Computer Vision
+					</div>
+				</div>
+
+				<div class="experience-item">
+					<div class="job-title">
+						Junior Full Stack Developer
+						<span class="date">Sept 2023 – Aug 2024</span>
+					</div>
+					<div class="company">Cubictree Technology Solutions • Remote</div>
+
+					<div class="code-block">
+						// Job Analysis Dashboard System interface DashboardMetrics {
+						loadTimeImprovement: "35% reduction via Next.js SSR";
+						dataProcessing: "100K+ location records via Python ETL";
+						systemUptime: "99.9% via AWS Lambda CRON jobs"; laborSavings: "1000+
+						hours annually through automation"; }
+					</div>
+
+					<div class="achievement">
+						• Built scalable analytics dashboard with React.js, Node.js,
+						PostgreSQL stack
+					</div>
+					<div class="achievement">
+						• Designed Python ETL pipeline processing
+						<strong>100K+ records</strong> with 25% efficiency gains
+					</div>
+					<div class="achievement">
+						• Implemented AWS Lambda automation achieving
+						<strong>99.9% uptime</strong>
+					</div>
+					<div class="achievement">
+						• Developed RESTful APIs with comprehensive error handling and auth
+						middleware
+					</div>
+
+					<div class="tech-stack">
+						Tech: React.js, Next.js, Node.js, PostgreSQL, Python, AWS Lambda,
+						ETL Pipelines
+					</div>
+				</div>
+			</div>
+
+			<div class="section">
+				<div class="section-title">🔬 Key Projects</div>
+
+				<div class="project-item">
+					<div class="job-title">
+						Stories.fun - AI-Powered Content Platform
+						<span class="date">July 2024 – May 2025</span>
+					</div>
+					<div class="company">Remote Team • Full-Stack</div>
+
+					<div class="code-block">
+						// Semantic Search Engine Architecture const searchEngine = {
+						embedding: "OpenAI GPT embeddings", vectorDB: "Qdrant with
+						intelligent caching", response: "sub-second query performance",
+						optimization: "60% cost reduction in embeddings" };
+					</div>
+
+					<div class="achievement">
+						• Engineered production semantic search with OpenAI + LangChain +
+						CrewAI
+					</div>
+					<div class="achievement">
+						• Type-safe architecture using Next.js 15 + tRPC
+					</div>
+					<div class="achievement">
+						• AWS infrastructure with auto-scaling and load balancing
+					</div>
+
+					<div class="tech-stack">
+						Tech: Next.js 15, tRPC, OpenAI APIs, LangChain, CrewAI, Qdrant,
+						Whisper, GPT-4, Solana, AWS
+					</div>
+				</div>
+
+				<div class="project-item">
+					<div class="job-title">
+						E Mithru - Student Mentoring Platform
+						<span class="date">Sep 2022 – May 2023</span>
+					</div>
+					<div class="company">Academic Project • Full-Stack</div>
+
+					<div class="code-block">
+						# Security & Performance Metrics echo "Multi-factor authentication:
+						✓" echo "Page load optimization: 30% improvement (3s → 2.1s)" echo
+						"User retention increase: 15%" echo "Security breaches: 0 across
+						10K+ sessions"
+					</div>
+
+					<div class="achievement">
+						• Secure full-stack with React.js, Node.js, MongoDB
+					</div>
+					<div class="achievement">
+						• Advanced server-side rendering optimization
+					</div>
+					<div class="achievement">
+						• <strong>40% increase in student engagement</strong>, 25%
+						improvement in academic performance
+					</div>
+
+					<div class="tech-stack">
+						Tech: React.js, Node.js, MongoDB, Auth Systems, Encryption, SSR,
+						Analytics
+					</div>
+				</div>
+			</div>
+
+			<div class="section">
+				<div class="section-title">🎯 Perfect Fit for Sticker Mule</div>
+
+				<div class="code-block">
+					type StickerMuleAlignment struct { RemoteExperience string `json:"5+
+					years distributed teams"` TechnicalStack bool `json:"Go, TypeScript,
+					GraphQL, PostgreSQL, Redis"`
+					<span class="star">⭐</span> CloudExpertise string `json:"Docker,
+					Kubernetes, GCP experience"`
+					<span class="star">⭐</span> CommerceBackground string `json:"Scalable
+					platforms, payment systems"` CommunicationSkills string
+					`json:"Excellent English, async collaboration"`
+					<span class="star">⭐</span> Degree string `json:"Computer Science
+					equivalent (8.45 CGPA)"` <span class="star">⭐</span> NoBS_Attitude
+					bool `json:"Direct, results-focused approach"` } func main() {
+					fmt.Println("Ready to help build the Internet's best commerce
+					platform! 🚀") }
+				</div>
+
+				<div class="achievement">
+					<strong>Ready to contribute to:</strong> Stores Platform, Give
+					giveaway platform, Ship shipping platform, Notify email/SMS marketing
+					system
+				</div>
+				<div class="achievement">
+					<em
+						>"Low-stress, high-impact development with a fun team building the
+						future of e-commerce!"</em
+					>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			function downloadResume() {
+				const button = document.querySelector(".download-btn");
+				button.style.display = "none";
+
+				setTimeout(() => {
+					window.print();
+
+					setTimeout(() => {
+						button.style.display = "block";
+					}, 1000);
+				}, 100);
+			}
+
+			// Alternative: Save as HTML
+			function saveAsHTML() {
+				const htmlContent = document.documentElement.outerHTML;
+				const blob = new Blob([htmlContent], { type: "text/html" });
+				const url = URL.createObjectURL(blob);
+				const a = document.createElement("a");
+				a.href = url;
+				a.download = "Sahaj_Kedia_Resume_Sticker_Mule.html";
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a);
+				URL.revokeObjectURL(url);
+			}
+		</script>
+	</body>
+</html>

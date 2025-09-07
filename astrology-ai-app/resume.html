@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Sahaj Kedia - Full Stack AI Engineer</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet" />
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			/* Ensure colors print properly */
+			* {
+				-webkit-print-color-adjust: exact;
+				color-adjust: exact;
+				print-color-adjust: exact;
+			}
+
+			body {
+				font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+					Roboto, sans-serif;
+				line-height: 1.4;
+				color: #1f2937;
+				background: #f9fafb;
+				padding: 15px;
+				font-size: 12px;
+			}
+
+			.resume-container {
+				max-width: 800px;
+				margin: 0 auto;
+				background: white;
+				box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+				border-radius: 12px;
+				overflow: hidden;
+			}
+
+			.header {
+				background: linear-gradient(
+					135deg,
+					#1e40af 0%,
+					#3b82f6 50%,
+					#60a5fa 100%
+				);
+				color: white;
+				padding: 30px;
+				text-align: center;
+				position: relative;
+			}
+
+			.header::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+			}
+
+			.header-content {
+				position: relative;
+				z-index: 1;
+			}
+
+			.name {
+				font-size: 2.2rem;
+				font-weight: 700;
+				margin-bottom: 6px;
+				letter-spacing: -0.025em;
+			}
+
+			.title {
+				font-size: 1.1rem;
+				font-weight: 400;
+				margin-bottom: 15px;
+				opacity: 0.95;
+			}
+
+			.remote-badge {
+				display: inline-block;
+				background: rgba(255, 255, 255, 0.2);
+				padding: 4px 12px;
+				border-radius: 16px;
+				font-size: 0.8rem;
+				font-weight: 500;
+				margin-bottom: 15px;
+				backdrop-filter: blur(10px);
+				border: 1px solid rgba(255, 255, 255, 0.3);
+			}
+
+			.contact-info {
+				display: flex;
+				justify-content: center;
+				flex-wrap: wrap;
+				gap: 20px;
+				font-size: 0.8rem;
+			}
+
+			.contact-item {
+				display: flex;
+				align-items: center;
+				gap: 6px;
+				opacity: 0.9;
+			}
+
+			.contact-item a {
+				color: white;
+				text-decoration: none;
+				transition: opacity 0.2s;
+			}
+
+			.contact-item a:hover {
+				opacity: 0.7;
+			}
+
+			.main-content {
+				padding: 25px;
+			}
+
+			.two-column {
+				display: grid;
+				grid-template-columns: 1fr 1.5fr;
+				gap: 25px;
+			}
+
+			.left-column {
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+			}
+
+			.right-column {
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+			}
+
+			.section {
+				margin-bottom: 20px;
+			}
+
+			.section-title {
+				font-size: 1rem;
+				color: #1e40af;
+				font-weight: 600;
+				margin-bottom: 12px;
+				padding-bottom: 6px;
+				border-bottom: 2px solid #1e40af;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+			}
+
+			.skills-grid {
+				display: flex;
+				flex-direction: column;
+				gap: 15px;
+			}
+
+			.skill-category {
+				margin-bottom: 12px;
+			}
+
+			.skill-category h4 {
+				color: #374151;
+				margin-bottom: 6px;
+				font-size: 0.85rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 0.3px;
+			}
+
+			.skill-tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 4px;
+			}
+
+			.skill-tag {
+				background: #dbeafe;
+				color: #1e40af;
+				padding: 3px 8px;
+				border-radius: 4px;
+				font-size: 0.7rem;
+				font-weight: 500;
+				border: 1px solid #bfdbfe;
+			}
+
+			.education-item {
+				background: #f8fafc;
+				padding: 12px;
+				border-radius: 6px;
+				border-left: 3px solid #3b82f6;
+				margin-bottom: 10px;
+			}
+
+			.degree {
+				font-weight: 600;
+				color: #111827;
+				margin-bottom: 4px;
+				font-size: 0.85rem;
+			}
+
+			.university {
+				color: #3b82f6;
+				margin-bottom: 4px;
+				font-weight: 500;
+				font-size: 0.8rem;
+			}
+
+			.date {
+				color: #6b7280;
+				font-size: 0.75rem;
+				font-weight: 500;
+			}
+
+			.stats {
+				display: flex;
+				gap: 12px;
+				margin-top: 6px;
+			}
+
+			.stat {
+				text-align: center;
+				padding: 4px 8px;
+				background: #eff6ff;
+				border-radius: 4px;
+				border: 1px solid #dbeafe;
+				flex: 1;
+			}
+
+			.stat-value {
+				font-weight: 600;
+				color: #1e40af;
+				font-size: 0.9rem;
+			}
+
+			.stat-label {
+				font-size: 0.65rem;
+				color: #6b7280;
+				margin-top: 2px;
+			}
+
+			.remote-highlights {
+				background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+				padding: 15px;
+				border-radius: 8px;
+				border: 1px solid #bae6fd;
+				margin-bottom: 20px;
+			}
+
+			.remote-highlights h3 {
+				color: #0369a1;
+				margin-bottom: 8px;
+				font-size: 0.9rem;
+				font-weight: 600;
+			}
+
+			.remote-highlights ul {
+				list-style: none;
+				display: flex;
+				flex-direction: column;
+				gap: 4px;
+			}
+
+			.remote-highlights li {
+				color: #0c4a6e;
+				font-size: 0.75rem;
+				padding-left: 16px;
+				position: relative;
+			}
+
+			.remote-highlights li::before {
+				content: "✓";
+				position: absolute;
+				left: 0;
+				color: #0891b2;
+				font-weight: bold;
+			}
+
+			.experience-item,
+			.project-item {
+				margin-bottom: 18px;
+				padding: 15px;
+				background: #f8fafc;
+				border-radius: 8px;
+				border-left: 3px solid #3b82f6;
+			}
+
+			.job-header,
+			.project-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				margin-bottom: 8px;
+				flex-wrap: wrap;
+				gap: 8px;
+			}
+
+			.job-title,
+			.project-title {
+				font-size: 0.9rem;
+				font-weight: 600;
+				color: #111827;
+				line-height: 1.3;
+			}
+
+			.company,
+			.project-duration {
+				color: #3b82f6;
+				font-weight: 500;
+				font-size: 0.8rem;
+			}
+
+			.date {
+				color: #6b7280;
+				font-size: 0.75rem;
+				font-weight: 500;
+				background: #f3f4f6;
+				padding: 2px 8px;
+				border-radius: 4px;
+				white-space: nowrap;
+			}
+
+			.achievements {
+				list-style: none;
+				margin-top: 10px;
+			}
+
+			.achievements li {
+				margin-bottom: 6px;
+				padding-left: 16px;
+				position: relative;
+				color: #374151;
+				line-height: 1.4;
+				font-size: 0.75rem;
+			}
+
+			.achievements li::before {
+				content: "▸";
+				position: absolute;
+				left: 0;
+				color: #3b82f6;
+				font-weight: bold;
+				font-size: 0.9em;
+			}
+
+			.tech-stack {
+				margin-top: 8px;
+				font-size: 0.7rem;
+				color: #6b7280;
+				font-style: italic;
+			}
+
+			.tech-stack strong {
+				color: #374151;
+			}
+
+			.download-btn {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				background: #1e40af;
+				color: white;
+				padding: 10px 18px;
+				border: none;
+				border-radius: 6px;
+				cursor: pointer;
+				font-weight: 500;
+				font-size: 0.8rem;
+				box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+				transition: all 0.2s;
+				z-index: 1000;
+				display: flex;
+				align-items: center;
+				gap: 6px;
+			}
+
+			.download-btn:hover {
+				background: #1d4ed8;
+				transform: translateY(-1px);
+				box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+			}
+
+			@media print {
+				body {
+					background: white;
+					padding: 0;
+				}
+				.resume-container {
+					box-shadow: none;
+					border-radius: 0;
+				}
+				.download-btn {
+					display: none;
+				}
+
+				/* Preserve header colors and styling for PDF */
+				.header {
+					background: #1e40af !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.remote-badge {
+					background: rgba(255, 255, 255, 0.2) !important;
+					border: 1px solid rgba(255, 255, 255, 0.3) !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.experience-item,
+				.project-item {
+					background: #f8fafc !important;
+					border-left: 3px solid #3b82f6 !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.skill-tag {
+					background: #dbeafe !important;
+					color: #1e40af !important;
+					border: 1px solid #bfdbfe !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.education-item {
+					background: #f8fafc !important;
+					border-left: 3px solid #3b82f6 !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.stat {
+					background: #eff6ff !important;
+					border: 1px solid #dbeafe !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.remote-highlights {
+					background: #f0f9ff !important;
+					border: 1px solid #bae6fd !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.date {
+					background: #f3f4f6 !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.section-title {
+					color: #1e40af !important;
+					border-bottom: 2px solid #1e40af !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.company,
+				.project-duration,
+				.university {
+					color: #3b82f6 !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.achievements li::before {
+					color: #3b82f6 !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.stat-value {
+					color: #1e40af !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.remote-highlights h3 {
+					color: #0369a1 !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.remote-highlights li {
+					color: #0c4a6e !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.remote-highlights li::before {
+					color: #0891b2 !important;
+					-webkit-print-color-adjust: exact;
+					color-adjust: exact;
+					print-color-adjust: exact;
+				}
+			}
+
+			@media (max-width: 768px) {
+				.two-column {
+					grid-template-columns: 1fr;
+					gap: 20px;
+				}
+				.main-content {
+					padding: 20px 15px;
+				}
+				.header {
+					padding: 25px 20px;
+				}
+				.name {
+					font-size: 1.8rem;
+				}
+				.contact-info {
+					flex-direction: column;
+					gap: 10px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<button
+			class="download-btn"
+			onclick="downloadPDF()">
+			📄 Download PDF
+		</button>
+
+		<div class="resume-container">
+			<header class="header">
+				<div class="header-content">
+					<h1 class="name">Sahaj Kedia</h1>
+					<p class="title">
+						Full Stack AI Engineer & Remote Development Specialist
+					</p>
+					<div class="remote-badge">
+						🌍 Remote-First • Global Team Experience
+					</div>
+					<div class="contact-info">
+						<div class="contact-item">
+							<span>📧</span>
+							<a href="mailto:sahajkedia20152498@gmail.com"
+								>sahajkedia20152498@gmail.com</a
+							>
+						</div>
+						<div class="contact-item">
+							<span>📱</span>
+							<a href="tel:+919108342605">+91 910-834-2605</a>
+						</div>
+						<div class="contact-item">
+							<span>🔗</span>
+							<a
+								href="https://linkedin.com/in/sahaj-kedia/"
+								target="_blank"
+								>linkedin.com/in/sahaj-kedia</a
+							>
+						</div>
+						<div class="contact-item">
+							<span>💻</span>
+							<a
+								href="https://github.com/sahajkedia"
+								target="_blank"
+								>github.com/sahajkedia</a
+							>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<main class="main-content">
+				<section class="remote-highlights">
+					<h3>🚀 Remote Work Excellence</h3>
+					<ul>
+						<li>
+							5+ years experience with distributed teams across multiple time
+							zones
+						</li>
+						<li>
+							Expert in async communication, documentation, and remote
+							collaboration tools
+						</li>
+						<li>Proven track record of delivering complex projects remotely</li>
+						<li>
+							Strong experience with Git workflows, CI/CD, and cloud deployment
+						</li>
+					</ul>
+				</section>
+
+				<div class="two-column">
+					<div class="left-column">
+						<section class="section">
+							<h2 class="section-title">Technical Skills</h2>
+							<div class="skills-grid">
+								<div class="skill-category">
+									<h4>Programming Languages</h4>
+									<div class="skill-tags">
+										<span class="skill-tag">JavaScript</span>
+										<span class="skill-tag">TypeScript</span>
+										<span class="skill-tag">Python</span>
+										<span class="skill-tag">Java</span>
+									</div>
+								</div>
+								<div class="skill-category">
+									<h4>Frontend Development</h4>
+									<div class="skill-tags">
+										<span class="skill-tag">React.js</span>
+										<span class="skill-tag">Next.js</span>
+										<span class="skill-tag">Redux</span>
+										<span class="skill-tag">tRPC</span>
+									</div>
+								</div>
+								<div class="skill-category">
+									<h4>Backend & APIs</h4>
+									<div class="skill-tags">
+										<span class="skill-tag">Node.js</span>
+										<span class="skill-tag">Express.js</span>
+										<span class="skill-tag">FastAPI</span>
+										<span class="skill-tag">RESTful APIs</span>
+										<span class="skill-tag">GraphQL</span>
+									</div>
+								</div>
+								<div class="skill-category">
+									<h4>Databases & AI</h4>
+									<div class="skill-tags">
+										<span class="skill-tag">PostgreSQL</span>
+										<span class="skill-tag">MongoDB</span>
+										<span class="skill-tag">Vector DB</span>
+										<span class="skill-tag">LangChain</span>
+										<span class="skill-tag">OpenAI APIs</span>
+									</div>
+								</div>
+								<div class="skill-category">
+									<h4>Cloud & DevOps</h4>
+									<div class="skill-tags">
+										<span class="skill-tag">AWS</span>
+										<span class="skill-tag">EC2</span>
+										<span class="skill-tag">S3</span>
+										<span class="skill-tag">Lambda</span>
+										<span class="skill-tag">Docker</span>
+									</div>
+								</div>
+								<div class="skill-category">
+									<h4>Remote Tools</h4>
+									<div class="skill-tags">
+										<span class="skill-tag">Git</span>
+										<span class="skill-tag">GitHub Actions</span>
+										<span class="skill-tag">CI/CD</span>
+										<span class="skill-tag">Async Comm</span>
+										<span class="skill-tag">Documentation</span>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<section class="section">
+							<h2 class="section-title">Education</h2>
+							<div class="education-item">
+								<div class="degree">
+									Bachelor of Engineering in Information Science and Engineering
+								</div>
+								<div class="university">
+									Visvesvaraya Technological University, Bangalore
+								</div>
+								<div class="date">Aug 2019 – June 2023</div>
+								<div class="stats">
+									<div class="stat">
+										<div class="stat-value">8.45/10.0</div>
+										<div class="stat-label">CGPA</div>
+									</div>
+									<div class="stat">
+										<div class="stat-value">4 Years</div>
+										<div class="stat-label">Duration</div>
+									</div>
+								</div>
+							</div>
+							<div class="education-item">
+								<div class="degree">Higher Secondary Education (PCM)</div>
+								<div class="university">
+									FIITJEE Junior College, Visakhapatnam
+								</div>
+								<div class="date">Apr 2017 – Apr 2019</div>
+								<div class="stats">
+									<div class="stat">
+										<div class="stat-value">93%</div>
+										<div class="stat-label">BIEAP Class 12</div>
+									</div>
+									<div class="stat">
+										<div class="stat-value">2 Years</div>
+										<div class="stat-label">Duration</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+
+					<div class="right-column">
+						<section class="section">
+							<h2 class="section-title">Professional Experience</h2>
+
+							<div class="experience-item">
+								<div class="job-header">
+									<div>
+										<div class="job-title">
+											Full-Stack AI Engineer (AI + UX)
+										</div>
+										<div class="company">VJ Imaging Technologies • Remote</div>
+									</div>
+									<div class="date">Sept 2024 – Present</div>
+								</div>
+								<ul class="achievements">
+									<li>
+										Architected enterprise-grade X-ray image analysis
+										application with multi-model interfaces, implementing
+										real-time defect detection algorithms and advanced data
+										visualization components using React.js and TypeScript
+									</li>
+									<li>
+										Optimized LLM inference pipelines and agent-based
+										architectures, achieving 40% improvement in diagnostic
+										precision through custom fine-tuning techniques and
+										efficient model orchestration
+									</li>
+									<li>
+										Automated CI/CD deployment workflows using GitHub Actions
+										and AWS EC2, implementing structured data capture pipelines
+										with MongoDB for model performance monitoring and drift
+										detection
+									</li>
+									<li>
+										Developed sophisticated image management system with RESTful
+										APIs, featuring bulk download capabilities and real-time
+										preview functionality built with Node.js and Express.js
+									</li>
+								</ul>
+								<div class="tech-stack">
+									<strong>Tech Stack:</strong> React.js, TypeScript, Node.js,
+									Express.js, MongoDB, AWS EC2, GitHub Actions, LLM APIs,
+									Computer Vision
+								</div>
+							</div>
+
+							<div class="experience-item">
+								<div class="job-header">
+									<div>
+										<div class="job-title">Junior Full Stack Developer</div>
+										<div class="company">
+											Cubictree Technology Solutions • Remote
+										</div>
+									</div>
+									<div class="date">Sept 2023 – Aug 2024</div>
+								</div>
+								<ul class="achievements">
+									<li>
+										Built scalable job analysis dashboard using React.js,
+										Node.js, and PostgreSQL, implementing server-side rendering
+										with Next.js to achieve 35% reduction in page load times
+									</li>
+									<li>
+										Designed and implemented Python-based ETL data pipeline
+										processing 100,000+ location records, resulting in 25%
+										improvement in route optimization algorithms and system
+										efficiency
+									</li>
+									<li>
+										Deployed automated CRON job scheduling system on AWS Lambda,
+										maintaining 99.9% system uptime and saving 1,000+ labor
+										hours annually through intelligent automation
+									</li>
+									<li>
+										Developed RESTful APIs with comprehensive error handling and
+										authentication middleware, ensuring robust data processing
+										for large-scale applications
+									</li>
+								</ul>
+								<div class="tech-stack">
+									<strong>Tech Stack:</strong> React.js, Next.js, Node.js,
+									PostgreSQL, Python, AWS Lambda, ETL Pipelines, RESTful APIs
+								</div>
+							</div>
+						</section>
+
+						<section class="section">
+							<h2 class="section-title">Key Projects</h2>
+
+							<div class="project-item">
+								<div class="project-header">
+									<div>
+										<div class="project-title">
+											Stories.fun - AI-Powered Content Platform
+										</div>
+										<div class="project-duration">
+											July 2024 – May 2025 • Remote Team
+										</div>
+									</div>
+									<div class="date">Full-Stack</div>
+								</div>
+								<ul class="achievements">
+									<li>
+										Engineered production-ready semantic search engine using
+										OpenAI embeddings, LangChain, CrewAI, and Qdrant vector
+										database with intelligent caching achieving sub-second query
+										responses
+									</li>
+									<li>
+										Architected multi-modal AI pipeline integrating Whisper ASR,
+										GPT-4 conversational AI, and Hume TTS with sophisticated
+										content chunking algorithms for optimal performance
+									</li>
+									<li>
+										Implemented type-safe full-stack architecture using Next.js
+										15, tRPC, and Solana Web3 integration, achieving 60%
+										reduction in embedding computation costs through
+										optimization
+									</li>
+									<li>
+										Deployed scalable infrastructure on AWS with CI/CD
+										pipelines, implementing auto-scaling and load balancing for
+										high-availability production environment
+									</li>
+								</ul>
+								<div class="tech-stack">
+									<strong>Tech Stack:</strong> Next.js 15, tRPC, OpenAI APIs,
+									LangChain, CrewAI, Qdrant, Whisper, GPT-4, Solana Web3, AWS,
+									CI/CD
+								</div>
+							</div>
+
+							<div class="project-item">
+								<div class="project-header">
+									<div>
+										<div class="project-title">
+											E Mithru - Student Mentoring Platform
+										</div>
+										<div class="project-duration">
+											Sep 2022 – May 2023 • Academic Project
+										</div>
+									</div>
+									<div class="date">Full-Stack</div>
+								</div>
+								<ul class="achievements">
+									<li>
+										Architected secure full-stack web application using
+										React.js, Node.js, and MongoDB, implementing multi-factor
+										authentication and end-to-end encryption protocols
+									</li>
+									<li>
+										Achieved 40% increase in student engagement and 25%
+										improvement in academic performance metrics through
+										data-driven UX optimization and real-time analytics
+									</li>
+									<li>
+										Implemented advanced server-side rendering techniques
+										reducing average page load time by 30% (3s to 2.1s),
+										resulting in 15% increase in user retention rates
+									</li>
+									<li>
+										Maintained zero security breaches across 10,000+ user
+										sessions through robust security architecture and continuous
+										vulnerability assessment
+									</li>
+								</ul>
+								<div class="tech-stack">
+									<strong>Tech Stack:</strong> React.js, Node.js, MongoDB,
+									Multi-factor Auth, Encryption, SSR, Analytics, Security
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</main>
+		</div>
+
+		<script>
+			function downloadPDF() {
+				const downloadBtn = document.querySelector(".download-btn");
+				downloadBtn.style.display = "none";
+				window.print();
+				setTimeout(() => {
+					downloadBtn.style.display = "block";
+				}, 1000);
+			}
+
+			document.addEventListener("DOMContentLoaded", function () {
+				const experienceItems = document.querySelectorAll(
+					".experience-item, .project-item"
+				);
+				experienceItems.forEach((item) => {
+					item.addEventListener("mouseenter", function () {
+						this.style.transform = "translateY(-1px)";
+						this.style.transition = "transform 0.2s ease";
+					});
+					item.addEventListener("mouseleave", function () {
+						this.style.transform = "translateY(0)";
+					});
+				});
+
+				const skillTags = document.querySelectorAll(".skill-tag");
+				skillTags.forEach((tag, index) => {
+					tag.style.animationDelay = `${index * 0.03}s`;
+				});
+			});
+		</script>
+	</body>
+</html>
